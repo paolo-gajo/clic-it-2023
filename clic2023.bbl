@@ -1,0 +1,30 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citename{Cohn \bgroup et al.\egroup
+  }2020]{cohn2020proceedings}
+Trevor Cohn, Yulan He, and Yang Liu.
+\newblock 2020.
+\newblock {Proceedings of the 2020 Conference on Empirical Methods in Natural
+  Language Processing (EMNLP)}.
+\newblock In {\em Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}.
+
+\bibitem[\protect\citename{for Computing~Machinery}1983]{ACM:83}
+Association for Computing~Machinery.
+\newblock 1983.
+\newblock {Association for Computing Machinery}.
+\newblock {\em Computing Reviews}, 24(11):503--512.
+
+\bibitem[\protect\citename{Hack}2011]{hack2011libera}
+Margherita Hack.
+\newblock 2011.
+\newblock {\em Libera scienza in libero Stato}.
+\newblock Bur.
+
+\bibitem[\protect\citename{Jurafsky and Manning}2012]{jurafsky2012natural}
+Dan Jurafsky and Christopher Manning.
+\newblock 2012.
+\newblock Natural language processing.
+\newblock {\em Instructor}, 212(998):3482.
+
+\end{thebibliography}
