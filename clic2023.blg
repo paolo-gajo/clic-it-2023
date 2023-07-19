@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: clic2023.aux
+The style file: acl.bst
+Database file #1: bibliography.bib
+Warning--empty journal in fersini2018overview-ibereval
+Warning--empty journal in gokhaleSpreadLoveNot2022
+Warning--empty journal in gothard2020ExploringIncelLanguage
+Warning--can't use both volume and number fields in mathew2021hatexplain
+You've used 27 entries,
+            2490 wiz_defined-function locations,
+            724 strings with 11309 characters,
+and the built_in function-call counts, 12256 in all, are:
+= -- 1262
+> -- 578
+< -- 12
++ -- 199
+- -- 196
+* -- 926
+:= -- 1965
+add.period$ -- 112
+call.type$ -- 27
+change.case$ -- 198
+chr.to.int$ -- 27
+cite$ -- 31
+duplicate$ -- 501
+empty$ -- 880
+format.name$ -- 229
+if$ -- 2575
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 25
+newline$ -- 163
+num.names$ -- 87
+pop$ -- 227
+preamble$ -- 1
+purify$ -- 226
+quote$ -- 0
+skip$ -- 398
+stack$ -- 0
+substring$ -- 533
+swap$ -- 135
+text.length$ -- 12
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 212
+warning$ -- 4
+while$ -- 98
+width$ -- 31
+write$ -- 385
+(There were 4 warnings)
