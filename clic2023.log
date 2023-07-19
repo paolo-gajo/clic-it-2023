@@ -1,0 +1,703 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.18)  19 JUL 2023 19:52
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/paolo/My Drive/UNI/Latex Projects/clic2023/clic2023"
+(c:/Users/paolo/My Drive/UNI/Latex Projects/clic2023/clic2023.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22> (c:/texlive/2022/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(c:/texlive/2022/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (c:/texlive/2022/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (c:/texlive/2022/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+) (c:/texlive/2022/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (c:/texlive/2022/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count193
+\Gm@cntv=\count194
+\c@Gm@tempcnt=\count195
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks17
+) (./clic2023.sty
+Conference Style for CLIC.it 2017 -- released May, 2017
+\titlebox=\skip50
+) (c:/texlive/2022/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
+) (c:/texlive/2022/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+ (c:/texlive/2022/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)) (c:/texlive/2022/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2023/02/13 3.86 The Babel package
+\babel@savecnt=\count196
+\U@D=\dimen149
+\l@unhyphenated=\language87
+ (c:/texlive/2022/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count197
+ (c:/texlive/2022/texmf-dist/tex/generic/babel-italian/italian.ldf
+Language: italian 2022/03/27 v.1.4.07 Italian support for the babel system
+\it@lettering=\count198
+\it@doublequoteactive=\count199
+\it@ISOcompliance=\count266
+) (c:/texlive/2022/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language21). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language21). Reported on input line 108.
+)) (c:/texlive/2022/texmf-dist/tex/generic/babel/locale/en/babel-english.tex
+Package babel Info: Importing font and identification data for english
+(babel)             from babel-en.ini. Reported on input line 11.
+) (c:/texlive/2022/texmf-dist/tex/generic/babel/locale/it/babel-italian.tex
+Package babel Info: Importing font and identification data for italian
+(babel)             from babel-it.ini. Reported on input line 11.
+) (c:/texlive/2022/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count267
+) (c:/texlive/2022/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+) (c:/texlive/2022/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (c:/texlive/2022/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+ (c:/texlive/2022/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+) (c:/texlive/2022/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+) (c:/texlive/2022/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip51
+\multirow@cntb=\count268
+\multirow@dima=\skip52
+\bigstrutjot=\dimen150
+) (c:/texlive/2022/texmf-dist/tex/latex/todonotes/todonotes.sty
+Package: todonotes 2023/01/31 v1.1.6 Todonotes source and documentation.
+Package: todonotes 2023/01/31
+ (c:/texlive/2022/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+) (c:/texlive/2022/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+ (c:/texlive/2022/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/texlive/2022/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks18
+\XKV@tempa@toks=\toks19
+)
+\XKV@depth=\count269
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)) (c:/texlive/2022/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (c:/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (c:/texlive/2022/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (c:/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks20
+\pgfutil@tempdima=\dimen151
+\pgfutil@tempdimb=\dimen152
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box51
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (c:/texlive/2022/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+ (c:/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (c:/texlive/2022/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (c:/texlive/2022/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (c:/texlive/2022/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (c:/texlive/2022/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen153
+\Gin@req@width=\dimen154
+) (c:/texlive/2022/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (c:/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks21
+\pgfkeys@temptoks=\toks22
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks23
+))
+\pgf@x=\dimen155
+\pgf@y=\dimen156
+\pgf@xa=\dimen157
+\pgf@ya=\dimen158
+\pgf@xb=\dimen159
+\pgf@yb=\dimen160
+\pgf@xc=\dimen161
+\pgf@yc=\dimen162
+\pgf@xd=\dimen163
+\pgf@yd=\dimen164
+\w@pgf@writea=\write3
+\r@pgf@reada=\read3
+\c@pgf@counta=\count270
+\c@pgf@countb=\count271
+\c@pgf@countc=\count272
+\c@pgf@countd=\count273
+\t@pgf@toka=\toks24
+\t@pgf@tokb=\toks25
+\t@pgf@tokc=\toks26
+\pgf@sys@id@count=\count274
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+))) (c:/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count275
+\pgfsyssoftpath@bigbuffer@items=\count276
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen165
+\pgfmath@count=\count277
+\pgfmath@box=\box52
+\pgfmath@toks=\toks27
+\pgfmath@stack@operand=\toks28
+\pgfmath@stack@operation=\toks29
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count278
+)) (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen166
+\pgf@picmaxx=\dimen167
+\pgf@picminy=\dimen168
+\pgf@picmaxy=\dimen169
+\pgf@pathminx=\dimen170
+\pgf@pathmaxx=\dimen171
+\pgf@pathminy=\dimen172
+\pgf@pathmaxy=\dimen173
+\pgf@xx=\dimen174
+\pgf@xy=\dimen175
+\pgf@yx=\dimen176
+\pgf@yy=\dimen177
+\pgf@zx=\dimen178
+\pgf@zy=\dimen179
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen180
+\pgf@path@lasty=\dimen181
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen182
+\pgf@shorten@start@additional=\dimen183
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box53
+\pgf@hbox=\box54
+\pgf@layerbox@main=\box55
+\pgf@picture@serial@count=\count279
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen184
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen185
+\pgf@pt@y=\dimen186
+\pgf@pt@temp=\dimen187
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen188
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen189
+\pgf@sys@shading@range@num=\count280
+\pgf@shadingcount=\count281
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box56
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (c:/texlive/2022/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box57
+) (c:/texlive/2022/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen190
+\pgf@nodesepend=\dimen191
+) (c:/texlive/2022/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (c:/texlive/2022/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (c:/texlive/2022/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (c:/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (c:/texlive/2022/texmf-dist/tex/latex/pgf/math/pgfmath.sty (c:/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (c:/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen192
+\pgffor@skip=\dimen193
+\pgffor@stack=\toks30
+\pgffor@toks=\toks31
+)) (c:/texlive/2022/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count282
+\pgfplotmarksize=\dimen194
+)
+\tikz@lastx=\dimen195
+\tikz@lasty=\dimen196
+\tikz@lastxsaved=\dimen197
+\tikz@lastysaved=\dimen198
+\tikz@lastmovetox=\dimen199
+\tikz@lastmovetoy=\dimen256
+\tikzleveldistance=\dimen257
+\tikzsiblingdistance=\dimen258
+\tikz@figbox=\box58
+\tikz@figbox@bg=\box59
+\tikz@tempbox=\box60
+\tikz@tempbox@bg=\box61
+\tikztreelevel=\count283
+\tikznumberofchildren=\count284
+\tikznumberofcurrentchild=\count285
+\tikz@fig@count=\count286
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count287
+\pgfmatrixcurrentcolumn=\count288
+\pgf@matrix@numberofcolumns=\count289
+)
+\tikz@expandcount=\count290
+ (c:/texlive/2022/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (c:/texlive/2022/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (c:/texlive/2022/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count291
+\calc@Bcount=\count292
+\calc@Adimen=\dimen259
+\calc@Bdimen=\dimen260
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count293
+\calc@Cskip=\skip55
+)
+\c@@todonotes@numberoftodonotes=\count294
+) (c:/texlive/2022/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2022/01/07 v1.5 Sub-captions (AR)
+ (c:/texlive/2022/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2022/03/01 v3.6b Customizing captions (AR)
+ (c:/texlive/2022/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
+\caption@tempdima=\dimen261
+\captionmargin=\dimen262
+\caption@leftmargin=\dimen263
+\caption@rightmargin=\dimen264
+\caption@width=\dimen265
+\caption@indent=\dimen266
+\caption@parindent=\dimen267
+\caption@hangindent=\dimen268
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count295
+\c@continuedfloat=\count296
+)
+\c@subfigure=\count297
+\c@subtable=\count298
+) (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks32
+\symAMSa=\mathgroup5
+\symAMSb=\mathgroup6
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (c:/texlive/2022/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count299
+\float@exts=\toks33
+\float@box=\box62
+\@float@everytoks=\toks34
+\@floatcapt=\box63
+) (c:/texlive/2022/texmf-dist/tex/latex/sttools/cuted.sty
+Package: cuted 2021/10/04 v2.0 Mixing onecolumn and twocolumn modes
+\At@ViperColsBreak=\toks35
+\preCutedStrip=\toks36
+\postCutedStrip=\toks37
+\cuted@@tempbox@a=\box64
+\cuted@@tempbox@c=\box65
+\cuted@@tempbox@var=\box66
+\hold@viper=\box67
+\@viper=\box68
+\cuted@@varbox@a=\box69
+\cuted@@varbox@c=\box70
+\cuted@@tempdim@spread=\dimen269
+\cuted@@tempdim@a=\dimen270
+\cuted@@tempdim@b=\dimen271
+\ht@hold@viper=\dimen272
+\ht@viper=\dimen273
+\var@@pagediscards@ht=\dimen274
+\stripsep=\skip56
+\viper@penalty=\count300
+)
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 80.
+ (c:/texlive/2022/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+) (c:/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count301
+\l__pdf_internal_box=\box71
+) (./clic2023.aux)
+\openout1 = `clic2023.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(89.62709pt, 418.25368pt, 89.6271pt)
+* v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04675pt
+* \textwidth=455.24408pt
+* \textheight=702.78297pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=17.3571pt
+* \topmargin=-14.22636pt
+* \headheight=5.0pt
+* \headsep=0.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=59.0pt
+* \marginparsep=10.0pt
+* \columnsep=17.07182pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumntrue
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Info: Redefining \it@ocap on input line 80.
+LaTeX Info: Redefining \it@ccap on input line 80.
+
+File italian.ldf warning: 
+italian.ldf    With OT1 encoding guillemets are poorly faked
+italian.ldf    Use T1 encoding
+italian.ldf    or specify a font with command \CaporaliFrom
+italian.ldf    See the documentation concerning the babel-italian typesetting 
+italian.ldf    on input line 80.
+
+(c:/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count302
+\scratchdimen=\dimen275
+\scratchbox=\box72
+\nofMPsegments=\count303
+\nofMParguments=\count304
+\everyMPshowfont=\toks38
+\MPscratchCnt=\count305
+\MPscratchDim=\dimen276
+\MPnumerator=\count306
+\makeMPintoPDFobject=\count307
+\everyMPtoPDFconversion=\toks39
+) (c:/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (c:/texlive/2022/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 81.
+ (c:/texlive/2022/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 81.
+ (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 81.
+ (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 81.
+ (c:/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Underfull \hbox (badness 4366) in paragraph at lines 83--84
+\OT1/ptm/m/n/10.95 prob-lem of hate speech de-tec-tion in
+ []
+
+
+Underfull \hbox (badness 1019) in paragraph at lines 83--84
+\OT1/ptm/m/n/10.95 cross-lingual, cross-domain set-tings us-
+ []
+
+
+Underfull \hbox (badness 1184) in paragraph at lines 83--84
+\OT1/ptm/m/n/10.95 ing Trans-former mod-els, fine-tuned on
+ []
+
+
+Underfull \hbox (badness 1983) in paragraph at lines 83--84
+\OT1/ptm/m/n/10.95 ian datasets are com-piled from main-
+ []
+
+
+Underfull \hbox (badness 2503) in paragraph at lines 90--91
+[]\OT1/ptm/b/n/10.95 Italiano. \OT1/ptm/m/it/10.95 In questo stu-dio af-fron-ti-amo
+ []
+
+
+Underfull \hbox (badness 1448) in paragraph at lines 90--91
+\OT1/ptm/m/it/10.95 iano e in-glese. I dataset in ital-iano
+ []
+
+
+Underfull \hbox (badness 1412) in paragraph at lines 90--91
+\OT1/ptm/m/it/10.95 par-tire da un fo-rum ital-iano di in-cel.
+ []
+
+
+Underfull \hbox (badness 1173) in paragraph at lines 98--104
+\OT1/ptm/m/n/10.95 bate'') com-mu-nity within the Manosphere has
+ []
+
+
+Underfull \hbox (badness 1168) in paragraph at lines 105--113
+\OT1/ptm/m/n/10.95 less-resourced lan-guages, such as Ital-ian, one
+ []
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 105--113
+\OT1/ptm/m/n/10.95 The prob-lem be-comes even more ex-ac-er-bated
+ []
+
+[1{c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+
+]
+Underfull \hbox (badness 1975) in paragraph at lines 137--138
+[]\OT1/ptm/m/n/10.95 English-language hate speech de-tec-tion has
+ []
+
+[2]
+Overfull \hbox (6.03775pt too wide) in paragraph at lines 155--164
+ [][] 
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 185.
+
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 200.
+(c:/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 189--224
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--224
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[]\OT1/ptm/m/n/10.95 Incel
+ []
+
+[3] [4]
+Underfull \hbox (badness 2875) in paragraph at lines 319--320
+\OT1/ptm/m/n/10.95 While the mod-els are trained with dif-fer-ent
+ []
+
+(./clic2023.bbl
+Underfull \hbox (badness 1158) in paragraph at lines 31--38
+[]\OT1/ptm/m/n/10 Cristina Bosco, Fe-lice Dell'Orletta, Fabio Po-letto,
+ []
+
+
+Underfull \hbox (badness 2818) in paragraph at lines 47--52
+[]\OT1/ptm/m/n/10 Andrea Cimino, Lorenzo De Mat-tei, and Fe-lice
+ []
+
+
+Underfull \hbox (badness 2326) in paragraph at lines 72--78
+\OT1/ptm/m/n/10 yny Iden-ti-fi-ca-tion.  In Va-le-rio Basile, Danilo
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 112--117
+[]\OT1/ptm/m/n/10 Milo[]s Jakub[]^^P[]cek, Adam Kil-gar-riff, Vojt[]ech Kov[]a[]r,
+ []
+
+
+Underfull \hbox (badness 3460) in paragraph at lines 135--140
+[]\OT1/ptm/m/n/10 Ariadna Matamoros-Fern[]andez and Jo-han Farkas.
+ []
+
+
+Underfull \hbox (badness 2698) in paragraph at lines 143--150
+[]\OT1/ptm/m/n/10 Binny Mathew, Pun-ya-joy Saha, Seid Muhie Yi-
+ []
+
+[5]
+Underfull \hbox (badness 2941) in paragraph at lines 195--200
+[]\OT1/ptm/m/n/10 Leandro Silva, Mainack Mon-dal, Den-zil Cor-rea,
+ []
+
+)
+
+LaTeX Warning: Reference `incels-section' on page  undefined on input line 376.
+
+[6]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 462.
+
+<images-tables/keyness_chart_incelsis.pdf, id=35, 723.28029pt x 378.79895pt>
+File: images-tables/keyness_chart_incelsis.pdf Graphic file (type pdf)
+<use images-tables/keyness_chart_incelsis.pdf>
+Package pdftex.def Info: images-tables/keyness_chart_incelsis.pdf  used on input line 465.
+(pdftex.def)             Requested size: 455.24408pt x 238.43074pt.
+<images-tables/keyness_chart_fdb.pdf, id=36, 713.69762pt x 378.79895pt>
+File: images-tables/keyness_chart_fdb.pdf Graphic file (type pdf)
+<use images-tables/keyness_chart_fdb.pdf>
+Package pdftex.def Info: images-tables/keyness_chart_fdb.pdf  used on input line 469.
+(pdftex.def)             Requested size: 455.24408pt x 241.62129pt.
+
+Underfull \vbox (badness 2547) has occurred while \output is active []
+
+ [7] [8 <./images-tables/keyness_chart_incelsis.pdf> <./images-tables/keyness_chart_fdb.pdf>]
+
+LaTeX Warning: Reference `related-work' on page  undefined on input line 537.
+
+
+Underfull \vbox (badness 6047) has occurred while \output is active []
+
+ [9] [10
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 563--563
+[]\OT1/ptm/m/n/10.95 Incel
+ []
+
+CUTED [- LAST -]
+Extra skip:0.0pt
+Left:20.83313pt/0.0pt
+Right:0.0pt/0.0pt
+Split: 20.41656pt
+Output:20.41656pt
+Pageshrink: 0.0pt
+Pagestretch: 0.0pt
+@colht:702.78297pt
+CUTED [output]: 20.41656pt
+CUTED [leftcolumn badness]: 7
+CUTED [rightcolumn badness]: 0
+
+LaTeX Warning: Optional argument of \twocolumn too tall on page (1column).
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11
+
+
+] (./clic2023.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 17088 strings out of 476024
+ 338554 string characters out of 5794016
+ 1899382 words of memory out of 5000000
+ 37189 multiletter control sequences out of 15000+600000
+ 547633 words of font info for 114 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 117i,13n,131p,1238b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on clic2023.pdf (11 pages, 197895 bytes).
+PDF statistics:
+ 176 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+

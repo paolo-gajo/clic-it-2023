@@ -23,7 +23,41 @@
 \usepackage{latexsym} 
 \pagenumbering{gobble} % does not display page numbering
 \usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{todonotes}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{cuted}
 
+
+\newcommand{\bs}[0]{$\blacksquare$}
+
+\newcommand{\Ni}{({\em i})~}
+\newcommand{\Nii}{({\em ii})~}
+\newcommand{\Niii}{({\em iii})~}
+
+\newcommand{\abc}[1]{{\color{blue} #1}}
+\newcommand{\paolo}[1]{{\color{red} #1}}
+
+\newcommand{\todoA}[1]{\todo[color=blue!40]{A: #1}}
+\newcommand{\todoP}[1]{\todo[color=red]{P: #1}}
+
+\newcommand{\itodo}[1]{\todo[inline]{#1}}
+
+\newcommand{\dsENcorpus}{IFU-22-EN}
+\newcommand{\dsITcorpus}{IFU-22-IT}
+\newcommand{\dsENclassification}{IFS-EN-5203}
+\newcommand{\dsITclassification}{IFS-IT-500}
+\newcommand{\dsENforecasting}{IFSS-EN-223K}
+\newcommand{\dsITforecasting}{IFSS-IT-30K}
+
+\newcommand{\dsENclassificationtrain}{IFS-EN$_{\mbox{tr}}$} % Incel Forum Supervised, English, 5203 instances
+\newcommand{\dsENclassificationdev}{IFS-EN$_{\mbox{de}}$} % Incel Forum Supervised, English, 5203 instances
+\newcommand{\dsENclassificationtest}{IFS-EN$_{\mbox{te}}$} % Incel Forum Supervised, English, 5203 instances
+
+\newcommand{\enforum}{\textit{Incels.is}}
+\newcommand{\itforum}{\textit{Il forum dei brutti}}
 
 %\setlength\titlebox{5cm}
 
@@ -46,293 +80,529 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-\textbf{English.}~This document contains the instructions for preparing the camera-ready manuscript for the proceedings of CLiC-it 2023. The document itself conforms to its own specifications, and is therefore an example of what your manuscript should look like. These instructions should be used for both papers submitted for review and for final versions of accepted papers.
+\textbf{English.}~In this paper we approach the problem of hate speech detection in cross-lingual, cross-domain settings using Transformer models, fine-tuned on English and Italian datasets. The Italian datasets are compiled from mainstream social media (Twitter and Facebook), while the English dataset concerns a forum frequented by ``incels'', short for ``involuntary celibates''. The models' performance is evaluated on an Italian incel forum dataset. Experiments show the best results come from using a combination of Italian and English data, emphasizing the importance of in-domain data, even when languages differ.
+
+% hate speech identification in cross-lingual and cross-domain settings. We do so by employing Transformer models, pre-trained on monolingual (Italian) and bilingual (Italian-English) corpora. We fine-tune these models on various combinations of English- and Italian-language datasets, all annotated for hate speech. The English-language dataset pertains to the so-called community of ``incels'', short for ``involuntary celibates'', while the ones in Italian are compiled from mainstream social media sites (Twitter and Facebook). We then evaluate the performance of the models on an Italian-language dataset built from the contents of an Italian incel forum. Our experiments with model domain adaptation via training on the masked language modeling task and fine-tuning on different combinations of datasets show that the best results are obtained not by training solely using Italian data, but with a combination of Italian and English data. This shows the importance of using in-domain data for training, even when training and test data are in different languages.
+
 \end{abstract}
 
 \begin{abstract-alt}
- \textrm{\bf{Italiano.}}~Sebbene la scelta della lingua del manoscritto sia lasciata alla discrezione dell'autore (si veda \S\ \ref{ssec:lang}), nel caso si opti per l'italiano è tuttavia richiesto che l'abstract sia scritto sia in inglese che in italiano (si veda \S\ \ref{ssec:abs}). L'abstract in italiano, se presente, va redatto in corsivo e posizionato in seconda posizione rispetto all'abstract in inglese.
+ \textrm{\bf{Italiano.}}~In questo studio affrontiamo il problema dell'identificazione dei discorsi d'odio in scenari che coinvolgono lingue e contesti linguistici differenti, usando modelli Transformer su cui conduciamo un \textit{fine-tuning} su dataset in italiano e inglese. I dataset in italiano sono costruiti a partire da social media di vasto utilizzo (Twitter e Facebook), mentre quello inglese riguarda un forum frequentato dalla comunità dei c.d. ``incel'', abbreviazione inglese di ``celibi involontari''. Le prestazioni dei modelli sono valutate su un dataset costruito a partire da un forum italiano di incel. Gli esperimenti dimostrano che i risultati migliori si ottengono utilizzando una combinazione di dati italiani e inglesi, sottolineando l'importanza dei dati provenienti dallo stesso contesto linguistico per l'addestramento, anche quando le lingue differiscono.
+ 
+%  . A questo scopo, impieghiamo modelli Transformer, pre-addestrati su corpora monolingui (italiano) e bilingui (italiano-inglese). Abbiamo effettuato il fine-tuning di questi modelli su varie combinazioni di dataset in lingua inglese e italiana, tutti annotati per i discorsi d'odio. Il dataset inglese riguarda la comunità dei c.d. ``incel'', abbreviazione inglese di ``celibi involontari'', mentre quelli italiani sono costruiti partendo da social media di vasto utilizzo (Twitter e Facebook). Valutiamo le prestazioni dei modelli su un dataset in lingua italiana costruito a partire dai contenuti di un forum italiano di incel. Gli esperimenti di adattamento dei modelli a questo contesto linguistico attraverso l'addestramento sulla task del masked language modeling e il fine-tuning su diverse combinazioni di dataset dimostrano che i risultati migliori si ottengono non solo con l'addestramento su dati in italiano, ma con una combinazione di dati in italiano e in inglese. Questo dimostra l'importanza di utilizzare dati provenienti dallo stesso contesto linguistico per l'addestramento, anche quando i dati di addestramento e di test sono in lingue diverse.
 \end{abstract-alt}
 
 
 \section{Introduction}
 
-The following instructions are directed to authors of papers submitted
-to CLiC-it 2023 or accepted for publication in its proceedings. All
-authors are required to adhere to these specifications. Authors are
-required to provide a Portable Document Format (PDF) version of their
-papers, \textbf{as well as the \LaTeX\ source code}. The proceedings are designed for printing on A4 paper.
+Hate speech, broadly defined as language that expresses hatred towards a targeted group or is intended to be derogatory, humiliating, or insulting to the members of the group~\cite{davidson-2017-automated-hate}, has become an increasingly prevalent and dangerous phenomenon in the past years \cite{matamoros-fernandezRacismHateSpeech2021}.
+% The rapid rise of social media platforms has enabled the dissemination of hateful and offensive rhetoric, with tangible negative consequences, such as increased prejudice towards minority groups and the escalation of hate crimes \cite{peliconInvestigatingCrosslingualTraining2021}.
+ A specific area of concern in the realm of hate speech is the online spaces known as the ``Manosphere'', where misogynous discourse in particular has become increasingly rampant~\cite{ribeiro2021evolution-manosphere}.
+% These spaces are characterized by the adoption of the ``Red Pill'' philosophy, which promotes a toxic idea of masculinity and traditional gender roles, and has been linked to the rise in misogynous and racist discourse~\cite{gingAlphasBetasIncels2019-manosphere}.
+Specifically, the incel (short for ``involuntary celibate'') community within the Manosphere has been identified as one that frequently engages in hateful, misogynous, and racist speech~\cite{nagle-2017-kill-normies,jakiOnlineHatredWomen2019}.
+% Given the gravity of the phenomenon, especially in these environments, the development of effective hate speech detection systems is critical to addressing the harmful consequences of these online platforms and promoting a more inclusive and respectful digital landscape.
 
-\section{General Instructions}
+While there is no scarcity of English-language models and training resources for 
+the detection of hate speech, especially with the recent rise in popularity of 
+this research topic \cite{alkomahLiteratureReviewTextual2022}, 
+much work can still be done when approaching this problem in other languages.
+For less-resourced languages, such as Italian, one of the main difficulties of combating this phenomenon is the lack of annotated data~\cite{van2023mitigating}. The problem becomes even more 
+exacerbated when considering the detection of hate speech in niche contexts, 
+such as in forums frequented by incels, which are characterized by the use of 
+specific misogynous and racist lexicon~\cite{gothard2020ExploringIncelLanguage}. Indeed, to the best of our knowledge, it seems no work has yet been done with regard to the detection of hate speech in Italian incel forums.
 
-Manuscripts must be in two-column format.  Exceptions to the
-two-column format include the title, authors' names and complete
-addresses, which must be centered at the top of the first page, and
-any full-width figures or tables (see the guidelines in \S\ ~\ref{ssec:first}). {\bf Type single-spaced.}  Start all
-pages directly under the top margin. See the guidelines later
-regarding formatting the first page.  The manuscript should be
-printed single-sided and its length
-should not exceed the maximum page limit described in Section~\ref{sec:ceur-specs}.
-{\bf Do not number the pages}. This can be obtained by using the following command in the header of the document: 
+In this paper, we present a simple approach to improving the performance of hate speech detection models in cross-lingual and cross-domain settings, focusing on detection efforts on Italian incel forums. Our contributions are the following:
 
-\begin{quote}
-\begin{verbatim}
-\pagenumbering{gobble}
-\end{verbatim}     
-\end{quote}
+\noindent
+\textbf{\Ni Corpora.} We compile two novel unsupervised corpora on the domain of incel forums, one in English and one in Italian. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
 
+\textbf{\Nii Masked language modeling.} For the first time, we adapt various models to the linguistic domain of English and Italian incel forums by training them on the masked language modeling (MLM) task on the aforementioned unsupervised corpora. We release these novel models, which can be used for further research on the topic.\footnote{\url{to.be.done}}
 
+\textbf{\Niii Hate speech identification.} We train the obtained MLM-enhanced models on various combinations of English and Italian datasets, pertaining to the domains of incel forums and mainstream social media (Twitter and Facebook). Then, we test their hate speech identification performance on the domain of incel Italian forums by training.
 
+% To this end, we train Transformer models on a variety of datasets in English and Italian, all annotated for hate speech. The English training dataset is compiled from an English-language incel forum, \enforum\footnote{\url{https://incels.is}}, while the Italian ones are built from mainstream social media platforms such as Twitter and Facebook.
 
-\subsection{Electronically-available Resources}
+% We use two mBERT~\cite{devlinBERTPretrainingDeep2019a} models as the baselines for our study, training them on both the English and the Italian datasets. We compare mBERT$_{base}$ to another mBERT model, trained on the masked language modeling (MLM) task on sentences extracted from two incel forums, one in English (\enforum) and one in Italian (\itforum\footnote{\url{https://ilforumdeibrutti.forumfree.it}}).
+% The two mBERT models are compared to other models trained specifically on Italian data: UmBERTo \cite{musixmatch-2020-umberto} and AlBERTo \cite{PolignanoEtAlCLIC2019}. We also train these two models on the MLM task on the entirety of the contents of the aforementioned Italian incel forum. In doing so, we aim to improve the model's capability of detecting hateful language in the target language and domain, i.e., an Italian incel forum such as \itforum. 
 
-Your PDF can be prepared using  \LaTeX\ with
-the CLiC-it 2023 style file (clic2023.sty, adapted 
-from the  official ACL 2014 style  file) and the 
-ACL bibliography style (acl.bst). 
+Our experiments show that the best results are obtained by training the mBERT model on bilingual data taken from both the English and Italian incel forums, using the MLM task, and then fine-tuning it on combinations of English and Italian datasets annotated for hate speech. This demonstrates how in this niche scenario having in-domain incel annotated data may be more important than having a large amount of general data in the target language.
 
-{You can alternatively use Microsoft Word 
-to produce your PDF file. In this case, we strongly
-recommend the use of the Word template file
-(clic2023.odt) on the CLiC-it 2023 website. }
+% \todoP{maybe drop par below}
+% The work hereby presented has the potential to contribute to the development of effective hate speech detection systems for different languages, with particular focus on Italian, with relation to niche contexts such as incel forums. This, in turn, can help address the harmful consequences of these online platforms and promote a more inclusive and respectful digital landscape.
 
+\section{Related Work}
 
+Prior work on Italian hate speech has been conducted chiefly within the context of the EVALITA shared tasks. The 2018 edition hosted a shared task on hate speech detection \cite{boscoOverviewEVALITA2018} based on two Italian-language datasets annotated for hate speech, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM \cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech against migrants and women \cite{basileEVALITA2020Overview}, based on a dataset of tweets. In this case, the best results were obtained by using an ensemble of BERT models \cite{mutiUniBOAMIMultiClass2020}.
 
-\subsection{Format of Electronic Manuscript}
-\label{sect:pdf}
+English-language hate speech detection has been conducted both with models such as logistic regression and linear SVMs~\cite{davidson-2017-automated-hate} and, more recently, by using transformers~\cite{mathew2021hatexplain}.
 
-For the production of the electronic manuscript you must use Adobe's
-Portable Document Format (PDF). PDF files are usually produced from
-\LaTeX\ using the \textit{pdflatex} command. If your version of
-\LaTeX\ produces Postscript files, you can convert these into PDF
-using \textit{ps2pdf} or \textit{dvipdf}. On Windows, you can also use
-Adobe Distiller or PDFCreator to generate PDF.
+In multilingual settings, this problem has been approached in a variety of ways. For example, \newcite{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of datasets annotated for hate speech to improve the performance of transformer models in zero-shot, few-shot and well-resourced settings. \newcite{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow these approaches in attempting to improve the performance of our models.
 
-Please make sure that your PDF file includes all the necessary fonts
-(especially tree diagrams, symbols, and fonts with Asian
-characters). When you print or create the PDF file, there is usually
-an option in your printer setup to include none, all or just
-non-standard fonts.  Please make sure that you select the option of
-including ALL the fonts. \textbf{Before sending it, test your PDF by
-  printing it from a computer different from the one where it was
-  created.} Moreover, some word processors may generate very large PDF
-files, where each page is rendered as an image. Such images may
-reproduce poorly. In this case, try alternative ways to obtain the
-PDF. One way on some systems is to install a driver for a postscript
-printer, send your document to the printer specifying ``Output to a
-file'', then convert the file to PDF.
+% \newcite{aluruDeepLearningModels2020} show that LASER embeddings with logistic regression perform better than BERT in low-resource settings. In the zero-shot setting they approach, Italian (together with Portuguese) achieves especially good results. In the context of monolingual Italian hate speech detection, and specifically misogyny detection, \newcite{mutiUniBOAMIMultiClass2020} use AlBERTo \cite{PolignanoEtAlCLIC2019} to approach the EVALITA 2020 misogyny detection shared task \cite{basileEVALITA2020Overview}, achieving top performance among all participants. The runners-up also experiment with BERT-based architectures, but approach the task using an ensemble technique \cite{leesJigsawAMIHaSpeeDe22020}.
 
-It is of utmost importance to specify the \textbf{A4 format} (21 cm
-x 29.7 cm) when formatting the paper. Print-outs of the PDF file on A4 
-paper should be identical to the hardcopy version. If you cannot 
-meet the above requirements about the production of your 
-electronic submission, please contact the publication chairs 
-as soon as possible.
-
-
-\subsection{Layout}
-\label{ssec:layout}
-
-Format manuscripts two columns to a page, in the manner these
-instructions are formatted. The exact dimensions for a page on A4
-paper are:
-
-\begin{itemize}
-\item Left and right margins: 2.5 cm
-\item Top margin: 2.5 cm
-\item Bottom margin: 2.5 cm
-\item Column width: 7.7 cm
-\item Column height: 24.7 cm
-\item Gap between columns: 0.6 cm
-\end{itemize}
-
-\noindent Papers should not be submitted on any other paper size.
- If you cannot meet the above requirements about the production of your electronic submission, please contact the publication chairs above as soon as possible.
-
-
-\subsection{Fonts}
-
-For reasons of uniformity, Adobe's {\bf Times Roman} font should be
-used. In \LaTeX2e{} this is accomplished by putting
-
-\begin{quote}
-\begin{verbatim}
-\usepackage{times}
-\usepackage{latexsym}
-\end{verbatim}
-\end{quote}
-in the preamble. If Times Roman is unavailable, use {\bf Computer
-  Modern Roman} (\LaTeX2e{}'s default).  Note that the latter is about
-  10\% less dense than Adobe's Times Roman font.
-
-
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{|l|rl|}
-\hline \bf Type of Text & \bf Font Size & \bf Style \\ \hline
-paper title & 15 pt & bold \\
-author names & 12 pt & bold \\
-author affiliation & 12 pt & \\
-the word ``Abstract'' & 12 pt & bold \\
-section titles & 12 pt & bold \\
-document text & 11 pt  &\\
-captions & 11 pt & \\
-abstract text & 10 pt & \\
-bibliography & 10 pt & \\
-footnotes & 10 pt & \\
-\hline
-\end{tabular}
-\end{center}
-\caption{\label{font-table} Font guide. }
-\end{table}
-
-\subsection{Language}
-\label{ssec:lang}
-Manuscripts can be written {\bf either in Italian or English}. It is 
-advised to supplement characters and terms not belonging to the
-chosen language with appropriate transliterations and/or translations
-since not all readers understand all such characters and terms.
-Inline transliteration or translation can be represented in
-the order of: original-form transliteration ``translation''.
-
-
-\subsection{The First Page}
-\label{ssec:first}
-
-\textbf{Center the title, author's name(s) and affiliation(s) across both
-columns.} Do not use footnotes for affiliations. Do not include the
-paper ID number assigned during the submission process. Use the
-two-column format only when you begin the abstract.
-
-{\bf Title}: Place the title centered at the top of the first page, in
-a 15-point bold font. (For a complete guide to font sizes and styles,
-see Table~\ref{font-table}) Long titles should be typed on two lines
-without a blank line intervening. Approximately, put the title at 2.5
-cm from the top of the page, followed by a blank line, then the
-author's names(s), and the affiliation on the following line. Do not
-use only initials for given names (middle initials are allowed). Do
-not format surnames in all capitals (e.g., use ``Schlangen'' not
-``SCHLANGEN'').  Do not format title and section headings in all
-capitals as well except for proper names (such as ``BLEU'') that are
-conventionally in all capitals.  The affiliation should contain the
-author's complete address, and if possible, an electronic mail
-address. Start the body of the first page 7.5 cm from the top of the
-page.
-
-The title, author names and addresses should be completely identical
-to those entered to the electronical paper submission website in order
-to maintain the consistency of author information among all
-publications of the conference. If they are different, the publication
-chairs may resolve the difference without consulting with you; so it
-is in your own interest to double-check that the information is
-consistent.
-
-{\bf Abstract}: \label{ssec:abs} Type the abstract at the beginning of the first
-column. The width of the abstract text should be smaller than the
-width of the columns for the text in the body of the paper by about
-0.6 cm on each side. Center the word {\bf Abstract} in a 12 point bold
-font above the body of the abstract. The abstract should be a concise
-summary of the general thesis and conclusions of the paper. It should
-be no longer than 200 words. The abstract text should be in 10 point font. {\bf  If the contribution is written in Italian, authors are asked to write the abstract  both in Italian and English}, otherwise the abstract should be only in English.
-
-{\bf Text}: Begin typing the main body of the text immediately after
-the abstract, observing the two-column format as shown in 
-the present document. Do not include page numbers.
-
-{\bf Indent} when starting a new paragraph. Use 11 points for text and 
-subsection headings, 12 points for section headings and 15 points for
-the title. 
-
-\subsection{Sections}
-
-{\bf Headings}: Type and label section and subsection headings in the
-style shown on the present document.  Use numbered sections (Arabic
-numerals) in order to facilitate cross references. Number subsections
-with the section number and the subsection number separated by a dot,
-in Arabic numerals. Do not number subsubsections.
-
-{\bf Citations}: Citations within the text appear in parentheses
-as~\cite{hack2011libera} or, if the author's name appears in the text
-itself, as Hack~\shortcite{hack2011libera}. Append lowercase letters
-to the year in cases of ambiguity. Treat double authors as
-in~\cite{jurafsky2012natural}, but write as in~\cite{cohn2020proceedings} when more than two authors are involved. Collapse multiple citations as
-in~\cite{cohn2020proceedings,hack2011libera,jurafsky2012natural}. Also refrain from using full citations as sentence constituents. We suggest that instead of
-\begin{quote}
-  ``\cite{hack2011libera} showed that ...''
-\end{quote}
-you use
-\begin{quote}
-``Hack \shortcite{hack2011libera}   showed that ...''
-\end{quote}
-
-If you are using the provided \LaTeX{} and Bib\TeX{} style files, you
-can use the command \verb|\newcite| to get ``author (year)'' citations.
-
-As reviewing will {\bf not} be double-blind, the submitted version of the 
-papers {\bf should include the authors' names and affiliations} and self-references 
-are allowed.
-
-\textbf{References}: Gather the full set of references together under
-the heading {\bf References}; place the section before any Appendices,
-unless they contain references. Arrange the references alphabetically
-by first author, rather than by order of occurrence in the text.
-Provide as complete a citation as possible, using a consistent format,
-such as the one for {\em Computational Linguistics\/} or the one in the 
-{\em Publication Manual of the American 
-Psychological Association\/}.  Use of full names for
-authors rather than initials is preferred.  A list of abbreviations for common computer science journals can be found in the ACM 
-{\em Computing Reviews} \newcite{ACM:83}.
-
-The \LaTeX{} and Bib\TeX{} style files provided roughly fit the
-American Psychological Association format, allowing regular citations, 
-short citations and multiple citations as described above.
-
-{\bf Appendices}: Appendices, if any, directly follow the text and the
-references (but see above).  Letter them in sequence and provide an
-informative title: {\bf Appendix A. Title of Appendix}.
-
-\subsection{Footnotes}
-
-{\bf Footnotes}: Put footnotes at the bottom of the page and use 10
-points text. They may be numbered or referred to by asterisks or other
-symbols.\footnote{This is how a footnote should appear.} Footnotes
-should be separated from the text by a line.\footnote{Note the line
-separating the footnotes from the text.}
-
-\subsection{Graphics}
-
-{\bf Illustrations}: Place figures, tables, and photographs in the
-paper near where they are first discussed, rather than at the end, if
-possible.  Wide illustrations may run across both columns.  Color
-illustrations are discouraged, unless you have verified that  
-they will be understandable when printed in black ink.
-
-{\bf Captions}: Provide a caption for every illustration; number each one
-sequentially in the form:  ``Figure 1. Caption of the Figure.'' ``Table 1.
-Caption of the Table.''  Type the captions of the figures and 
-tables below the body, using 11 point text.
-
-\section{CEUR Specifications}
+\section{Datasets}
 \label{sec:ceur-specs}
 
-All papers may consist of up to {\bf 5 pages of content}, references excluded.  Papers that do not conform to the specified length and formatting requirements may be
-rejected without review.
+In order to conduct the study, we leverage existing Italian-language datasets annotated for hate speech from past EVALITA\footnote{\url{https://www.evalita.it}} campaigns.
 
-Proceedings shall be submitted to CEUR-WS.org for online publication. Note that CEUR-WS distinguish between regular papers \textbf{(at least 25,000 characters, spaces and references included)}, and short papers (at least 17,500 characters). 
-25,000 characters correspond to about 5-6 pages with the CLiC-it 2023 style.
-To be sure that your paper is considered as a long paper in the Proceedings, you should also check that the camera-ready version of the paper complies with this requirement. In case your paper does not reach 25,000 characters, it will simply be considered as a short paper in the Proceedings. However, there are no other differences with regular papers.
+The first Italian dataset we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, hosted at EVALITA 2018 \cite{boscoOverviewEVALITA2018} (henceforth ``HSD-FB-18''), by annotating Facebook posts for hate speech. The second one is from the second edition of the HaSpeeDe shared task \cite{basileEVALITA2020Overview} (``HSD-TW-20''), compiled by adding new data to the HaSpeeDe 2018 Twitter dataset. The third and last dataset we use in Italian is the one compiled for the Automatic Misogyny Identification (AMI) shared task \cite{fersiniAMIEVALITA2020Automatic2020} (``AMI-20''), hosted at EVALITA 2020. This dataset is also compiled from tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{Although this dataset is not annotated for hate speech, it still comes in handy, since in incel spaces most of the hate speech is in the form of misogyny.} All Italian datasets were split 70/30 between training and development sets. The test sets, which we are not using in this study, were released separately in all cases for the aforementioned shared tasks. 
 
-\section{Contacts - Publishing Chairs}
-For any question regarding the instructions for the CLiC-it 2023 proceedings please get in touch with Alice Suozzi (\texttt{alice.suozzi@unive.it}) or Andrea Zaninello (\texttt{azaninello@fbk.eu}).
+In addition to these resources, we compiled two novel unsupervised datasets, comprising posts scraped from incel forums: \dsENcorpus\, (Incel Forum 2022 English Unsupervised) scraped from the \textit{Incels.is} forum, and \dsITcorpus\, (Incel Forum 2022 Italian Unsupervised) scraped from \textit{Il forum dei brutti}. The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content (i.e., the content of the post being replied to). Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two datasets.\footnote{The datasets are available at: \url{https://zenodo.org/record/8147845}.} We build these new resources both due to the lack of freely available incel corpora and the fact that incel language changes rapidly, as outlined in Appendix~\ref{app:keyness}, making it a worthwhile effort to compile updated resources.
+
+\begin{table}[t]
+  \centering
+  \caption{Statistics of the IFC-22-EN and IFC-22-IT unsupervised datasets in terms of posts and threads. The mean length is computed at the token level.}
+  \begin{tabular}{l|ccc}
+      \hline
+      \textbf{Dataset} & \textbf{Posts} & \textbf{Threads} & \textbf{Length} \\
+      \hline
+      \dsENcorpus & 4,760k & 230k & 31.07$\pm$70.01 \\
+      \dsITcorpus & \,\,\,\,638k & \,\,\,30k & 52.78$\pm$80.77 \\
+      \hline
+  \end{tabular}
+  \label{tab:english-italian-unsupervised-datasets-stats}
+\end{table}
+
+\begin{table}[t]
+  \caption{Hate speech (HS) annotation statistics for the \dsENclassification\, and \dsITclassification\, datasets.}
+  \label{tab:english-italian-supervised-datasets-partition-stats}
+  \centering
+  % \footnotesize
+  \begin{tabular}{l|cc}
+  \hline
+  % \bf \multirow{2}{*}{Dataset}  &\multicolumn{2}{c|}{\bf Binary} & \multicolumn{4}{c}{\bf Multi-Label} \\
+  % \cline{2-7}
+   \bf Binary &  \bf HS\,\, & \bf \% \\ % & \bf M\,\, & \bf R\,\, & \bf Both & \bf Neither \\
+  \hline
+  \dsENclassification$_{\mbox{train}}$ 	&  1,482 & 68.61 \\ % 2,160 \\ % & 806 & 630 & 46 & 2,160 \\
+  \dsENclassification$_{\mbox{val}}$ 	  &  316   & 68.10 \\ % 464 \\ % & 173 & 130 & 13 & 464   \\
+  \dsENclassification$_{\mbox{test}}$ 	&  292   & 59.71 \\ % 489 \\ % & 160 & 125 &  7 & 489   \\
+  \dsITclassification$_{\mbox{test}}$   &  200   & 40.00 \\ % 300 \\ % & 187 & 8 & 5    & 300   \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{figure}[]
+  \begin{footnotesize}
+  \caption{Guidelines for the corpus annotation, derived from ~\cite{fersini2018overview-ibereval} for misogyny and~\cite{waseem2016hateful} for racism.}
+  \label{fig:annotation-guidelines}
+  \begin{tabular}{|p{0.94\columnwidth}|}
+  \hline
+  \vspace{0mm}
+  Please identify whether each post is categorized as misogynous, racist, or falls into another category:
+  
+  A post is deemed \textbf{misogynous} if it exhibits any of the following traits:
+  \vspace{-2mm}
+  \begin{itemize}
+  \setlength\itemsep{0mm}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item Objectifies or stereotypes women;
+  \item Claims that men are superior to women;
+  \item Derails the conversation to defend the abuse of women, deny male responsibility, or redirect the conversation in favor of men;
+  \item Contains sexual advances, solicits sexual favors, sexually harasses the recipient, or threatens women with physical violence to assert power;
+  \item Uses slurs against women without any legitimate purpose.
+  \end{itemize}
+  
+  \vspace{-2mm}
+  A post is considered \textbf{racist} if it exhibits any of the following traits:
+  \vspace{-2mm}
+  \begin{itemize}
+  \setlength\itemsep{0mm}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item Uses a racial slur;
+  \item Stereotypes, attacks, or seeks to silence a minority without a valid argument;
+  \item Promotes violent crime against minorities;
+  \item Misrepresents the truth or distorts views on a minority with baseless claims;
+  \item Shows support for problematic ideologies, such as xenophobia, homophobia, or sexism.
+  \end{itemize}
+  \\
+  \hline
+  \end{tabular}
+  \end{footnotesize}
+\end{figure}
+
+A subset of the two datasets was annotated for both misogyny and racism, following the guidelines presented in Figure~\ref{fig:annotation-guidelines}.
+For English, a subset of 50 posts was randomly selected and labeled by three annotators, all with a C2 CEFR level of English, well-versed in linguistics, gender studies, NLP, and data annotation. 
+The Cohen's Kappa inter-annotator agreement~\cite{bobicev2017inter} was of 0.77, which is considered high.
+As such, the remaining instances were annotated by a single annotator. For the Italian dataset, two native speakers of Italian, also experts in the relevant fields, annotated  50 posts as well, reaching an IAA of 0.69. As the IAA was deemed acceptable, the rest of the instances were annotated by one single annotator. 
+
+We refer to these datasets as \dsENclassification\, (Incel Forum 2022 English Supervised) and \dsITclassification\, (Incel Forum 2022 Italian Supervised), 
+whose statistics are shown in 
+Table~\ref{tab:english-italian-supervised-datasets-partition-stats}. \dsENclassification~is split between training, development and testing partitions with a 70/15/15 split, while \dsITclassification~is only used for testing.
+The datasets are annotated for racism and misogyny because these are the most relevant forms of hate speech in the two forums \cite{silva2016analyzing,ging2018special}.
+
+We also use existing Italian-language datasets annotated for hate speech \cite{boscoOverviewEVALITA2018} and misogyny \cite{basileEVALITA2020Overview} from past EVALITA\footnote{\url{https://www.evalita.it}} campaigns.
+
+With that information at hand, we approach the task as a binary classification problem, where a post is considered hateful if it is labeled as being either misogynous or racist.
+
+\section{Experiments and Evaluation}
+\label{sec:exps}
+
+We train each model five times and select the number of epochs based on the performance on the validation set. We do this in order to make our results more reliable and diminishing the effect of the random initialization of the models. The resulting models are then evaluated on the \dsENclassification\, and \dsITclassification\, test sets.
+Table \ref{tab:hate-speech-all-models-all-ids} shows the performance in terms of precision, recall and F$_1$-measure.
+
+\begin{table*}[t]
+  \centering
+  % \footnotesize
+  \caption{Impact of incorporating additional datasets in English (Italian) when fine-tuning BERT (mBERT) and Incel BERT (Incel mBERT) on the mono- (top) and cross-lingual (bottom) hate speech detection task.}
+  \label{tab:hate-speech-all-models-all-ids}
+
+\begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|ccc|ccc}
+\multicolumn{1}{c|}{} & \multicolumn{1}{c|}{\bf EN} & \multicolumn{3}{c|}{\bf IT} & \multicolumn{3}{c|}{\bf \begin{minipage}{3cm}\begin{center}Val. (\dsENclassificationdev)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+ & \rotatebox{90}{Incels.is} & \rotatebox{90}{HSD-FB-18} & \rotatebox{90}{HSD-TW-20} & \rotatebox{90}{AMI-20}
+ & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
+    \hline
+        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}mBERT\end{minipage}}} 
+    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel mBERT\end{minipage}}} 
+    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multicolumn{1}{c}{} \\
+    \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}UmBERTo\end{minipage}}} 
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel\\UmBERTo\end{minipage}}} 
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}AlBERTo\end{minipage}}} 
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel\\AlBERTo\end{minipage}}} 
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+\end{tabular}
+\end{table*}
+
+As regards monolingual MLM training, 
+
+Carrying out MLM on mBERT on 1$M$ bilingual instances yields a mean F$_1$ score of 0.503 on the fourth epoch of training. Compared to the baseline mBERT model, which achieves a mean F$_1$ score of 0.333, this represents a significant performance boost of 51\%, showing the effectiveness of this approach.
 
 
-\section*{Acknowledgments}
+\section{Conclusions}
 
-The acknowledgments should go immediately before the references.
+In this paper, we have presented an approach to improve the performance of hate speech detection models in a cross-lingual and cross-domain scenarios. We used existing datasets in Italian annotated for hate speech and combined them with unsupervised datasets compiled by us in English and Italian from incel forums.
 
-Do not number the acknowledgments section. This document has been adapted from the instructions for the ACL-2014 proceedings by Alexander Koller and Yusuke Miyao, adapted from those for earlier ACL meetings, including those for ACL-2012 by Maggie Li and Michael White, those from ACL-2010 by Jing-Shing Chang and Philipp Koehn, those for ACL-2008 by Johanna D. Moore, Simone Teufel, James Allan, and Sadaoki Furui, those for ACL-2005 by Hwee Tou Ng and Kemal Oflazer, those for ACL-2002 by Eugene Charniak and Dekang Lin, and earlier ACL and EACL formats. Those versions were written by several people, including John Chen, Henry S. Thompson and Donald Walker. Additional elements were taken from the formatting instructions of the {\em International Joint Conference on Artificial Intelligence}.
+Choosing mBERT as our baseline model, we improved its performance by following the approach of~\newcite{caselliHateBERTRetrainingBERT2021} through MLM training, enhancing its capability of detecting hateful language in the target language. We did the same for Italian models, namely UmBERTo and AlBERTo, and compared the results with the baseline mBERT models.
+
+Our experiments show that 
+
+Future work 
+
+\section*{Ethical Considerations}
+All the data for the compilation of the unsupervised datasets is publicly available, as forum users accept a legal disclaimer before posting. The posters are kept anonymous and maintain complete ownership of their posts. 
+% 
+The scope of the paper covers an inherently sensitive issue which could be subject to bias. Human supervision is necessary to assess the quality of the results, especially during the annotation process. Therefore, the annotated posts were evaluated as objectively as possible.
+
+The models tend to favor precision over recall which, upon deployment, 
+could lead to a fairly permissive platform, thus putting free speech 
+at a reasonable level.
+
+\section*{Limitations}
+
+While the models are trained with different amounts of MLM training data, smaller intervals could be used (e.g., 200$k$, 300$k$, etc.) to have a better understanding of the performance trend of the model based on the amount of added data. The fact that the models first increase in performance and then drop when using monolingual data also needs further research.
+
+Additionally, more languages could be used: for example, Spanish and Portuguese are close to Italian, so using datasets annotated for hate speech in those languages and merging the to ours might help increase performance. Italian dataset annotated for hate speech could also be used to do the same.
+
+% Additionally, the same approach could be repeated using a larger amount of test data to further smooth out any possible irregularities in the results.
+
+Finally, the same experiments could also be repeated using the individual misogyny and racism labels, instead of the combined hate speech label, to study the contribution of each label to the overall performance of the model.
 
 % include your own bib file like this:
 \bibliographystyle{acl}
 \bibliography{bibliography.bib}
+
+\appendix
+
+\section{Analysis of Keyness in Incel Forums}
+\label{app:keyness}
+
+We can investigate the difference of relative frequency in word usage between general language and the language used in a specific speech community by building corpora representative of the two groups of speakers. That is, we can use a large \textit{reference corpus},
+% compiled by crawling the Internet indiscriminately for content in English, Italian, or any language,
+representing general language usage, and compare its frequencies to a \textit{focus corpus}~\cite{kilgarriff2009simple}, built only from texts pertaining to a specific communicative context.
+
+% \todoA{can you explain what is keyness?}
+We show the evolution of incel language by studying the change in 
+\textit{keyness}~\cite{kilgarriff2009simple} 
+of specific sets of words, showing how the lexical features of incel 
+communities of speakers of English and Italian
+% these two communities 
+change rapidly over time.
+Keyness indicates which words in a focus corpus are highly frequent compared to a reference corpus. 
+The keyness of a word $w$ is defined as~\cite{lexical_computing_2015}:%
+% The formula below shows Sketch Engine's implementation of this metric 
+
+\begin{equation}
+keyness(w) = \frac{fpm_f(w) + n}
+                {fpm_r(w)\, + \,n}
+\end{equation}
+%
+\paolo{where $fpm_f(w)$ represents the normalized frequency of a focus corpus word per million words,} $fpm_r(w)$ refers to the word in the reference corpus, and $n$ is a smoothing parameter (here, $n=1$).
+% where $f_{{pm_{focus}}}$ represents the normalized frequency of a word (per million words) in the focus corpus; $f_{{pm_{ref}}}$ represents the normalized frequency of a word (per million words) in the reference corpus; and $n$ represents a smoothing parameter (n = 1 by default).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+To study the English-speaking \textit{Incels.is} forum, we consider \paolo{all of its contents, for a total of}
+% a subset of
+104$M$ words (collected up to 18 October 2022).
+% , while for the 
+\paolo{We do the same for the}
+Italian \textit{Il forum dei brutti},
+% we consider the whole contents of the forum: %, which amount to 
+\paolo{for a total of}
+30$M$ words (up to 4 December 2022). For English, we calculate the keyness by using 
+enTenTen20
+% \footnote{\url{https://www.sketchengine.eu/ententen-english-corpus/}} 
+as the reference corpus, while for Italian we use itTenTen20~\cite{tenten2013kilgarriff}.
+% \footnote{\url{https://www.sketchengine.eu/ittenten-italian-corpus/}}.
+
+As regards \enforum, in order to compile a list of characteristic incel lexicon, the keyness of lexical items was calculated across the entirety of the forum, up to October 2022. Preliminary candidates were selected by 
+collecting single- and multi-word items that ranked in the top $500$ for keyness, for a total of $1k$ analyzed items.  Among these, only terms considered to be typical of incel language were examined. As mentioned in Section~\ref{incels-section}, racism and misogyny are very characteristic elements of the language of incels. As such, a simple way to choose characteristic terms for this speech community is manually evaluating racist and misogynous terms (or terms that are frequently associated to racist and misogynous contexts) and selecting those which are not typically found in general language, i.e., having high keyness scores.
+The evaluation of the individual terms was carried out by manually analyzing concordance lines in the corpus with the objective of verifying whether their use could be construed as being hateful. Although human evaluation is unavoidably subjective, we erred on the side of caution and only selected terms which could unmistakably be used in a hateful manner. Unfortunately, this terminology extraction strategy has the drawback of not directly taking into account terms that get resemanticized and assume a new, offensive meaning. Further work could be carried out to identify such terms in order to have a more comprehensive understanding of the issue.
+
+With relation to \itforum, we once again studied terms we deemed to be characteristic of the forum's incel language; however, in this case we focused on 10 terms used to describe other men in negative or positive ways. We chose this approach because the goal of this modern diachronic study is to show that language specific to incels changes over time, regardless of whether it can be considered hateful. Therefore, since in \dsITcorpus\, we could not find as much misogynous or racist jargon as in \dsENcorpus, we decided to consider the way men are represented, instead of women.
+
+% In order to conduct the diachronic study, the subset was divided into 22 chronological partitions, one for each 100 pages of the forum from 2017 to 2022. The keyness of each selected term was measured for every partition, calculating its slope across all 22 partitions. For each term, the slope was then divided by the average keyness over the 22 partitions, thus obtaining its normalized slope. For each partition, only the keyness of the 500 terms with the highest keyness was recorded. Zero values, produced whenever the item's keyness was not high enough to appear among the top 500 terms of the partition, were ignored both for the calculation of the slope and the average keyness. The 10 terms with the highest and lowest normalized slope, 20 in total, were thus grouped and their mean normalized slope was calculated.
+
+In order to conduct the study, the contents posted on the \enforum\, forum from 2017 to 2022 were divided into 22 chronological partitions, one for each 100 pages, each page containing 100 threads. With a similar approach, \itforum\, was divided chronologically by grouping posts by year of creation, from 2009 to 2022, for a total of 14 partitions. 
+
+The keyness of each selected term was measured for every partition, calculating the slope $m$ of its regression line as:
+
+% Returns the slope of the linear regression line through data points in known_y's and known_x's. The slope is the vertical distance divided by the horizontal distance between any two points on the line, which is the rate of change along the regression line.
+
+\begin{equation}
+  \label{eq:slope}
+  m = \frac{\sum_{i=1}^{n} (t_i - \bar{t})(k_i - \bar{k})}{\sum_{i=1}^{n} (t_i - \bar{t})^2}
+\end{equation}
+where $t_i$ is the $i$-th time partition, $k_i$ is the $i$-th keyness score, $n$ is the number of partitions, and $\bar{t}$ and $\bar{k}$ are the means of the two variables. By calculating the slope of the regression line, we are able to find how the keyness of a term changes over time. A positive slope indicates that the use of a term is becoming more frequent, while a negative slope indicates that a term is becoming less prevalent. For each term, the slope was first calculated across all partitions (22 for \enforum\, and 14 for \itforum); then, it was divided by the average keyness of the term over all the partitions, thus obtaining the normalized slope. This was done because certain terms may have very high keyness values, while other terms may not be as prevalent, and we wanted to be able to compare the slope of different terms regardless of the absolute value of their keyness.
+
+For each partition, only the keyness of the 500 terms with the highest keyness was recorded. Zero values, produced whenever the item's keyness was not high enough to appear among the top 500 terms of the partition, were ignored both for the calculation of the slope and the average keyness. The number of zero values for \enforum\, was 7.16\% of the total, while for \itforum\, it was 44.44\%.
+
+With relation to \enforum, we selected the 10 terms with the highest and lowest normalized slope, 20 in total, while for \itforum\, we only picked the top and bottom 5 terms, 10 in total. The lower number of terms for \itforum\, is due to the fact that we could not identify enough relevant terms for the study. For both forums, the mean normalized slope was finally calculated for each group of terms to have a pair of values which could be used to compare the two overall trends.
+
+% As far as \textit{Incels.is} is concerned, in order to compile a list of characteristic 
+% incel lexicon, the keyness of lexical items was calculated across the entirety 
+% of the forum, up to 
+% % \todoA{I see Oct above. Confusing}
+% October 2022. Preliminary candidates were selected by 
+% collecting single- and multi-word items that ranked in the top $500$ for 
+% keyness, for a total of $1k$ analyzed items. 
+% % \todoA{considered by who?}
+% % Only terms considered to be typical of incel language were examined. 
+% Racism and misogyny are very characteristic elements of the language of 
+% incels~\cite{silva2016analyzing,ging2018special,jakiOnlineHatredWomen2019}. 
+% % \paolo{As such, a simple way to choose characteristic terms for this speech community is manually evaluating racist and misogynous terms (or terms that are frequently associated to racist and misogynous contexts) and selecting those which are not typically found in general language, i.e., having high keyness scores.}
+% Therefore, we \paolo{manually} selected characteristic hateful terminology for this speech community by considering racist and misogynous terms that are not typically found in general language, i.e.\, having high keyness scores.
+
+% % \paolo{With relation to \itforum, we once again considered the whole forum and studied terms we deemed to be characteristic of the forum's incel language; however, in this case we focused on 10 terms used to describe other men in negative or positive ways, since we could not find as much misogynous or racist jargon as in \dsENcorpus.}
+
+% In order to conduct the diachronic study, the subset was divided into 22 
+% chronological partitions, one for each 100 pages\footnote{Each page contains 10 threads.} of the forum from 2017 to 2022. 
+% The keyness of each selected term was measured for every partition, calculating 
+% \paolo{the slope of its regression line}
+% % its slope
+% across all 22 partitions. For each term, the slope was divided by 
+% the average keyness over the 22 partitions, thus obtaining its normalized slope. 
+% For each partition, only the terms having the top 500 keyness scores were recorded.
+% Zero values (7.16\% in total), produced whenever the item's 
+% keyness was not high enough to appear among the top 500 terms of the partition, 
+% were ignored both for the calculation of the slope and for the average 
+% keyness. The 10 terms with the highest and lowest normalized slope, 20 in total, 
+% were thus grouped and their mean normalized slope was calculated.
+
+% % \paolo{
+% % In order to conduct the study, the contents posted on the \enforum\, forum from 2017 to 2022 were divided into 22 chronological partitions, one for each 100 pages, each page containing 100 threads. Similarly, \itforum\, was divided chronologically by grouping posts by year of creation, from 2009 to 2022, for a total of 14 partitions. 
+
+% % The keyness of each selected term was measured for every partition, calculating the slope $m$ of its regression line as:
+
+% % % Returns the slope of the linear regression line through data points in known_y's and known_x's. The slope is the vertical distance divided by the horizontal distance between any two points on the line, which is the rate of change along the regression line.
+
+% % \begin{equation}
+% %   \label{eq:slope}
+% %   m = \frac{\sum_{i=1}^{n} (t_i - \bar{t})(k_i - \bar{k})}{\sum_{i=1}^{n} (t_i - \bar{t})^2}
+% % \end{equation}
+% % where $t_i$ is the $i$-th time partition, $k_i$ is the $i$-th keyness score, $n$ is the number of partitions, and $\bar{t}$ and $\bar{k}$ are the means of the two variables. By calculating the slope of the regression line, we are able to find how the keyness of a term changes over time.
+% % % A positive slope indicates that the use of a term is becoming more frequent, while a negative slope indicates that a term is becoming less prevalent.
+% % For each term, the slope was first calculated across all partitions (22 for \enforum\, and 14 for \itforum); then, it was divided by the average keyness of the term over all the partitions, thus obtaining the normalized slope. This was done because we want to compare the slope for different terms regardless of their absolute keyness.
+
+% % For each partition, only the keyness of the 500 terms with the highest keyness was recorded. Zero values, produced whenever the item's keyness was not high enough to appear among the top 500 terms of the partition, were ignored both for the calculation of the slope and the average keyness. The number of zero values for \enforum\, was 7.16\% of the total, while for \itforum\, it was 44.44\%.
+
+% % With relation to \enforum, we selected the 10 terms with the highest and lowest normalized slope, 20 in total, while for \itforum\, we only picked the top and bottom 5 terms, 10 in total. The lower number of terms for \itforum\, is due to the fact that we could not identify enough relevant terms for the study. For both forums, the mean normalized slope was finally calculated for each group of terms to have a pair of values which could be used to compare the two overall trends.
+% % }
+
+% As regards \textit{Il forum dei brutti}, the forum contents were 
+% divided chronologically by grouping posts by year of creation, from 2009 to 
+% 2022, for a total of 14 partitions. In this case, we carry out a study on 10 
+% terms we deem to be characteristic of the forum's incel language, used to 
+% describe other men %
+% % \footnote{The goal of this diachronic study is to show that language specific to incels changes over time, regardless of whether it can be considered hate speech.} 
+% in negative or positive ways. The amount of zero values 
+% for these 10 terms is 44.44\% of the total. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Figure~\ref{fig:keyness-over-time} shows the over-time trend of the keyness of the terms extracted from \enforum\, and \itforum\, over the partitions of the two forums. The curves show clear opposite trends for the two groups, which we refer to as ``gainers'' and ``losers'' of keyness, based on whether their mean normalized slope is positive or negative, respectively. The plots help visualize a widening over-time difference in lexicon, which may cause models trained on dated texts to become increasingly worse at evaluating more recent data. The highlighted terms in the figure also show that certain terms seem to substitute each other over time, although not all of them can be paired in this manner. For example, ``foid'' is a contraction of ``femoid'' and ``adone'' is a close synonym of ``chad'', and for both pairs we can observe opposite trends with a specific point in time in which one overtakes the other.
+
+\begin{figure*}[]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{images-tables/keyness_chart_incelsis.pdf}
+    \caption{\enforum}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{images-tables/keyness_chart_fdb.pdf}
+    \caption{\itforum}
+  \end{subfigure}
+  \caption[Keyness graph for \enforum\, and \itforum.]{Keyness over time for the characteristic incel terms extracted from the (a) \enforum\, and (b) \itforum\, forums. Red lines represent the terms that gained keyness over time, while blue lines represent the terms that lost keyness over time.}
+  \label{fig:keyness-over-time}
+\end{figure*}
+
+Table~\ref{tab:keyness} reports the normalized slopes of the terms obtained from the two forums. In both cases, the mean normalized slopes of the two data series, compared side by side, quantitatively display a clear trend according to which certain terms gain popularity over time, while others become less popular. With regard to \enforum, the difference between the mean normalized slopes is 0.106, while for \itforum\, the difference is even larger, 0.247, which points at an even faster lexical evolution. In both cases, the shift in lexicon needs to be taken into account in order to have a clear picture of the language adopted by each speech community. For terms such as ``foid'', ``femoid'', and ``roastie'', the observed trends also confirm the time-series data discussed in \newcite{gothard2020ExploringIncelLanguage}, which show certain terms increasing and decreasing in use over the total messages posted in incel subreddits.
+
+\begin{table}[t]
+  \caption{Keyness normalized slopes for \enforum\, and \itforum.}
+  \footnotesize
+    \centering
+    \begin{tabular}{c|lc|lc}
+      \hline
+      \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\bf Forum}} & \multicolumn{2}{c|}{\bf Gainers} & \multicolumn{2}{c}{\bf Losers} \\
+      \cline{2-5}
+       & \bf Term &\bf  Slope &\bf  Term &\bf  Slope \\
+      \hline
+      \multirow{11}{*}[0pt]{\rotatebox[origin=c]{90}{\enforum}} & shitskin    & 0.093           & racepill    & -0.019           \\
+      & deathnic    & 0.081           & stacie      & -0.022           \\
+      &cumskin     & 0.079           & jb          & -0.027           \\
+      &noodlewhore & 0.077           & chadlite    & -0.029           \\
+      &slav        & 0.068           & whitecels   & -0.032           \\
+      &foid        & 0.058           & cunt        & -0.036           \\
+      &curryland   & 0.051           & slut        & -0.046           \\
+      &aryan       & 0.048           & deathnik    & -0.047           \\
+      &ricecel     & 0.047           & roastie     & -0.051           \\
+      &whore       & 0.025           & femoid      & -0.124           \\
+      \cline{2-5}
+      &\bf Mean       &\bf 0.063  &\bf Mean       &\bf -0.043      \\
+      \hline
+      \multirow{6}{*}[8pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2cm}\textit{Il forum}\\ \textit{dei brutti}\end{minipage}}}
+      &zerbini & 0.104 & reietto & -0.142 \\
+      &normie & 0.121 & strafigo & -0.122 \\
+      &bv & 0.125 & figaccione & -0.122 \\
+      &chad & 0.126 & attraente & -0.113 \\
+      &subumano & 0.158 & adone & -0.103 \\
+      \cline{2-5}
+      &\bf Mean &\bf 0.127 &\bf Mean &\bf -0.120 \\ \hline
+    \end{tabular}
+  \label{tab:keyness}
+\end{table}
+
+With relation to \enforum, as already anticipated through Figure~\ref{fig:keyness-over-time}, although terms like ``foid'' and ``femoid'' have the same meaning (both are used to dehumanize women by associating them to insentient androids\footnote{\url{https://incels.wiki/w/Femoid}}), the shorter form has become more popular, while the use of the full form has decreased. This is probably due to the fact that, given the high frequency with which the term is used in the forum, users tend to use the abbreviated version to save time and effort. This might seem like a minor detail, but the sheer amount of misogyny that is expressed in the forum through this term alone makes it important to point out a shift in its use.
+
+As regards \itforum, we can observe that the way users refer to men changes in a rather clear way. On one hand, positive words that are commonly used in general language, such as ``strafigo'' and ``figaccione'' (both meaning ``extremely handsome''), are substituted by specialized terms that are more specific to the forum's speech community, e.g., ``chad''.\footnote{\url{https://incels.wiki/w/Chad}} On the other hand, we can see the same phenomenon for negative words, where ``reietto'' (``outcast'') loses popularity, leaving space to terms with more specialized uses, such as ``bv'', meaning ``brutto vero'' (lit. ``truly ugly''), and ``subumano'', meaning ``subhuman''. The first is an acronym, which makes its meaning opaque to outsiders, while the second is a term with a much stronger and denigrating connotation.
+
+% This trend is also confirmed statistically. For both forums, we first take the normalized average slopes for each term and then we test if the difference between gainers and losers of keyness is statistically significant. For the \enforum\, forum, since the data series of the losers is not normally distributed, we use the Mann-Whitney U test \cite{mann1947test}. For \itforum, since both data series are normally distributed, we use a two-sample t-test \cite{snedecor1989statistical}. In both cases, the p-values are well below 0.001, as shown in Table~\ref{tab:statistical-tests-diachronic-study}, showing the results are statistically significant. This means that the change in the usage of the terms is not random, but rather due to a concrete variation in the way specific lexicon is used by the two speech communities.
+
+% \begin{table}[t]
+%   \centering
+%   \caption[Keyness statistical tests.]{Results of the Mann-Whitney U test and the t-test for the normalized slopes of the keyness of the terms gaining and losing popularity over time, for \enforum\, and \itforum, respectively.}
+%   \label{tab:statistical-tests-diachronic-study}
+%   \begin{tabular}{l|c|c|c}
+%     \hline
+%   \bf Forum                    &\bf  Test       &\bf  Stat Value  &\bf  \textit{p}-Value        \\
+%   \hline
+%   \enforum\,           & Mann-Whitney U & 100             & 0.0002             \\
+%   \itforum\, & t-test         & -22.7566        & 1.4736 x $10^{-8}$ \\
+%   \hline
+%   \end{tabular}
+%   \end{table}
+
+Based on the conducted qualitative and quantitative analyses, the same conclusions can be drawn for both forums: the presented terms are arguably characteristic of the incel language used within the two platforms and the change in their usage over time is non-negligible. This implies that language models could become progressively worse at predicting over these domains, were their training resources not be periodically updated. Models rely on training material to learn language, and if the material is outdated, their understanding of the discourse currently produced by a specific speech community could become suboptimal. This is especially important considering the fact that, especially in the case of \enforum, the presented racist and misogynous terms are novel and carry most of the discriminatory meaning through neologisms.
+
+Consequently, it seems desirable, if not necessary, to periodically update corpora to have accurate terminological representations. In some cases, it would arguably make sense to even rebuild resources from scratch, were they too outdated. In our case, given the observed changes in keyness, we estimate that the hereby analyzed time frame could be taken as a reference for how long resources can be considered up-to-date. However, with the aim of obtaining an objective figure, further research could be conducted to quantify how often resources should be updated to keep up with the evolution of the language used in the spaces scrutinized through this study.
+
+The necessity to build such material is also supported by the fact that, as discussed in Chapter~\ref{related-work}, resources on the topic of incels are rare and limited, and their applicability is often compromised because the linguistic domain of the source data only partially aligns with the one under investigation \cite{pelzer-2021-toxic-language-incel-communities}. An additional cause for such incompatibility of resources can be found in the annotation scheme, which can be inapplicable to the supervised task being approached \cite{zhou-2022-automated-hs-detection}. However, the necessity to build new resources does not mean they will be obsolete soon after being employed, as the time frames we have analyzed in this chapter span various years of forum activity.
+
+\clearpage
+
+\section{Complete Results}
+\label{app:complete-results}
+
+  \begin{strip}
+  \centering
+  % \footnotesize
+  \captionof{table}{Impact of incorporating additional datasets in English (Italian) when fine-tuning BERT (mBERT) and Incel BERT (Incel mBERT) on the mono- (top) and cross-lingual (bottom) hate speech detection task.}
+  \label{tab:hate-speech-all-models-all-ids-appendix}
+
+\begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|ccc|ccc}
+\multicolumn{1}{c|}{} & \multicolumn{1}{c|}{\bf EN} & \multicolumn{3}{c|}{\bf IT} & \multicolumn{3}{c|}{\bf \begin{minipage}{3cm}\begin{center}Val. (\dsENclassificationdev)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+ & \rotatebox{90}{Incels.is} & \rotatebox{90}{HSD-FB} & \rotatebox{90}{HSD-TW} & \rotatebox{90}{AMI-20}
+ & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
+    \hline
+        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}mBERT\end{minipage}}} 
+    &  \bs &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
+    &  \bs &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
+    &  \bs &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
+    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}Incel mBERT\end{minipage}}} 
+    &  \bs &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
+    &  \bs &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
+    &  \bs &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
+    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}UmBERTo\end{minipage}}} 
+    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
+    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
+    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}Incel\\UmBERTo\end{minipage}}} 
+    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
+    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
+    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}AlBERTo\end{minipage}}} 
+    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
+    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
+    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}Incel\\AlBERTo\end{minipage}}} 
+    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
+    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
+    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
+    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
+    \hline
+\end{tabular}
+\end{strip}
 
 \end{document}
