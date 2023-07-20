@@ -52,6 +52,10 @@
 \newcommand{\dsENforecasting}{IFSS-EN-223K}
 \newcommand{\dsITforecasting}{IFSS-IT-30K}
 
+\newcommand{\imbert}{\mbox{Incel mBERT}}
+\newcommand{\umbert}{\mbox{Incel UmBERTo}}
+\newcommand{\albert}{\mbox{Incel AlBERTo}}
+
 \newcommand{\dsENclassificationtrain}{IFS-EN$_{\mbox{tr}}$} % Incel Forum Supervised, English, 5203 instances
 \newcommand{\dsENclassificationdev}{IFS-EN$_{\mbox{de}}$} % Incel Forum Supervised, English, 5203 instances
 \newcommand{\dsENclassificationtest}{IFS-EN$_{\mbox{te}}$} % Incel Forum Supervised, English, 5203 instances
@@ -237,16 +241,10 @@ We also use existing Italian-language datasets annotated for hate speech \cite{b
 
 With that information at hand, we approach the task as a binary classification problem, where a post is considered hateful if it is labeled as being either misogynous or racist.
 
-\section{Experiments and Evaluation}
-\label{sec:exps}
-
-We train each model five times and select the number of epochs based on the performance on the validation set. We do this in order to make our results more reliable and diminishing the effect of the random initialization of the models. The resulting models are then evaluated on the \dsENclassification\, and \dsITclassification\, test sets.
-Table \ref{tab:hate-speech-all-models-all-ids} shows the performance in terms of precision, recall and F$_1$-measure.
-
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Impact of incorporating additional datasets in English (Italian) when fine-tuning BERT (mBERT) and Incel BERT (Incel mBERT) on the mono- (top) and cross-lingual (bottom) hate speech detection task.}
+  \caption{Performance on the hate speech identification task of the adopted models when fine-tuning on the top three combinations of the adopted datasets in English and Italian (top) and only Italian (bottom).}
   \label{tab:hate-speech-all-models-all-ids}
 
 \begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|ccc|ccc}
@@ -290,6 +288,34 @@ Table \ref{tab:hate-speech-all-models-all-ids} shows the performance in terms of
 \end{tabular}
 \end{table*}
 
+\section{Models}
+\label{sec:models}
+
+We apply multilingual models to the English-Italian combinations of training datasets and Italian-only models to the Italian-only combinations.
+
+As regards the multilingual models, we use mBERT$_{base}$ and an MLM-enhanced version of it which we obtain by training it for one epoch on $500k$ posts sampled from \dsENcorpus and $500k$ posts sampled from \dsITcorpus, for a total of $1M$ bilingual sentences. We refer to this model as ``\imbert''.
+
+With relation to the Italian-only models, we use UmBERTo$_{base}$ and AlBERTo$_{base}$. In addition, we also create MLM-enhanced versions of these two models by training them on the entirety of the contents of \dsITcorpus, for a total of $627k$ sentences. We refer to these models as ``\umbert''\, and ``\albert'', respectively.
+
+The MLM pre-training process is carried out in all cases by tokenizing the sentences using Hugging Face's AutoTokenizer\footnote{\url{https://huggingface.co/docs/transformers/model\_doc/auto\#transformers.AutoTokenizer}},
+% , which automatically selects the appropriate tokenizer for the model we wish 
+% to train. The sentences are 
+feeding them into the model using Hugging Face's data collator for language 
+modeling.\footnote{\url{https://huggingface.co/docs/transformers/main\_classes/ data\_collator}}
+% , which automatically masks tokens with a 15\% chance for the 
+% MLM task. Finally, t
+Due to computational constraints, we train the models for a single (1) epoch, with a masking probability of 15\% and a batch size of 32
+% masking sentence tokens with a probability of 15\% and using a batch size of 32 samples 
+on a single Tesla P100 GPU with 16 GB of VRAM.
+
+\section{Experiments and Evaluation}
+\label{sec:exps}
+
+We train each model five times and select the number of epochs based on the performance on the validation set. We do this in order to make our results more reliable and diminishing the effect of the random initialization of the models. The resulting models are then evaluated on the \dsENclassification\, and \dsITclassification\, test sets.
+Table \ref{tab:hate-speech-all-models-all-ids} shows the performance in terms of precision, recall and F$_1$-measure for the three dataset combinations yielding the overall highest performance with the best-performing model. The full results can be found in Appendix~\ref{app:complete-results}, in Table~\ref{tab:hate-speech-all-models-all-ids-appendix}.
+
+\itodo{waiting for results to continue writing}
+
 As regards monolingual MLM training, 
 
 Carrying out MLM on mBERT on 1$M$ bilingual instances yields a mean F$_1$ score of 0.503 on the fourth epoch of training. Compared to the baseline mBERT model, which achieves a mean F$_1$ score of 0.333, this represents a significant performance boost of 51\%, showing the effectiveness of this approach.
@@ -316,7 +342,7 @@ at a reasonable level.
 
 \section*{Limitations}
 
-While the models are trained with different amounts of MLM training data, smaller intervals could be used (e.g., 200$k$, 300$k$, etc.) to have a better understanding of the performance trend of the model based on the amount of added data. The fact that the models first increase in performance and then drop when using monolingual data also needs further research.
+Due to computational constraints, we were forced to only carry out MLM pre-training for one epoch over the contents of the incel forums. 
 
 Additionally, more languages could be used: for example, Spanish and Portuguese are close to Italian, so using datasets annotated for hate speech in those languages and merging the to ours might help increase performance. Italian dataset annotated for hate speech could also be used to do the same.
 
@@ -544,7 +570,7 @@ The necessity to build such material is also supported by the fact that, as disc
   \begin{strip}
   \centering
   % \footnotesize
-  \captionof{table}{Impact of incorporating additional datasets in English (Italian) when fine-tuning BERT (mBERT) and Incel BERT (Incel mBERT) on the mono- (top) and cross-lingual (bottom) hate speech detection task.}
+  \captionof{table}{Performance on the hate speech identification task of the adopted models when fine-tuning them on all combinations of the adopted datasets in English and Italian (top) and only Italian (bottom).}
   \label{tab:hate-speech-all-models-all-ids-appendix}
 
 \begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|ccc|ccc}
@@ -568,6 +594,7 @@ The necessity to build such material is also supported by the fact that, as disc
     &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
     &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
     \hline
+    \multicolumn{1}{c}{} \\
     \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
     \hline
     \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}UmBERTo\end{minipage}}} 
