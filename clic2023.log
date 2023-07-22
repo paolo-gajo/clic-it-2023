@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.18)  22 JUL 2023 02:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.18)  22 JUL 2023 18:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -390,31 +390,59 @@ Package: cuted 2021/10/04 v2.0 Mixing onecolumn and twocolumn modes
 \var@@pagediscards@ht=\dimen274
 \stripsep=\skip56
 \viper@penalty=\count300
-)
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 91.
+) (c:/texlive/2022/texmf-dist/tex/generic/soul/soul.sty
+Package: soul 2023-02-18 v3.0 Permit use of UTF-8 characters in soul (HO)
+ (c:/texlive/2022/texmf-dist/tex/generic/soul/soul-ori.sty
+Package: soul-ori 2023-02-18 v3.0 letterspacing/underlining (mf)
+\SOUL@word=\toks38
+\SOUL@lasttoken=\toks39
+\SOUL@syllable=\toks40
+\SOUL@cmds=\toks41
+\SOUL@buffer=\toks42
+\SOUL@token=\toks43
+\SOUL@syllgoal=\dimen275
+\SOUL@syllwidth=\dimen276
+\SOUL@charkern=\dimen277
+\SOUL@hyphkern=\dimen278
+\SOUL@dimen=\dimen279
+\SOUL@dimeni=\dimen280
+\SOUL@minus=\count301
+\SOUL@comma=\count302
+\SOUL@apo=\count303
+\SOUL@grave=\count304
+\SOUL@spaceskip=\skip57
+\SOUL@ttwidth=\dimen281
+\SOUL@uldp=\dimen282
+\SOUL@ulht=\dimen283
+) (c:/texlive/2022/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (c:/texlive/2022/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+))
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 100.
  (c:/texlive/2022/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ) (c:/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count301
+\l__color_backend_stack_int=\count305
 \l__pdf_internal_box=\box71
 ) (./clic2023.aux)
 \openout1 = `clic2023.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -450,29 +478,29 @@ LaTeX Font Info:    ... okay on input line 91.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \it@ocap on input line 91.
-LaTeX Info: Redefining \it@ccap on input line 91.
+LaTeX Info: Redefining \it@ocap on input line 100.
+LaTeX Info: Redefining \it@ccap on input line 100.
 
 File italian.ldf warning: 
 italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting 
-italian.ldf    on input line 91.
+italian.ldf    on input line 100.
 
 (c:/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count302
-\scratchdimen=\dimen275
+\scratchcounter=\count306
+\scratchdimen=\dimen284
 \scratchbox=\box72
-\nofMPsegments=\count303
-\nofMParguments=\count304
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count305
-\MPscratchDim=\dimen276
-\MPnumerator=\count306
-\makeMPintoPDFobject=\count307
-\everyMPtoPDFconversion=\toks39
+\nofMPsegments=\count307
+\nofMParguments=\count308
+\everyMPshowfont=\toks44
+\MPscratchCnt=\count309
+\MPscratchDim=\dimen285
+\MPnumerator=\count310
+\makeMPintoPDFobject=\count311
+\everyMPtoPDFconversion=\toks45
 ) (c:/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -482,50 +510,50 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 92.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 101.
  (c:/texlive/2022/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 92.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 101.
  (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 92.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 101.
  (c:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 92.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 101.
  (c:/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Trying to load font information for OMS+pcr on input line 92.
+LaTeX Font Info:    Trying to load font information for OMS+pcr on input line 101.
  (c:/texlive/2022/texmf-dist/tex/latex/psnfss/omspcr.fd
 File: omspcr.fd 
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 92.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
 
-Underfull \hbox (badness 2293) in paragraph at lines 94--98
+Underfull \hbox (badness 2293) in paragraph at lines 103--107
 \OT1/ptm/m/n/10.95 for ``in-vol-un-tary celi-bates''. We pre-
  []
 
 
-Underfull \hbox (badness 1205) in paragraph at lines 94--98
+Underfull \hbox (badness 1205) in paragraph at lines 103--107
 \OT1/ptm/m/n/10.95 from two in-cel fo-rums, one in Ital-ian
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 114--120
+Underfull \hbox (badness 1173) in paragraph at lines 123--129
 \OT1/ptm/m/n/10.95 bate'') com-mu-nity within the Manosphere has
  []
 
 
-Underfull \hbox (badness 1168) in paragraph at lines 121--129
+Underfull \hbox (badness 1168) in paragraph at lines 130--138
 \OT1/ptm/m/n/10.95 less-resourced lan-guages, such as Ital-ian, one
  []
 
 
-Underfull \hbox (badness 1178) in paragraph at lines 121--129
+Underfull \hbox (badness 1178) in paragraph at lines 130--138
 \OT1/ptm/m/n/10.95 The prob-lem be-comes even more ex-ac-er-bated
  []
 
@@ -534,88 +562,66 @@ Underfull \hbox (badness 1178) in paragraph at lines 121--129
 
 
 ]
-Underfull \hbox (badness 1975) in paragraph at lines 154--155
+Underfull \hbox (badness 1975) in paragraph at lines 163--164
 []\OT1/ptm/m/n/10.95 English-language hate speech de-tec-tion has
  []
 
 
-Underfull \hbox (badness 2165) in paragraph at lines 166--167
-\OT1/ptm/m/n/10.95 com-piled from tweets and is an-no-tated with
+Underfull \hbox (badness 1675) in paragraph at lines 172--175
+\OT1/ptm/m/n/10.95 We lever-age ex-ist-ing Italian-language datasets
  []
 
 [2]
-Overfull \hbox (6.03775pt too wide) in paragraph at lines 173--182
+Overfull \hbox (6.03775pt too wide) in paragraph at lines 187--196
  [][] 
  []
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 184.
+               Default added (so using `tbp') on input line 198.
 
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 199.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 213.
 (c:/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 188--223
+Underfull \hbox (badness 10000) in paragraph at lines 202--237
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--223
+Underfull \hbox (badness 10000) in paragraph at lines 202--237
 
  []
 
 
-Underfull \hbox (badness 2970) in paragraph at lines 477--478
+Underfull \hbox (badness 2970) in paragraph at lines 422--423
 \OT1/ptm/m/n/10.95 use [] and [] as our base-
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 501--502
- \OT1/ptm/b/n/10.95 Italian-only. \OT1/ptm/m/n/10.95 Over-all, the best per-form-ing
+Underfull \hbox (badness 1038) in paragraph at lines 521--528
+\OT1/ptm/m/n/10.95 that [] and [] per-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 501--502
-\OT1/ptm/m/n/10.95 model on the Italian-only com-bi-na-tions is
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Underfull \hbox (badness 2393) in paragraph at lines 501--502
-\OT1/ptm/m/n/10.95 of 0.707, when train-ing solely on [].
- []
-
-
-Underfull \hbox (badness 1147) in paragraph at lines 501--502
-\OT1/ptm/m/n/10.95 and [] on Ital-ian sen-tences ex-tracted
- []
-
-[5]
-Underfull \hbox (badness 1038) in paragraph at lines 509--510
-\OT1/ptm/m/n/10.95 est per-for-mance is once again recorded when
- []
-
-
-Underfull \hbox (badness 1546) in paragraph at lines 509--510
-\OT1/ptm/m/n/10.95 us-ing [] for train-ing. The com-bi-na-
- []
-
-
-Underfull \hbox (badness 2119) in paragraph at lines 509--510
-\OT1/ptm/m/n/10.95 For ex-am-ple, the per-for-mance dif-fer-ence be-
- []
-
-
-Underfull \hbox (badness 1552) in paragraph at lines 520--521
+ [5]
+Underfull \hbox (badness 1552) in paragraph at lines 556--557
 \OT1/ptm/m/n/10.95 104 lan-guages and [] and []
  []
 
 
-Underfull \hbox (badness 4024) in paragraph at lines 520--521
+Underfull \hbox (badness 4024) in paragraph at lines 556--557
 [] \OT1/ptm/m/n/10.95 can out-per-form them by pre-
  []
 
-[6] (./clic2023.bbl
+
+Underfull \hbox (badness 2005) in paragraph at lines 556--557
+\OT1/ptm/m/n/10.95 that, al-though we are test-ing on an en-tirely
+ []
+
+(./clic2023.bbl [6]
 Underfull \hbox (badness 1158) in paragraph at lines 31--38
 []\OT1/ptm/m/n/10 Cristina Bosco, Fe-lice Dell'Orletta, Fabio Po-letto,
  []
@@ -646,7 +652,7 @@ Underfull \hbox (badness 2698) in paragraph at lines 143--150
  []
 
 [7]
-Underfull \hbox (badness 2941) in paragraph at lines 195--200
+Underfull \hbox (badness 2941) in paragraph at lines 212--217
 []\OT1/ptm/m/n/10 Leandro Silva, Mainack Mon-dal, Den-zil Cor-rea,
  []
 
@@ -656,29 +662,33 @@ Underfull \vbox (badness 6047) has occurred while \output is active []
  [8]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 689.
+               Default added (so using `tbp') on input line 725.
 
 <images-tables/keyness_chart_incelsis.pdf, id=44, 723.28029pt x 378.79895pt>
 File: images-tables/keyness_chart_incelsis.pdf Graphic file (type pdf)
 <use images-tables/keyness_chart_incelsis.pdf>
-Package pdftex.def Info: images-tables/keyness_chart_incelsis.pdf  used on input line 692.
+Package pdftex.def Info: images-tables/keyness_chart_incelsis.pdf  used on input line 728.
 (pdftex.def)             Requested size: 455.24408pt x 238.43074pt.
 <images-tables/keyness_chart_fdb.pdf, id=45, 713.69762pt x 378.79895pt>
 File: images-tables/keyness_chart_fdb.pdf Graphic file (type pdf)
 <use images-tables/keyness_chart_fdb.pdf>
-Package pdftex.def Info: images-tables/keyness_chart_fdb.pdf  used on input line 696.
+Package pdftex.def Info: images-tables/keyness_chart_fdb.pdf  used on input line 732.
 (pdftex.def)             Requested size: 455.24408pt x 241.62129pt.
+
+Overfull \vbox (2.90596pt too high) detected at line 764
+ []
+
 [9] [10 <./images-tables/keyness_chart_incelsis.pdf> <./images-tables/keyness_chart_fdb.pdf>] [11] (./clic2023.aux) ) 
 Here is how much of TeX's memory you used:
- 17113 strings out of 476024
- 338853 string characters out of 5794016
- 1907382 words of memory out of 5000000
- 37211 multiletter control sequences out of 15000+600000
- 547633 words of font info for 114 fonts, out of 8000000 for 9000
+ 17422 strings out of 476024
+ 344354 string characters out of 5794016
+ 1908382 words of memory out of 5000000
+ 37504 multiletter control sequences out of 15000+600000
+ 547946 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,14n,131p,1734b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 117i,14n,131p,1233b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on clic2023.pdf (11 pages, 222843 bytes).
+Output written on clic2023.pdf (11 pages, 223943 bytes).
 PDF statistics:
  186 PDF objects out of 1000 (max. 8388607)
  82 compressed objects within 1 object stream

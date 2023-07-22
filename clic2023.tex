@@ -29,6 +29,14 @@
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage{cuted}
+\usepackage{soul}
+\usepackage{xcolor}
+
+\definecolor{lightgreen}{RGB}{0, 180, 0}
+\definecolor{lightred}{RGB}{214, 0, 0}
+
+\newcommand{\hlg}[1]{{\sethlcolor{lightgreen}\hl{#1}}}
+\newcommand{\hlr}[1]{{\sethlcolor{lightred}\hl{#1}}}
 
 
 \newcommand{\bs}[0]{$\blacksquare$}
@@ -71,6 +79,7 @@
 \newcommand{\enforum}{\textit{Incels.is}}
 \newcommand{\itforum}{\textit{Il forum dei brutti}}
 
+
 %\setlength\titlebox{5cm}
 
 % You can expand the titlebox if you need extra space
@@ -79,7 +88,7 @@
 % in the camera-ready version and ask you to change it back.
 
 
-\title{Hate Speech Detection in Italian Incel Forums}
+  \title{Hate Speech Detection in Italian Incel Forums Using Bilingual Fine-Tuning Data}
 
 \author{\textbf{Paolo Gajo, Alberto Barrón Cedeño, Silvia Bernardini, Adriano Ferraresi} \\
   University of Bologna, Italy \\
@@ -125,15 +134,15 @@ much work can still be done when approaching this problem in other languages.
 For less-resourced languages, such as Italian, one of the main difficulties of combating this phenomenon is the lack of annotated data~\cite{van2023mitigating}. The problem becomes even more 
 exacerbated when considering the detection of hate speech in niche contexts, 
 such as in forums frequented by incels, which are characterized by the use of 
-specific misogynous and racist lexicon~\cite{gothard2020ExploringIncelLanguage}. Indeed, to the best of our knowledge, it seems no work has yet been done with regard to the detection of hate speech in Italian incel forums.
+specific misogynous and racist lexicon~\cite{gothard2020ExploringIncelLanguage}. In particular, it seems no work has yet been done on the detection of hate speech in Italian incel forums.
 
 In this paper, we present a simple approach to improving the performance of hate speech detection models in cross-lingual and cross-domain settings, focusing on detection efforts on Italian incel forums. Our contributions are the following:
 
-\vspace*{1mm}\noindent\textbf{\Ni Corpora.} We compile two novel unsupervised corpora on the domain of incel forums, one in English and one in Italian. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
+\vspace*{1mm}\noindent\textbf{\Ni Corpora.} We compile two novel unsupervised corpora on the domain of incel forums, one in Italian and one in English. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
 
-\vspace*{1mm}\noindent\textbf{\Nii Masked language modeling.} For the first time, we adapt various models to the linguistic domain of English and Italian incel forums by training them on the masked language modeling (MLM) task on the aforementioned unsupervised corpora. We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic-it-2023-resources}}
+\vspace*{1mm}\noindent\textbf{\Nii Masked language modeling.} For the first time, we adapt monolingual Italian models and multilingual models to the linguistic domain of Italian and English incel forums by training them on the masked language modeling (MLM) task on the aforementioned unsupervised corpora. We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic23}}
 
-\vspace*{1mm}\noindent\textbf{\Niii Hate speech identification.} We train the obtained MLM-enhanced models on various combinations of English and Italian datasets, pertaining to the domains of incel forums and mainstream social media (Twitter and Facebook). Then, we test their hate speech identification performance on the domain of incel Italian forums by training.
+\vspace*{1mm}\noindent\textbf{\Niii Hate speech identification.} We approach the identification of hate speech in Italian incel forums using monolingual (Italian) and bilingual (English-Italian) training data. We train the obtained MLM-enhanced models on various combinations of English and Italian datasets, pertaining to the domains of incel forums and mainstream social media, testing. Then, we test their hate speech identification performance on the domain of Italian incel forums.
 
 % \vspace*{1mm}
 
@@ -142,30 +151,35 @@ In this paper, we present a simple approach to improving the performance of hate
 % We use two mBERT~\cite{devlinBERTPretrainingDeep2019a} models as the baselines for our study, training them on both the English and the Italian datasets. We compare \mbert\, to another mBERT model, trained on the masked language modeling (MLM) task on sentences extracted from two incel forums, one in English (\enforum) and one in Italian (\itforum\footnote{\url{https://ilforumdeibrutti.forumfree.it}}).
 % The two mBERT models are compared to other models trained specifically on Italian data: \umbert\, \cite{musixmatch-2020-umberto} and \albert\, \cite{PolignanoEtAlCLIC2019}. We also train these two models on the MLM task on the entirety of the contents of the aforementioned Italian incel forum. In doing so, we aim to improve the model's capability of detecting hateful language in the target language and domain, i.e., an Italian incel forum such as \itforum. 
 
-Our experiments show that the best results are obtained by training the mBERT model on bilingual data taken from both the English and Italian incel forums, using the MLM task, and then fine-tuning it on combinations of English and Italian datasets annotated for hate speech. This demonstrates how in this niche scenario having in-domain incel annotated data may be more important than having a large amount of general data in the target language.
+Our experiments show that the best results are obtained by training the mBERT model on bilingual data taken from both the English and Italian incel forums, using the MLM task, and then fine-tuning it on combinations of English and Italian datasets annotated for hate speech. This shows how in this niche scenario having in-domain incel annotated data may be more effective than using general target-language instances, despite part of the training data not being in the target language.
 
 % \todoP{maybe drop par below}
 % The work hereby presented has the potential to contribute to the development of effective hate speech detection systems for different languages, with particular focus on Italian, with relation to niche contexts such as incel forums. This, in turn, can help address the harmful consequences of these online platforms and promote a more inclusive and respectful digital landscape.
 
 \section{Related Work}
 
-Prior work on Italian hate speech identification has been conducted chiefly within the context of the EVALITA shared tasks. The 2018 edition hosted a shared task on hate speech detection \cite{boscoOverviewEVALITA2018} based on two Italian-language datasets annotated for hate speech, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM \cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech against migrants and women \cite{basileEVALITA2020Overview}, based on a dataset of tweets. In this case, the best results were obtained by using an ensemble of BERT models \cite{mutiUniBOAMIMultiClass2020}.
+Prior work on Italian hate speech identification has been conducted chiefly within the context of the EVALITA shared tasks. The 2018 edition hosted a shared task on hate speech detection \cite{boscoOverviewEVALITA2018} based on two Italian-language datasets annotated for hate speech, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM \cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech, especially against migrants, based on a dataset of tweets and news headlines \cite{basileEVALITA2020Overview}. In this case, the best results were obtained by using AlBERTo \cite{PolignanoEtAlCLIC2019} and UmBERTo \cite{musixmatch-2020-umberto}, two Italian-language Transformer models. The 2020 edition also hosted a shared task on the automatic identification of misogyny in Italian tweets \cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models achieved the top performance \cite{mutiUniBOAMIMultiClass2020}.
 
-English-language hate speech detection has been conducted both with models such as logistic regression and linear SVMs~\cite{davidson-2017-automated-hate} and, more recently, by using transformers~\cite{mathew2021hatexplain}.
+English-language hate speech detection has been conducted both with models such as logistic regression and linear SVMs \cite{davidson-2017-automated-hate} and, more recently, by using Transformers \cite{mathew2021hatexplain}.
 
-In multilingual settings, this problem has been approached in a variety of ways. For example, \newcite{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of datasets annotated for hate speech to improve the performance of transformer models in zero-shot, few-shot and well-resourced settings. \newcite{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow these approaches in attempting to improve the performance of our models.
+In multilingual settings, \newcite{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of datasets annotated for hate speech to improve the performance of classifiers in zero-shot, few-shot and well-resourced settings. \newcite{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow such approaches in attempting to improve the performance of our models.
 
 % \newcite{aluruDeepLearningModels2020} show that LASER embeddings with logistic regression perform better than BERT in low-resource settings. In the zero-shot setting they approach, Italian (together with Portuguese) achieves especially good results. In the context of monolingual Italian hate speech detection, and specifically misogyny detection, \newcite{mutiUniBOAMIMultiClass2020} use \albert\, \cite{PolignanoEtAlCLIC2019} to approach the EVALITA 2020 misogyny detection shared task \cite{basileEVALITA2020Overview}, achieving top performance among all participants. The runners-up also experiment with BERT-based architectures, but approach the task using an ensemble technique \cite{leesJigsawAMIHaSpeeDe22020}.
 
 \section{Datasets}
 \label{sec:ceur-specs}
 
-In order to conduct the study, we leverage existing Italian-language datasets annotated with binary hate speech labels from past EVALITA\footnote{\url{https://www.evalita.it}} campaigns.
-We also use two datasets compiled from two incel forums, one in English and one in Italian, once again binary-annotated for hate speech.
+We leverage existing Italian-language datasets from past EVALITA
+% \footnote{\url{https://www.evalita.it}}
+campaigns, along with two datasets compiled from two incel forums, one in English and one in Italian. All of the dataset are binary-annotated at a post level for hate speech.
 
-\vspace*{1mm}\noindent\textbf{Existing Italian datasets.} The first Italian dataset we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, hosted at EVALITA 2018 \cite{boscoOverviewEVALITA2018} (henceforth ``\hsdfb''), by annotating Facebook posts for hate speech. The second one is from the second edition of the HaSpeeDe shared task \cite{basileEVALITA2020Overview} (henceforth ``\hsdtw''), compiled by adding new data to the HaSpeeDe 2018 Twitter dataset. The third and last dataset we use in Italian is the one compiled for the Automatic Misogyny Identification (AMI) shared task \cite{fersiniAMIEVALITA2020Automatic2020} (henceforth ``\ami''), hosted at EVALITA 2020. This dataset is also compiled from tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{Although this dataset is not annotated for hate speech, it still comes in handy, since in incel spaces most of the hate speech is expressed in the form of misogyny.} All Italian datasets were split 70/30 between training and development sets. The test sets, which we do not use in this study, were released separately in all cases for the aforementioned shared tasks. 
+\vspace*{1mm}\noindent\textbf{Existing Italian datasets.} The first Italian dataset we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, hosted at EVALITA 2018 \cite{boscoOverviewEVALITA2018} (henceforth ``\hsdfb''), by annotating Facebook posts for hate speech. The second one is from the 2020 HaSpeeDe shared task \cite{basileEVALITA2020Overview} (``\hsdtw''), compiled by adding new data to the HaSpeeDe 2018 Twitter dataset. The third and last dataset we use in Italian is the one compiled for the Automatic Misogyny Identification (AMI) shared task \cite{fersiniAMIEVALITA2020Automatic2020} (``\ami''), hosted at EVALITA 2020. This dataset is also compiled from tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{In incel spaces most of the hate speech is expressed in the form of misogynym, making this data useful.} All Italian datasets were split 70/30 between training and development sets. We do not use the test sets of these shared tasks.
 
-\vspace*{1mm}\noindent\textbf{Novel incel datasets.} We compiled two novel unsupervised datasets, comprising posts scraped from incel forums: \dsENcorpus\, (Incel Forum, Unsupervised, 2022, English) scraped from the \textit{Incels.is} forum, and \dsITcorpus\, (Incel Forum, Unsupervised, 2022, Italian) scraped from \textit{Il forum dei brutti}. The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content which a user is replying to. Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two datasets.\footnote{The datasets are available at: \url{https://zenodo.org/record/8147845}.} We build these new resources both due to the lack of freely available incel corpora and the fact that incel language changes rapidly, as outlined in Appendix~\ref{app:keyness}, making it worthwhile to compile updated resources.
+\vspace*{1mm}\noindent\textbf{Novel incel datasets.} We compiled two novel unsupervised datasets, comprising posts scraped from incel forums: \dsENcorpus\, (Incel Forum, Unsupervised, 2022, English) scraped from the \textit{Incels.is} forum\footnote{\url{https://incels.is}}, and \dsITcorpus\, (Incel Forum, Unsupervised, 2022, Italian) scraped from \textit{Il forum dei brutti}.\footnote{\url{https://ilforumdeibrutti.forumfree.it}}
+% The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content which a user is replying to.
+Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two datasets.\footnote{The datasets are available at: \url{https://zenodo.org/record/8147845}.} We build these new resources both due to the lack of freely available incel corpora and the fact that incel language changes rapidly, as outlined in Appendix~\ref{app:keyness}, making it worthwhile to compile updated resources.
+
+\renewcommand{\arraystretch}{0.9}
 
 \begin{table}[t]
   \centering
@@ -236,7 +250,7 @@ We also use two datasets compiled from two incel forums, one in English and one 
   \dsITclassification                   &  200   & 40.00  &   300      &  60.00 \\ 
   \hsdfb                              	&  1,382 & 46.08  &   1,617    &  53.92 \\ 
   \hsdtw                              	&  971   & 32.38  &   2,028    &  67.62 \\ 
-  \ami                                	&  2,337 & 46.74  &   2,663    &  53.26 \\ 
+  \ami\,                                	&  2,337 & 46.74  &   2,663    &  53.26 \\ 
   \hline
   \end{tabular}
 \end{table}
@@ -244,10 +258,10 @@ We also use two datasets compiled from two incel forums, one in English and one 
 A subset of the two datasets was annotated for both misogyny and racism, following the guidelines presented in Figure~\ref{fig:annotation-guidelines}.
 For English, a subset of 50 posts was randomly selected and labeled by three annotators, all with a C2 CEFR level of English, well-versed in linguistics, gender studies, NLP, and data annotation. 
 The Cohen's Kappa inter-annotator agreement (IAA) \cite{bobicev2017inter} was of 0.77, which is considered high.
-As such, the remaining instances were annotated by a single annotator. For the Italian dataset, two native speakers of Italian, also experts in the relevant fields, annotated  50 posts as well, reaching an IAA of 0.69. As the IAA was deemed acceptable, the rest of the instances were annotated by one single annotator. 
+As such, the remaining instances were annotated by a single annotator. For the Italian dataset, two native speakers of Italian, also experts in the relevant fields, annotated  50 posts as well, reaching an IAA of 0.69. As the IAA was deemed acceptable, the rest of the instances were once again annotated by one annotator. 
 
 We refer to these two supervised datasets as \dsENclassification\, (Incel Forum, Supervised, English) and \dsITclassification\, (Incel Forum, Supervised, Italian). \dsENclassification~is split between training, development and testing partitions with a 70/15/15 split, while \dsITclassification~is only used for testing.
-The datasets are annotated for racism and misogyny, since they are the most relevant forms of hate speech in the two forums \cite{silva2016analyzing,ging2018special}.
+The datasets are annotated for racism and misogyny, since they are the most relevant forms of hate speech in the two forums \cite{silva2016analyzing,ging2018special}. Posts are annotated as hateful if they are either labeled as misogynous or racist.
 
 The annotation statistics of all the datasets used in this study can be found in Table~\ref{tab:english-italian-supervised-datasets-partition-stats}.
 
@@ -330,7 +344,9 @@ The annotation statistics of all the datasets used in this study can be found in
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance when fine-tuning on Italian-only dataset combinations. Epochs (e) are selected based on the convergence of the validation performance. Highest scores in bold.}
+  \caption{Performance when fine-tuning on Italian-only dataset combinations. Epochs (e) are selected based on the convergence of the validation performance. Highest scores in bold.
+  % The highlights indicate whether the Incel versions of the models perform better (green) or worse (red) than the base versions.
+  }
   \label{tab:italian-only-results}
 
   \begin{tabular}{l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
@@ -397,6 +413,26 @@ The annotation statistics of all the datasets used in this study can be found in
         \hline
     \end{tabular}
 \end{table*}
+
+\section{Models}
+\label{sec:models}
+
+We train the Italian-only models on combinations of the Italian datasets and the multilingual models on English-Italian combinations.
+
+With relation to the Italian-only scenario, we use \umbert\, and \albert\, as our baseline models. We choose these models because they achieved the best performance in previous EVALITA shared tasks on hate speech \cite{basileEVALITA2020Overview} and misogyny \cite{fersiniAMIEVALITA2020Automatic2020} identification. We also create MLM-enhanced versions of these two models by training them on the entirety of the contents of \dsITcorpus, for a total of $627k$ sentences.\footnote{The number of sentences is lower than the total number of posts ($638k$) because we exclude empty posts.} We refer to these models as ``\iumbert''\, and ``\ialbert''.
+
+As regards the Italian-English setting, we use \mbert\, as our baseline. We also use an MLM-enhanced version of it which we obtain by training it for one epoch on $500k$ posts sampled from \dsENcorpus\, and $500k$ posts sampled from \dsITcorpus, for a total of $1M$ bilingual sentences. We refer to this model as ``\imbert''.
+
+The MLM pre-training process is carried out in all cases by tokenizing the sentences using Hugging Face's AutoTokenizer\footnote{\url{https://huggingface.co/docs/transformers/model_doc/auto}},
+% , which automatically selects the appropriate tokenizer for the model we wish 
+% to train. The sentences are 
+feeding them into the model using Hugging Face's data collator for language 
+modeling.\footnote{\url{https://huggingface.co/docs/transformers/main/main_classes/data_collator}}
+% , which automatically masks tokens with a 15\% chance for the 
+% MLM task. Finally, t
+Due to hardware constraints, we train the models only for one epoch, with a masking probability of 15\% and a batch size of 32
+% masking sentence tokens with a probability of 15\% and using a batch size of 32 samples 
+on a single Tesla P100 GPU with 16 GB of VRAM.
 
 \begin{table*}[t]
   \centering
@@ -469,68 +505,68 @@ The annotation statistics of all the datasets used in this study can be found in
     \end{tabular}
 \end{table*}
 
-\section{Models}
-\label{sec:models}
-
-We train the Italian-only models on the Italian-only combinations and the multilingual models on the English-Italian combinations of datasets.
-
-With relation to the Italian-only scenario, we use \umbert\, and \albert\, as our baseline models. We choose these models because they achieved the best performance in previous EVALITA shared tasks on hate speech \cite{basileEVALITA2020Overview} and misogyny \cite{fersiniAMIEVALITA2020Automatic2020} identification. We also create MLM-enhanced versions of these two models by training them on the entirety of the contents of \dsITcorpus, for a total of $627k$ sentences.\footnote{The number of sentences used for MLM-training differs from the total number of posts ($638k$) because we exclude empty posts.} We refer to these models as ``\iumbert''\, and ``\ialbert''.
-
-As regards the Italian-English setting, we use \mbert\, as our baseline. We also use an MLM-enhanced version of it which we obtain by training it for one epoch on $500k$ posts sampled from \dsENcorpus\, and $500k$ posts sampled from \dsITcorpus, for a total of $1M$ bilingual sentences. We refer to this model as ``\imbert''.
-
-The MLM pre-training process is carried out in all cases by tokenizing the sentences using Hugging Face's AutoTokenizer\footnote{\url{https://huggingface.co/docs/transformers/model_doc/auto}},
-% , which automatically selects the appropriate tokenizer for the model we wish 
-% to train. The sentences are 
-feeding them into the model using Hugging Face's data collator for language 
-modeling.\footnote{\url{https://huggingface.co/docs/transformers/main/main_classes/data_collator}}
-% , which automatically masks tokens with a 15\% chance for the 
-% MLM task. Finally, t
-Due to hardware constraints, we train the models only for one epoch, with a masking probability of 15\% and a batch size of 32
-% masking sentence tokens with a probability of 15\% and using a batch size of 32 samples 
-on a single Tesla P100 GPU with 16 GB of VRAM.
-
 \section{Experiments and Evaluation}
 \label{sec:exps}
 
-We approach the task of identifying hate speech as a binary classification problem, where a post can either be hateful or not. We train each model five times on each dataset combination obtained by merging the datasets introduced in the previous section. We select the number of epochs based on the convergence of the performance on the validation set. We do this in order to make our results more reliable and diminishing the effect of the random initialization of the models. For each dataset combination, the training and validation sets are the unions of the individual training and validation sets of each merged dataset. The resulting models are then evaluated on the \dsITclassification\, test set.
+We approach the task of identifying hate speech as a binary classification problem, where a post can either be hateful or not. We train each model five times on all possible combinations of the previously introduced datasets. In the monolingual Italian setting we never use \dsENclassification, while it is always included when training the multilingual models in the bilingual setting. We select the number of epochs based on the convergence of the performance on the validation set. We do this in order to make our results more reliable and diminishing the effect of the random initialization of the models. For each dataset combination, the training and validation sets are the unions of the individual training and validation sets of each merged dataset. The resulting models are then evaluated on the \dsITclassification\, test set.
 
-Table \ref{tab:italian-only-results} shows the performance in terms of precision, recall and F$_1$-measure for the Italian-only models and dataset combinations. Table~\ref{tab:multilingual-results} reports the results for the multilingual models and English-Italian combinations.
+Table \ref{tab:italian-only-results} shows the performance in terms of precision, recall and F$_1$-measure for the Italian-only models and dataset combinations, while Table~\ref{tab:multilingual-results} reports the results for the bilingual setting.
 
 % The full results can be found in Appendix~\ref{app:complete-results}, in Table~\ref{tab:hate-speech-all-models-all-ids-appendix}.
 
-\paragraph*{Italian-only.} Overall, the best performing model on the Italian-only combinations is \ialbert, which achieves a test F$_1$ score of 0.707, when training solely on \hsdfb. Compared to training \mbert\, on the same dataset, which achieves a test F$_1$ score of 0.683 on \dsITclassification, this represents a performance boost of 2.4 F$_1$ points. To a lesser degree, the same can be observed with regard to \iumbert, which achieves a test F$_1$ score of 0.705 when trained on \hsdfb, representing a performance boost of 0.9 F$_1$ points compared to \umbert, which achieves a test F$_1$ score of 0.696 using the same dataset. In both cases, this shows that pre-training \albert\, and \umbert\, on Italian sentences extracted from \dsITcorpus\, is effective in improving their performance when evaluating on \dsITclassification.
+\vspace*{1mm}\noindent\textbf{Monolingual setting.}
+% \paragraph*{Italian.}
+Overall, the best performing model on the Italian-only combinations is \ialbert, which achieves a test F$_1$ score of 0.707, when training solely on \hsdfb. Compared to training \albert\, on the same dataset, which achieves a test F$_1$ score of 0.683 on \dsITclassification, this represents a performance boost of 2.4 F$_1$ points. To a lesser degree, the same can be observed with regard to \iumbert\, and \umbert\, (+0.9 F$_1$ points), when using the same combination. In both cases, this shows that pre-training \albert\, and \umbert\, on Italian sentences extracted from \dsITcorpus\, is effective in improving their performance.
 
-The worst test performance, for all models, is obtained when training solely on \hsdtw. In addition, the performance of \ialbert\, and \iumbert\, is worse than that of \umbert\, and \albert, showing an opposite trend to the one observed when training on \hsdfb. This is especially interesting considering the fact that the two datasets were annotated following the same annotation guidelines \cite{boscoOverviewEVALITA2018,basileEVALITA2020Overview}. The validation scores are also noticeably lower for \hsdtw\, combinations, compared to \hsdfb\, combinations. This shows that the models have a harder time learning from \hsdtw\, than from \hsdfb. This is coherent with the results obtained by participating teams in the two shared tasks, and with the fact that the messages contained in \hsdfb\, are ``longer and more correct than those in Twitter, allowing systems (and humans too) to find more and more clear indications of the presence of HS'' \cite{boscoOverviewEVALITA2018}. Thus, the considerably lower scores obtained on \dsITclassification\, when training on combinations involving \hsdtw\, can be explained by the fact that the models most likely have a harder time learning from the contents of \hsdtw. The fact that the messages contained in \hsdfb\, are longer would also be coherent with the fact that \ialbert\, and \iumbert\, perform better than \umbert\, and \albert\, when training on \hsdfb, since \dsITcorpus\, on average contains rather long posts (see Table~\ref{tab:english-italian-unsupervised-datasets-stats}), unlike Twitter datasets, since prior to 2023 tweets were limited to 280 characters.
+The worst test results, for all models, are obtained when training solely on \hsdtw, with \ialbert\, and \iumbert\, performing worse than \umbert\, and \albert, showing an opposite trend to the one observed when training on \hsdfb.
+% This is especially interesting considering the fact that the two datasets were annotated following the same annotation guidelines \cite{boscoOverviewEVALITA2018,basileEVALITA2020Overview}.
+The validation scores are also noticeably lower for \hsdtw\, combinations, compared to combinations including \hsdfb, which shows that the models have a harder time learning from \hsdtw. This is coherent with the results obtained by teams participating in the two HaSpeeDe shared tasks \cite{boscoOverviewEVALITA2018,basileEVALITA2020Overview} and with the fact that the messages contained in \hsdfb\, are ``longer and more correct than those in Twitter, allowing systems (and humans too) to find more and more clear indications of the presence of HS'' \cite{boscoOverviewEVALITA2018}. 
+% Thus, the considerably lower scores obtained on \dsITclassification\, when training on combinations involving \hsdtw\, can be explained by the fact that the models most likely have a harder time learning from the contents of \hsdtw.
+The fact that the messages contained in \hsdfb\, are longer would also be coherent with the fact that \ialbert\, and \iumbert\, perform better than \umbert\, and \albert\, when training on \hsdfb, since \dsITcorpus\, on average contains rather long posts.
+%  (see Table~\ref{tab:english-italian-unsupervised-datasets-stats}), unlike Twitter datasets, since prior to 2023 tweets were limited to 280 characters.
+Finally, an additional element which might explain the lower performance when training on \hsdtw\, is the fact that it contains hate speech against migrants, which might not be as relevant when it comes to identifying hate speech in incel spaces.
 
-As regards combining different Italian datasets, the strategy yields the highest performance for \albert\, and \umbert\, when training on both \hsdfb\, and \ami. Compared to other combinations, the performance is particularly high for \albert\, when training on \hsdfb\, and \ami, almost equaling that of \ialbert\, when training only on \hsdfb. However, once the models are MLM-trained on \dsITcorpus, the performance boost is no longer observed, and the Incel versions of the models perform better when only using \hsdfb. This could be due to a high affinity between the contents of \dsITcorpus\, and \hsdfb, compared to \hsdtw\, and \ami, which would mean that pre-training on \dsITcorpus\, biases the model toward that language, decreasing performance when other datasets are involved.
+As regards combining different Italian datasets, the strategy yields the highest performance for \albert\, and \umbert\, when training on both \hsdfb\, and \ami.
+% Compared to other combinations, the performance is particularly high for \albert\, when training on \hsdfb\, and \ami, almost equaling that of \ialbert\, when training only on \hsdfb.
+However, once the models are MLM-trained on \dsITcorpus, the performance decreases for some combinations. Overall, MLM pre-training seems to nullify the improvements obtained by merging different datasets. Therefore, while some improvement can be observed by merging different datasets, MLM appears to be a more effective strategy for improving the performance of the models, although it requires greater computational resources.
+% , and the Incel versions of the models perform better when only using \hsdfb.
+% In particular, the combination of \hsdfb\, and \hsdtw\, leads to a performance decrease for both \ialbert\, and \iumbert, which is coherent with the decrease in performance observed when training on \hsdtw\, alone and with the fact that the performance obtained by training on all three datasets is lower for \iumbert\, than when training on \hsdfb+\ami. This once again shows that using \hsdtw\, is detrimental to the performance of the models.
+% This could be due to a high affinity between \dsITcorpus\, and \hsdfb, compared to \hsdtw\, and \ami, which would mean that pre-training on \dsITcorpus\, biases the model toward the language of that dataset, reducing performance when adding others to the mix.
 
-\paragraph*{Italian-English.} Compared to the best combination using \mbert, which achieves a test F$_1$ score of 0.688, the best combination using \imbert\, achieves a test F$_1$ score of 0.722 (+3.4 F$_1$ points), which is also the highest score across both language settings. Just like in the Italian-only setting, \mbert\, performs better when only training it on \hsdfb, in addition to \dsENclassification, which is used in all combinations in this English-Italian bilingual setting. Conversely, \imbert\, performs better when training on \ami. This is interesting, since the \ami\, dataset lowered the performance of all Italian-only models, compared to only training on \hsdfb. Since misogyny is the main way hate speech is expressed in \enforum\, (39.44\% of the instances in \dsENclassification are misogynous), and due to the fact that we are using sentences extracted from this forum to pre-train \imbert, the performance boost could be due to the fact that the model is better at detecting misogynous language compared to \mbert\, and the Italian-only models.
+\vspace*{1mm}
+\noindent\textbf{Bilingual setting.}
+% \paragraph*{Italian-English.}
+Compared to the best combination using \mbert, which achieves a test F$_1$ score of 0.688, the best combination using \imbert\, achieves a test F$_1$ score of 0.722 (+3.4 F$_1$ points), which is also the highest score across both language settings. Just like in the monolingual setting, \mbert\, performs better when only training it on \hsdfb\, (in addition to \dsENclassification). Conversely, \imbert\, performs better when training on \ami. This is interesting, since the \ami\, dataset lowered the performance of all Italian-only models, compared to only training on \hsdfb. Since misogyny is the main way hate speech is expressed in \enforum\, (39.44\% of the instances in \dsENclassification\, are misogynous) and due to the fact that we are using sentences extracted from this forum to pre-train \imbert, the performance boost could be due to the fact that the model is better at learning about misogynous language compared to \mbert\, and the Italian-only models.
 
-As regards the worst combinations, the lowest performance is once again recorded when using \hsdtw\, for training. The combinations containing this dataset also lead to lower performance, compared to the other ones, both with relation to \mbert\, and \imbert. For example, the performance difference between training \imbert\, only on \ami and \hsdtw+\ami is 2.2 F$_1$ points in favor of the former.
+The lowest performance is once again achieved when training on \hsdtw\, and the combinations containing it, which is coherent with the results obtained in the monolingual setting.
+% , which also decreases performance when added to other training combinations.
 
-\paragraph*{IT-EN vs. IT.}
+% The combinations containing this dataset also lead to lower performance, both for \mbert\, and \imbert. For example, the performance difference between training \imbert\, only on \ami\, and \hsdtw+\ami\, is 2.2 F$_1$ points in favor of the former combination.
+
+\vspace*{1mm}
+\noindent\textbf{Monolingual vs. bilingual.}
+% \paragraph*{IT-EN vs. IT.}
 % Based on the results obtained for the two settings, we can find out whether there is a correlation between validation and test performance using Pearson's correlation coefficient. We do this in order to verify how good of a predictor the performance obtained on the validation sets is with respect to the performance obtained on \dsITclassification. For English-Italian combinations, we find a correlation of 0.401 (p-value $>$ 0.05), while for Italian-only combinations we find a correlation of 0.438 (p-value $<$ 0.05).
 % % Taking both groups into account, we find a correlation of 0.426 (p-value $<$ 0.05).
 % This shows that in the case of Italian-only combinations, the validation performance is a better predictor of the test performance than in the case of English-Italian combinations. This arguably makes sense, as the English-Italian combinations are tested in a cross-domain and partially cross-lingual setting, while the Italian-only ones are tested in monolingual cross-domain scenarios, with a higher similarity between the contents of the validation and test sets.
-
-The results of our experiments show that the highest performance is not obtained by training on the Italian-only datasets, but rather on the English-Italian ones. For five combinations out of seven, \imbert's performance is higher than all other models.
-% The only dataset combinations for which the performance of \imbert\, does not beat that of all other models are \hsdfb+\ami\, and \hsdtw+\ami.
+The results of our experiments show that the highest performance is not obtained by training on the Italian-only datasets, but rather on the English-Italian ones. For five dataset combinations out of seven, \imbert's performance is higher than all other models.
+The only combinations for which the performance of \imbert\, does not beat all other models are \hsdfb+\ami\, and \hsdtw+\ami.
 % For both language settings, the best overall performance when predicting on \dsITclassification, across all employed models and dataset combinations, is achieved when training \imbert\, solely on \ami.
 
-Since mBERT was originally pre-trained on 104 languages and \albert\, and \umbert\, were pre-trained only on Italian, the fact that \imbert\, can outperform them by pre-training on just $1M$ bilingual instances is is surprising. Even more surprising is the fact that using bilingual instances is better than pre-training Italian-only models only on Italian sentences. Furthermore, the number of Italian sentences used to train \ialbert\, and \iumbert\, is 627k, which is greater than the number of Italian sentences used to train \imbert, which is 500k.
+Since mBERT was originally pre-trained on 104 languages and \albert\, and \umbert\, were pre-trained only on Italian, the fact that \imbert\, can outperform them by pre-training on just $1M$ bilingual instances is rather surprising. Even more interesting is the fact that, although we are testing on an entirely Italian dataset, \imbert\, also outperforms \ialbert\, and \iumbert. This shows that, in this case, using bilingual instances on a multilingual model for MLM may result in higher performance than pre-training Italian models only on Italian sentences. Furthermore, the number of Italian sentences used to train \ialbert\, and \iumbert\, is $627k$, which is greater than the $500k$ Italian sentences used for \imbert.
 
 From these results, we could infer that the model is learning more about how to spot hate speech in \dsITclassification\, by learning language-agnostic incel concepts, since \imbert\, is pre-trained on sentences extracted from two incel forums in two different languages. Although the two speech communities are obviously distinct, the red pill and black pill ideologies have spread internationally, and are shared by both communities. This could explain why \imbert\, performs better than the Italian-only models: the model might be learning about incel hate speech by paying more attention to the sociological concepts underlying the language, and putting less focus on purely linguistic features.
 
 
 \section{Conclusions}
 
-In this paper, we have presented an approach to improve the performance of hate speech detection models in a cross-lingual and cross-domain scenarios. We used existing datasets in Italian annotated for hate speech and combined them with unsupervised datasets compiled by us in English and Italian from incel forums.
+In this paper, we have presented an approach to improve the performance of hate speech detection models within Italian incel forums.
 
-Choosing mBERT as our baseline model, we improved its performance by following the approach of~\newcite{caselliHateBERTRetrainingBERT2021} through MLM training, enhancing its capability of detecting hateful language in the target language. We did the same for Italian models, namely \umbert\, and \albert, and compared the results with the baseline mBERT models.
+Our experiments show that domain-adapting Transformer models to the contents of incel forums is beneficial to their performance when predicting the hatefulness of incel forum posts, both when using Italian-only and multilingual models. The increase in performance obtained by using this strategy is particularly high when using bilingual training data with \mbert, which might indicate that the model is learning about incel hate speech by learning language-agnostic incel concepts.
 
-Our experiments show that 
+We have also shown that for the vanilla Italian-only models (\albert\, and \umbert) combining different existing datasets can lead to a boost in performance. However, this performance boost is nullified after MLM pre-training, which appears to be a more effective strategy for improving the performance of the models, despite the greater computational cost.
 
-Future work 
+In future work, we plan to experiment with different resources for MLM-pretraining, using corpora in different languages, since it seems multilingual models such as \mbert\, are capable of learning about hate speech in a language-agnostic way from multiple languages. In addition, with more computational resources, more training epochs could be used to further improve the performance of the models.
 
 % \section*{Ethical Considerations}
 % All the data for the compilation of the unsupervised datasets is publicly available, as forum users accept a legal disclaimer before posting. The posters are kept anonymous and maintain complete ownership of their posts. 
