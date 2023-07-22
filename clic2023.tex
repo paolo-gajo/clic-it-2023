@@ -47,14 +47,22 @@
 
 \newcommand{\dsENcorpus}{IFU-22-EN}
 \newcommand{\dsITcorpus}{IFU-22-IT}
-\newcommand{\dsENclassification}{IFS-EN-5203}
-\newcommand{\dsITclassification}{IFS-IT-500}
+\newcommand{\dsENclassification}{IFS-EN}
+\newcommand{\dsITclassification}{IFS-IT}
 \newcommand{\dsENforecasting}{IFSS-EN-223K}
 \newcommand{\dsITforecasting}{IFSS-IT-30K}
 
+\newcommand{\mbert}{\mbox{mBERT$_{base}$}}
 \newcommand{\imbert}{\mbox{Incel mBERT}}
-\newcommand{\umbert}{\mbox{Incel UmBERTo}}
-\newcommand{\albert}{\mbox{Incel AlBERTo}}
+\newcommand{\umbert}{\mbox{UmBERTo}}
+\newcommand{\albert}{\mbox{AlBERTo}}
+\newcommand{\iumbert}{\mbox{Incel UmBERTo}}
+\newcommand{\ialbert}{\mbox{Incel AlBERTo}}
+
+\newcommand{\hsdfb}{\mbox{HSD-FB}}
+\newcommand{\hsdtw}{\mbox{HSD-TW}}
+\newcommand{\ami}{\mbox{AMI-20}}
+
 
 \newcommand{\dsENclassificationtrain}{IFS-EN$_{\mbox{tr}}$} % Incel Forum Supervised, English, 5203 instances
 \newcommand{\dsENclassificationdev}{IFS-EN$_{\mbox{de}}$} % Incel Forum Supervised, English, 5203 instances
@@ -71,27 +79,31 @@
 % in the camera-ready version and ask you to change it back.
 
 
-\title{Instructions for CLiC-it 2023 Proceedings}
+\title{Hate Speech Detection in Italian Incel Forums}
 
-\author{\textbf{First Author$^{1,2}$, Second Author$^{2}$, Third Author$^{3}$, Fourth Author$^{2,3}$} \\
-  1. Affiliation, Country \\
-  2. Affiliation, Country \\
-  3. Affiliation, Country \\
-  {\tt author1@domain}, {\tt author2@domain}, {\tt author3@domain}, {\tt author4@domain}}
+\author{\textbf{Paolo Gajo, Alberto Barrón Cedeño, Silvia Bernardini, Adriano Ferraresi} \\
+  University of Bologna, Italy \\
+  {\tt paolo.gajo@studio.unibo.it}\\
+  {\tt \{a.barron, silvia.bernardini, adriano.ferraresi\}@unibo.it}}
 
 \date{}
 
 \begin{document}
 \maketitle
 \begin{abstract}
-\textbf{English.}~In this paper we approach the problem of hate speech detection in cross-lingual, cross-domain settings using Transformer models, fine-tuned on English and Italian datasets. The Italian datasets are compiled from mainstream social media (Twitter and Facebook), while the English dataset concerns a forum frequented by ``incels'', short for ``involuntary celibates''. The models' performance is evaluated on an Italian incel forum dataset. Experiments show the best results come from using a combination of Italian and English data, emphasizing the importance of in-domain data, even when languages differ.
+\textbf{English.}~In this paper we approach the problem of improving the performance of hate speech detection models in cross-lingual and cross-domain settings, in Internet forums frequented by ``incels'', short for ``involuntary celibates''. We pre-train Transformer models on corpora built from two incel forums, one in Italian and one in English, using masked language modeling. We fine-tune the models on English and Italian datasets annotated for hate speech.
+% , built from incel forums and mainstream social media sites.
+% with binary labels which indicate whether a post contains hate speech or not. The Italian training datasets are compiled from mainstream social media (Twitter and Facebook), while the English dataset is built by gathering posts from the English incel forum. The models' performance is evaluated on the Italian incel forum dataset.
+Testing the performance of the fine-tuned models on a hate speech dataset obtained from an Italian incel forum shows that the best results are achieved by using a combination of Italian and English data, rather than just Italian, emphasizing the importance of in-domain data, even when languages differ.
 
 % hate speech identification in cross-lingual and cross-domain settings. We do so by employing Transformer models, pre-trained on monolingual (Italian) and bilingual (Italian-English) corpora. We fine-tune these models on various combinations of English- and Italian-language datasets, all annotated for hate speech. The English-language dataset pertains to the so-called community of ``incels'', short for ``involuntary celibates'', while the ones in Italian are compiled from mainstream social media sites (Twitter and Facebook). We then evaluate the performance of the models on an Italian-language dataset built from the contents of an Italian incel forum. Our experiments with model domain adaptation via training on the masked language modeling task and fine-tuning on different combinations of datasets show that the best results are obtained not by training solely using Italian data, but with a combination of Italian and English data. This shows the importance of using in-domain data for training, even when training and test data are in different languages.
 
 \end{abstract}
 
 \begin{abstract-alt}
- \textrm{\bf{Italiano.}}~In questo studio affrontiamo il problema dell'identificazione dei discorsi d'odio in scenari che coinvolgono lingue e contesti linguistici differenti, usando modelli Transformer su cui conduciamo un \textit{fine-tuning} su dataset in italiano e inglese. I dataset in italiano sono costruiti a partire da social media di vasto utilizzo (Twitter e Facebook), mentre quello inglese riguarda un forum frequentato dalla comunità dei c.d. ``incel'', abbreviazione inglese di ``celibi involontari''. Le prestazioni dei modelli sono valutate su un dataset costruito a partire da un forum italiano di incel. Gli esperimenti dimostrano che i risultati migliori si ottengono utilizzando una combinazione di dati italiani e inglesi, sottolineando l'importanza dei dati provenienti dallo stesso contesto linguistico per l'addestramento, anche quando le lingue differiscono.
+ \textrm{\bf{Italiano.}}~In questo studio affrontiamo il problema dell'identificazione dei discorsi d'odio in forum frequentati da ``incel'', abbreviazione inglese di ``celibi involontari''. Addestriamo quindi modelli Transformer su corpus costruiti a partire da due forum di incel, uno in italiano e uno in inglese, con il masked language modeling. Quindi, facciamo il fine-tuning dei modelli su dataset in italiano e inglese con annotazioni indicanti se un post esprime discorsi d'odio.
+%  , costruiti a partire da social media di vasto utilizzo e forum di incel.
+ Valutando le prestazioni dei modelli su un dataset ottenuto da un forum italiano di incel, osserviamo che i risultati migliori si ottengono addestrandoli su una combinazione di dataset italiani e inglesi, piuttosto che solo italiani, sottolineando l'importanza di utilizzare dati appartenenti allo stesso contesto linguistico, anche quando le lingue differiscono.
  
 %  . A questo scopo, impieghiamo modelli Transformer, pre-addestrati su corpora monolingui (italiano) e bilingui (italiano-inglese). Abbiamo effettuato il fine-tuning di questi modelli su varie combinazioni di dataset in lingua inglese e italiana, tutti annotati per i discorsi d'odio. Il dataset inglese riguarda la comunità dei c.d. ``incel'', abbreviazione inglese di ``celibi involontari'', mentre quelli italiani sono costruiti partendo da social media di vasto utilizzo (Twitter e Facebook). Valutiamo le prestazioni dei modelli su un dataset in lingua italiana costruito a partire dai contenuti di un forum italiano di incel. Gli esperimenti di adattamento dei modelli a questo contesto linguistico attraverso l'addestramento sulla task del masked language modeling e il fine-tuning su diverse combinazioni di dataset dimostrano che i risultati migliori si ottengono non solo con l'addestramento su dati in italiano, ma con una combinazione di dati in italiano e in inglese. Questo dimostra l'importanza di utilizzare dati provenienti dallo stesso contesto linguistico per l'addestramento, anche quando i dati di addestramento e di test sono in lingue diverse.
 \end{abstract-alt}
@@ -117,17 +129,18 @@ specific misogynous and racist lexicon~\cite{gothard2020ExploringIncelLanguage}.
 
 In this paper, we present a simple approach to improving the performance of hate speech detection models in cross-lingual and cross-domain settings, focusing on detection efforts on Italian incel forums. Our contributions are the following:
 
-\noindent
-\textbf{\Ni Corpora.} We compile two novel unsupervised corpora on the domain of incel forums, one in English and one in Italian. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
+\vspace*{1mm}\noindent\textbf{\Ni Corpora.} We compile two novel unsupervised corpora on the domain of incel forums, one in English and one in Italian. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
 
-\textbf{\Nii Masked language modeling.} For the first time, we adapt various models to the linguistic domain of English and Italian incel forums by training them on the masked language modeling (MLM) task on the aforementioned unsupervised corpora. We release these novel models, which can be used for further research on the topic.\footnote{\url{to.be.done}}
+\vspace*{1mm}\noindent\textbf{\Nii Masked language modeling.} For the first time, we adapt various models to the linguistic domain of English and Italian incel forums by training them on the masked language modeling (MLM) task on the aforementioned unsupervised corpora. We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic-it-2023-resources}}
 
-\textbf{\Niii Hate speech identification.} We train the obtained MLM-enhanced models on various combinations of English and Italian datasets, pertaining to the domains of incel forums and mainstream social media (Twitter and Facebook). Then, we test their hate speech identification performance on the domain of incel Italian forums by training.
+\vspace*{1mm}\noindent\textbf{\Niii Hate speech identification.} We train the obtained MLM-enhanced models on various combinations of English and Italian datasets, pertaining to the domains of incel forums and mainstream social media (Twitter and Facebook). Then, we test their hate speech identification performance on the domain of incel Italian forums by training.
+
+% \vspace*{1mm}
 
 % To this end, we train Transformer models on a variety of datasets in English and Italian, all annotated for hate speech. The English training dataset is compiled from an English-language incel forum, \enforum\footnote{\url{https://incels.is}}, while the Italian ones are built from mainstream social media platforms such as Twitter and Facebook.
 
-% We use two mBERT~\cite{devlinBERTPretrainingDeep2019a} models as the baselines for our study, training them on both the English and the Italian datasets. We compare mBERT$_{base}$ to another mBERT model, trained on the masked language modeling (MLM) task on sentences extracted from two incel forums, one in English (\enforum) and one in Italian (\itforum\footnote{\url{https://ilforumdeibrutti.forumfree.it}}).
-% The two mBERT models are compared to other models trained specifically on Italian data: UmBERTo \cite{musixmatch-2020-umberto} and AlBERTo \cite{PolignanoEtAlCLIC2019}. We also train these two models on the MLM task on the entirety of the contents of the aforementioned Italian incel forum. In doing so, we aim to improve the model's capability of detecting hateful language in the target language and domain, i.e., an Italian incel forum such as \itforum. 
+% We use two mBERT~\cite{devlinBERTPretrainingDeep2019a} models as the baselines for our study, training them on both the English and the Italian datasets. We compare \mbert\, to another mBERT model, trained on the masked language modeling (MLM) task on sentences extracted from two incel forums, one in English (\enforum) and one in Italian (\itforum\footnote{\url{https://ilforumdeibrutti.forumfree.it}}).
+% The two mBERT models are compared to other models trained specifically on Italian data: \umbert\, \cite{musixmatch-2020-umberto} and \albert\, \cite{PolignanoEtAlCLIC2019}. We also train these two models on the MLM task on the entirety of the contents of the aforementioned Italian incel forum. In doing so, we aim to improve the model's capability of detecting hateful language in the target language and domain, i.e., an Italian incel forum such as \itforum. 
 
 Our experiments show that the best results are obtained by training the mBERT model on bilingual data taken from both the English and Italian incel forums, using the MLM task, and then fine-tuning it on combinations of English and Italian datasets annotated for hate speech. This demonstrates how in this niche scenario having in-domain incel annotated data may be more important than having a large amount of general data in the target language.
 
@@ -136,26 +149,27 @@ Our experiments show that the best results are obtained by training the mBERT mo
 
 \section{Related Work}
 
-Prior work on Italian hate speech has been conducted chiefly within the context of the EVALITA shared tasks. The 2018 edition hosted a shared task on hate speech detection \cite{boscoOverviewEVALITA2018} based on two Italian-language datasets annotated for hate speech, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM \cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech against migrants and women \cite{basileEVALITA2020Overview}, based on a dataset of tweets. In this case, the best results were obtained by using an ensemble of BERT models \cite{mutiUniBOAMIMultiClass2020}.
+Prior work on Italian hate speech identification has been conducted chiefly within the context of the EVALITA shared tasks. The 2018 edition hosted a shared task on hate speech detection \cite{boscoOverviewEVALITA2018} based on two Italian-language datasets annotated for hate speech, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM \cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech against migrants and women \cite{basileEVALITA2020Overview}, based on a dataset of tweets. In this case, the best results were obtained by using an ensemble of BERT models \cite{mutiUniBOAMIMultiClass2020}.
 
 English-language hate speech detection has been conducted both with models such as logistic regression and linear SVMs~\cite{davidson-2017-automated-hate} and, more recently, by using transformers~\cite{mathew2021hatexplain}.
 
 In multilingual settings, this problem has been approached in a variety of ways. For example, \newcite{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of datasets annotated for hate speech to improve the performance of transformer models in zero-shot, few-shot and well-resourced settings. \newcite{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow these approaches in attempting to improve the performance of our models.
 
-% \newcite{aluruDeepLearningModels2020} show that LASER embeddings with logistic regression perform better than BERT in low-resource settings. In the zero-shot setting they approach, Italian (together with Portuguese) achieves especially good results. In the context of monolingual Italian hate speech detection, and specifically misogyny detection, \newcite{mutiUniBOAMIMultiClass2020} use AlBERTo \cite{PolignanoEtAlCLIC2019} to approach the EVALITA 2020 misogyny detection shared task \cite{basileEVALITA2020Overview}, achieving top performance among all participants. The runners-up also experiment with BERT-based architectures, but approach the task using an ensemble technique \cite{leesJigsawAMIHaSpeeDe22020}.
+% \newcite{aluruDeepLearningModels2020} show that LASER embeddings with logistic regression perform better than BERT in low-resource settings. In the zero-shot setting they approach, Italian (together with Portuguese) achieves especially good results. In the context of monolingual Italian hate speech detection, and specifically misogyny detection, \newcite{mutiUniBOAMIMultiClass2020} use \albert\, \cite{PolignanoEtAlCLIC2019} to approach the EVALITA 2020 misogyny detection shared task \cite{basileEVALITA2020Overview}, achieving top performance among all participants. The runners-up also experiment with BERT-based architectures, but approach the task using an ensemble technique \cite{leesJigsawAMIHaSpeeDe22020}.
 
 \section{Datasets}
 \label{sec:ceur-specs}
 
-In order to conduct the study, we leverage existing Italian-language datasets annotated for hate speech from past EVALITA\footnote{\url{https://www.evalita.it}} campaigns.
+In order to conduct the study, we leverage existing Italian-language datasets annotated with binary hate speech labels from past EVALITA\footnote{\url{https://www.evalita.it}} campaigns.
+We also use two datasets compiled from two incel forums, one in English and one in Italian, once again binary-annotated for hate speech.
 
-The first Italian dataset we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, hosted at EVALITA 2018 \cite{boscoOverviewEVALITA2018} (henceforth ``HSD-FB-18''), by annotating Facebook posts for hate speech. The second one is from the second edition of the HaSpeeDe shared task \cite{basileEVALITA2020Overview} (``HSD-TW-20''), compiled by adding new data to the HaSpeeDe 2018 Twitter dataset. The third and last dataset we use in Italian is the one compiled for the Automatic Misogyny Identification (AMI) shared task \cite{fersiniAMIEVALITA2020Automatic2020} (``AMI-20''), hosted at EVALITA 2020. This dataset is also compiled from tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{Although this dataset is not annotated for hate speech, it still comes in handy, since in incel spaces most of the hate speech is in the form of misogyny.} All Italian datasets were split 70/30 between training and development sets. The test sets, which we are not using in this study, were released separately in all cases for the aforementioned shared tasks. 
+\vspace*{1mm}\noindent\textbf{Existing Italian datasets.} The first Italian dataset we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, hosted at EVALITA 2018 \cite{boscoOverviewEVALITA2018} (henceforth ``\hsdfb''), by annotating Facebook posts for hate speech. The second one is from the second edition of the HaSpeeDe shared task \cite{basileEVALITA2020Overview} (henceforth ``\hsdtw''), compiled by adding new data to the HaSpeeDe 2018 Twitter dataset. The third and last dataset we use in Italian is the one compiled for the Automatic Misogyny Identification (AMI) shared task \cite{fersiniAMIEVALITA2020Automatic2020} (henceforth ``\ami''), hosted at EVALITA 2020. This dataset is also compiled from tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{Although this dataset is not annotated for hate speech, it still comes in handy, since in incel spaces most of the hate speech is expressed in the form of misogyny.} All Italian datasets were split 70/30 between training and development sets. The test sets, which we do not use in this study, were released separately in all cases for the aforementioned shared tasks. 
 
-In addition to these resources, we compiled two novel unsupervised datasets, comprising posts scraped from incel forums: \dsENcorpus\, (Incel Forum 2022 English Unsupervised) scraped from the \textit{Incels.is} forum, and \dsITcorpus\, (Incel Forum 2022 Italian Unsupervised) scraped from \textit{Il forum dei brutti}. The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content (i.e., the content of the post being replied to). Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two datasets.\footnote{The datasets are available at: \url{https://zenodo.org/record/8147845}.} We build these new resources both due to the lack of freely available incel corpora and the fact that incel language changes rapidly, as outlined in Appendix~\ref{app:keyness}, making it a worthwhile effort to compile updated resources.
+\vspace*{1mm}\noindent\textbf{Novel incel datasets.} We compiled two novel unsupervised datasets, comprising posts scraped from incel forums: \dsENcorpus\, (Incel Forum, Unsupervised, 2022, English) scraped from the \textit{Incels.is} forum, and \dsITcorpus\, (Incel Forum, Unsupervised, 2022, Italian) scraped from \textit{Il forum dei brutti}. The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content which a user is replying to. Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two datasets.\footnote{The datasets are available at: \url{https://zenodo.org/record/8147845}.} We build these new resources both due to the lack of freely available incel corpora and the fact that incel language changes rapidly, as outlined in Appendix~\ref{app:keyness}, making it worthwhile to compile updated resources.
 
 \begin{table}[t]
   \centering
-  \caption{Statistics of the IFC-22-EN and IFC-22-IT unsupervised datasets in terms of posts and threads. The mean length is computed at the token level.}
+  \caption{Statistics of the IFC-22-EN and IFC-22-IT unsupervised datasets in terms of posts and threads. Mean length computed at token level.}
   \begin{tabular}{l|ccc}
       \hline
       \textbf{Dataset} & \textbf{Posts} & \textbf{Threads} & \textbf{Length} \\
@@ -165,25 +179,6 @@ In addition to these resources, we compiled two novel unsupervised datasets, com
       \hline
   \end{tabular}
   \label{tab:english-italian-unsupervised-datasets-stats}
-\end{table}
-
-\begin{table}[t]
-  \caption{Hate speech (HS) annotation statistics for the \dsENclassification\, and \dsITclassification\, datasets.}
-  \label{tab:english-italian-supervised-datasets-partition-stats}
-  \centering
-  % \footnotesize
-  \begin{tabular}{l|cc}
-  \hline
-  % \bf \multirow{2}{*}{Dataset}  &\multicolumn{2}{c|}{\bf Binary} & \multicolumn{4}{c}{\bf Multi-Label} \\
-  % \cline{2-7}
-   \bf Binary &  \bf HS\,\, & \bf \% \\ % & \bf M\,\, & \bf R\,\, & \bf Both & \bf Neither \\
-  \hline
-  \dsENclassification$_{\mbox{train}}$ 	&  1,482 & 68.61 \\ % 2,160 \\ % & 806 & 630 & 46 & 2,160 \\
-  \dsENclassification$_{\mbox{val}}$ 	  &  316   & 68.10 \\ % 464 \\ % & 173 & 130 & 13 & 464   \\
-  \dsENclassification$_{\mbox{test}}$ 	&  292   & 59.71 \\ % 489 \\ % & 160 & 125 &  7 & 489   \\
-  \dsITclassification$_{\mbox{test}}$   &  200   & 40.00 \\ % 300 \\ % & 187 & 8 & 5    & 300   \\
-  \hline
-  \end{tabular}
 \end{table}
 
 \begin{figure}[]
@@ -227,128 +222,334 @@ In addition to these resources, we compiled two novel unsupervised datasets, com
   \end{footnotesize}
 \end{figure}
 
+\begin{table}[t]
+  \caption{Hate speech (HS) annotation statistics for the adopted datasets.}
+  \label{tab:english-italian-supervised-datasets-partition-stats}
+  \centering
+  % \footnotesize
+  \begin{tabular}{l|cc|cc}
+  \hline
+  % \bf \multirow{2}{*}{Dataset}  &\multicolumn{2}{c|}{\bf Binary} & \multicolumn{4}{c}{\bf Multi-Label} \\
+  \bf Dataset                          & \bf HS & \bf \% & \bf Non-HS & \bf \%  \\ 
+  \hline
+  \dsENclassification                 	&  2,090 & 40.17  &   3,113    &  59.83 \\ 
+  \dsITclassification                   &  200   & 40.00  &   300      &  60.00 \\ 
+  \hsdfb                              	&  1,382 & 46.08  &   1,617    &  53.92 \\ 
+  \hsdtw                              	&  971   & 32.38  &   2,028    &  67.62 \\ 
+  \ami                                	&  2,337 & 46.74  &   2,663    &  53.26 \\ 
+  \hline
+  \end{tabular}
+\end{table}
+
 A subset of the two datasets was annotated for both misogyny and racism, following the guidelines presented in Figure~\ref{fig:annotation-guidelines}.
 For English, a subset of 50 posts was randomly selected and labeled by three annotators, all with a C2 CEFR level of English, well-versed in linguistics, gender studies, NLP, and data annotation. 
 The Cohen's Kappa inter-annotator agreement (IAA) \cite{bobicev2017inter} was of 0.77, which is considered high.
 As such, the remaining instances were annotated by a single annotator. For the Italian dataset, two native speakers of Italian, also experts in the relevant fields, annotated  50 posts as well, reaching an IAA of 0.69. As the IAA was deemed acceptable, the rest of the instances were annotated by one single annotator. 
 
-We refer to these datasets as \dsENclassification\, (Incel Forum 2022 English Supervised) and \dsITclassification\, (Incel Forum 2022 Italian Supervised), 
-whose statistics are shown in 
-Table~\ref{tab:english-italian-supervised-datasets-partition-stats}. \dsENclassification~is split between training, development and testing partitions with a 70/15/15 split, while \dsITclassification~is only used for testing.
-The datasets are annotated for racism and misogyny because these are the most relevant forms of hate speech in the two forums \cite{silva2016analyzing,ging2018special}.
+We refer to these two supervised datasets as \dsENclassification\, (Incel Forum, Supervised, English) and \dsITclassification\, (Incel Forum, Supervised, Italian). \dsENclassification~is split between training, development and testing partitions with a 70/15/15 split, while \dsITclassification~is only used for testing.
+The datasets are annotated for racism and misogyny, since they are the most relevant forms of hate speech in the two forums \cite{silva2016analyzing,ging2018special}.
 
-We also use existing Italian-language datasets annotated for hate speech \cite{boscoOverviewEVALITA2018} and misogyny \cite{basileEVALITA2020Overview} from past EVALITA\footnote{\url{https://www.evalita.it}} campaigns.
+The annotation statistics of all the datasets used in this study can be found in Table~\ref{tab:english-italian-supervised-datasets-partition-stats}.
 
-With that information at hand, we approach the task as a binary classification problem, where a post is considered hateful if it is labeled as being either misogynous or racist.
+% We also use existing Italian-language datasets annotated for hate speech \cite{boscoOverviewEVALITA2018} and misogyny \cite{basileEVALITA2020Overview} from past EVALITA\footnote{\url{https://www.evalita.it}} campaigns.
+
+% \begin{table*}[t]
+%   \centering
+%   % \footnotesize
+%   \caption{Highest and lowest performance in terms of F$_1$-measure, precision and recall, when fine-tuning on Italian-only (top) and Italian-English (bottom) dataset combinations. The highest overall test scores for each model are in bold.}
+%   \label{tab:hate-speech-all-models-all-ids}
+
+%   \begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
+%     \multicolumn{1}{c|}{\bf Model} & \multicolumn{1}{c|}{\bf EN} & \multicolumn{3}{c|}{\bf IT} & \multicolumn{1}{c|}{\bf (e)} & \multicolumn{3}{c|}{\bf \begin{minipage}{3.5cm}\begin{center}Validation (IT)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+%      & \rotatebox{90}{\dsENclassification} & \rotatebox{90}{\hsdfb} & \rotatebox{90}{\hsdtw} & \rotatebox{90}{\ami} &
+%      & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
+%         \hline
+%         \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}\umbert\end{minipage}}} 
+%         &      &  \bs  &      &      &      5 &      0.855$\pm$0.003 &     0.868 &       0.843 &       0.696$\pm$0.010 &      0.879 &       0.576 \\ % 27
+%         &      &       &  \bs &      &      4 &      0.754$\pm$0.004 &     0.800 &       0.713 &       0.432$\pm$0.060 &      0.319 &       0.685 \\ % 28
+%         % &      &       &      &  \bs &      4 &      0.914$\pm$0.004 &     0.931 &       0.899 &       0.569$\pm$0.031 &      0.520 &       0.631 \\ % 29
+%         % &      &  \bs  &  \bs &      &      4 &      0.788$\pm$0.006 &     0.824 &       0.755 &       0.666$\pm$0.024 &      0.758 &       0.595 \\ % 30
+%         % &      &  \bs  &      &  \bs &      5 &      0.883$\pm$0.004 &     0.900 &       0.867 &  \bf  0.697$\pm$0.019 &      0.747 &       0.653 \\ % 31
+%         % &      &       &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.844 &       0.814 &       0.596$\pm$0.017 &      0.526 &       0.688 \\ % 32
+%         % &      &  \bs  &  \bs &  \bs &      5 &      0.822$\pm$0.003 &     0.836 &       0.808 &       0.680$\pm$0.016 &      0.692 &       0.671 \\ % 33
+%         \hline
+%         \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel\\\umbert\end{minipage}}} 
+%         &      &  \bs  &      &      &      5 &      0.867$\pm$0.006 &     0.887 &       0.848 &  \bf  0.705$\pm$0.009 &      0.870 &       0.593 \\ % 27
+%         &      &       &  \bs &      &      4 &      0.756$\pm$0.002 &     0.810 &       0.708 &       0.403$\pm$0.024 &      0.285 &       0.692 \\ % 28
+%         % &      &       &      &  \bs &      4 &      0.918$\pm$0.001 &     0.946 &       0.891 &       0.652$\pm$0.031 &      0.608 &       0.705 \\ % 29
+%         % &      &  \bs  &  \bs &      &      4 &      0.790$\pm$0.003 &     0.831 &       0.754 &       0.660$\pm$0.014 &      0.696 &       0.627 \\ % 30
+%         % &      &  \bs  &      &  \bs &      5 &      0.886$\pm$0.002 &     0.901 &       0.872 &       0.704$\pm$0.005 &      0.732 &       0.678 \\ % 31
+%         % &      &       &  \bs &  \bs &      2 &      0.831$\pm$0.003 &     0.866 &       0.799 &       0.648$\pm$0.011 &      0.544 &       0.802 \\ % 32
+%         % &      &  \bs  &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.853 &       0.804 &       0.699$\pm$0.029 &      0.718 &       0.682 \\ % 33
+%         \hline
+%         \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}\albert\end{minipage}}} 
+%         &      &  \bs  &      &      &      4 &      0.850$\pm$0.003 &     0.899 &       0.807 &       0.683$\pm$0.006 &      0.941 &       0.537 \\ % 27
+%         &      &       &  \bs &      &      1 &      0.752$\pm$0.006 &     0.817 &       0.698 &       0.520$\pm$0.089 &      0.426 &       0.716 \\ % 28
+%         % &      &       &      &  \bs &      2 &      0.907$\pm$0.004 &     0.952 &       0.866 &       0.528$\pm$0.022 &      0.517 &       0.542 \\ % 29
+%         % &      &  \bs  &  \bs &      &      2 &      0.775$\pm$0.003 &     0.803 &       0.750 &       0.695$\pm$0.007 &      0.786 &       0.623 \\ % 30
+%         % &      &  \bs  &      &  \bs &      3 &      0.879$\pm$0.003 &     0.918 &       0.843 &  \bf  0.705$\pm$0.011 &      0.803 &       0.629 \\ % 31
+%         % &      &       &  \bs &  \bs &      3 &      0.820$\pm$0.001 &     0.888 &       0.762 &       0.652$\pm$0.018 &      0.645 &       0.660 \\ % 32
+%         % &      &  \bs  &  \bs &  \bs &      2 &      0.808$\pm$0.011 &     0.872 &       0.753 &       0.684$\pm$0.015 &      0.821 &       0.587 \\ % 33
+%         \hline
+%         \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel\\\albert\end{minipage}}} 
+%         &      &  \bs  &      &      &      5 &      0.847$\pm$0.005 &     0.863 &       0.831 &  \bf  0.707$\pm$0.007 &      0.791 &       0.639 \\ % 27
+%         &      &       &  \bs &      &      1 &      0.748$\pm$0.002 &     0.785 &       0.715 &       0.506$\pm$0.035 &      0.370 &       0.805 \\ % 28
+%         % &      &       &      &  \bs &      5 &      0.912$\pm$0.003 &     0.930 &       0.895 &       0.617$\pm$0.018 &      0.562 &       0.685 \\ % 29
+%         % &      &  \bs  &  \bs &      &      2 &      0.771$\pm$0.004 &     0.791 &       0.752 &       0.673$\pm$0.016 &      0.721 &       0.632 \\ % 30
+%         % &      &  \bs  &      &  \bs &      5 &      0.873$\pm$0.003 &     0.888 &       0.858 &       0.668$\pm$0.014 &      0.663 &       0.674 \\ % 31
+%         % &      &       &  \bs &  \bs &      1 &      0.818$\pm$0.004 &     0.864 &       0.776 &       0.656$\pm$0.007 &      0.593 &       0.736 \\ % 32
+%         % &      &  \bs  &  \bs &  \bs &      4 &      0.800$\pm$0.009 &     0.828 &       0.773 &       0.688$\pm$0.017 &      0.747 &       0.639 \\ % 33
+
+%         \hline
+%         \multicolumn{6}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3.5cm}\begin{center}Validation (IT-EN)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+%         \hline
+%         \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}mBERT\end{minipage}}} 
+%         % &  \bs &  \bs  &      &      &      3 &      0.841$\pm$0.004 &     0.852 &       0.832 &  \bf  0.688$\pm$0.006 &      0.921 &       0.549 \\ % 34
+%         &  \bs &       &  \bs &      &      3 &      0.846$\pm$0.002 &     0.866 &       0.827 &       0.529$\pm$0.041 &      0.482 &       0.588 \\ % 35
+%         &  \bs &       &      &  \bs &      5 &      0.844$\pm$0.007 &     0.849 &       0.838 &       0.634$\pm$0.023 &      0.587 &       0.692 \\ % 36
+%         % &  \bs &  \bs  &  \bs &      &      4 &      0.844$\pm$0.006 &     0.844 &       0.844 &       0.616$\pm$0.028 &      0.675 &       0.568 \\ % 37
+%         % &  \bs &  \bs  &      &  \bs &      5 &      0.842$\pm$0.004 &     0.844 &       0.840 &       0.676$\pm$0.012 &      0.801 &       0.585 \\ % 38
+%         % &  \bs &       &  \bs &  \bs &      4 &      0.847$\pm$0.008 &     0.841 &       0.853 &       0.570$\pm$0.048 &      0.535 &       0.620 \\ % 39
+%         % &  \bs &  \bs  &  \bs &  \bs &      5 &      0.837$\pm$0.008 &     0.829 &       0.845 &       0.613$\pm$0.019 &      0.639 &       0.590 \\ % 40
+%         \hline
+%         \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel mBERT\end{minipage}}} 
+%         % &  \bs &  \bs  &      &      &      5 &      0.859$\pm$0.010 &     0.853 &       0.864 &       0.708$\pm$0.007 &      0.889 &       0.588 \\ % 34
+%         &  \bs &       &  \bs &      &      2 &      0.861$\pm$0.015 &     0.866 &       0.856 &       0.615$\pm$0.025 &      0.558 &       0.690 \\ % 35
+%         &  \bs &       &      &  \bs &      4 &      0.853$\pm$0.009 &     0.863 &       0.844 &  \bf  0.722$\pm$0.028 &      0.704 &       0.746 \\ % 36
+%         % &  \bs &  \bs  &  \bs &      &      5 &      0.857$\pm$0.007 &     0.855 &       0.859 &       0.679$\pm$0.014 &      0.731 &       0.635 \\ % 37
+%         % &  \bs &  \bs  &      &  \bs &      4 &      0.856$\pm$0.009 &     0.857 &       0.856 &       0.689$\pm$0.011 &      0.707 &       0.673 \\ % 38
+%         % &  \bs &       &  \bs &  \bs &      5 &      0.850$\pm$0.007 &     0.839 &       0.860 &       0.644$\pm$0.010 &      0.580 &       0.725 \\ % 39
+%         % &  \bs &  \bs  &  \bs &  \bs &      5 &      0.869$\pm$0.003 &     0.878 &       0.861 &       0.700$\pm$0.013 &      0.702 &       0.698 \\ % 40
+
+%         \hline
+%         % \multicolumn{1}{c}{} \\
+
+%     \end{tabular}
+% \end{table*}
 
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance on the hate speech identification task of the adopted models when fine-tuning on the top three combinations of the adopted datasets in English and Italian (top) and only Italian (bottom).}
-  \label{tab:hate-speech-all-models-all-ids}
+  \caption{Performance when fine-tuning on Italian-only dataset combinations. Epochs (e) are selected based on the convergence of the validation performance. Highest scores in bold.}
+  \label{tab:italian-only-results}
 
-\begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|ccc|ccc}
-\multicolumn{1}{c|}{} & \multicolumn{1}{c|}{\bf EN} & \multicolumn{3}{c|}{\bf IT} & \multicolumn{3}{c|}{\bf \begin{minipage}{3cm}\begin{center}Val. (\dsENclassificationdev)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
- & \rotatebox{90}{Incels.is} & \rotatebox{90}{HSD-FB-18} & \rotatebox{90}{HSD-TW-20} & \rotatebox{90}{AMI-20}
- & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
-    \hline
-        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}mBERT\end{minipage}}} 
-    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel mBERT\end{minipage}}} 
-    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multicolumn{1}{c}{} \\
-    \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}UmBERTo\end{minipage}}} 
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel\\UmBERTo\end{minipage}}} 
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}AlBERTo\end{minipage}}} 
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{0}{\begin{minipage}{1.7cm}Incel\\AlBERTo\end{minipage}}} 
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-\end{tabular}
+  \begin{tabular}{l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
+     & \multicolumn{3}{c|}{\bf IT} & \bf (e) & \multicolumn{3}{c|}{\bf \begin{minipage}{4cm}\begin{center}Validation (IT)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{4cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+      & \rotatebox{90}{\hsdfb} & \rotatebox{90}{\hsdtw} & \rotatebox{90}{\ami} &
+     & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
+        \hline
+        %     \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.5cm}mBERT\end{minipage}}} 
+        % &  \bs &  \bs  &      &      &      3 &      0.841$\pm$0.004 &     0.852 &       0.832 &       0.688$\pm$0.006 &      0.921 &       0.549 \\ % 34
+        % &  \bs &       &  \bs &      &      3 &      0.846$\pm$0.002 &     0.866 &       0.827 &       0.529$\pm$0.041 &      0.482 &       0.588 \\ % 35
+        % &  \bs &       &      &  \bs &      5 &      0.844$\pm$0.007 &     0.849 &       0.838 &       0.634$\pm$0.023 &      0.587 &       0.692 \\ % 36
+        % &  \bs &  \bs  &  \bs &      &      4 &      0.844$\pm$0.006 &     0.844 &       0.844 &       0.616$\pm$0.028 &      0.675 &       0.568 \\ % 37
+        % &  \bs &  \bs  &      &  \bs &      5 &      0.842$\pm$0.004 &     0.844 &       0.840 &       0.676$\pm$0.012 &      0.801 &       0.585 \\ % 38
+        % &  \bs &       &  \bs &  \bs &      4 &      0.847$\pm$0.008 &     0.841 &       0.853 &       0.570$\pm$0.048 &      0.535 &       0.620 \\ % 39
+        % &  \bs &  \bs  &  \bs &  \bs &      5 &      0.837$\pm$0.008 &     0.829 &       0.845 &       0.613$\pm$0.019 &      0.639 &       0.590 \\ % 40
+        % \hline
+        %     \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.2cm}Incel mBERT\end{minipage}}} 
+        % &  \bs &  \bs  &      &      &      5 &      0.859$\pm$0.010 &     0.853 &       0.864 &       0.708$\pm$0.007 &      0.889 &       0.588 \\ % 34
+        % &  \bs &       &  \bs &      &      2 &      0.861$\pm$0.015 &     0.866 &       0.856 &       0.615$\pm$0.025 &      0.558 &       0.690 \\ % 35
+        % &  \bs &       &      &  \bs &      4 &      0.853$\pm$0.009 &     0.863 &       0.844 &       0.722$\pm$0.028 &      0.704 &       0.746 \\ % 36
+        % &  \bs &  \bs  &  \bs &      &      5 &      0.857$\pm$0.007 &     0.855 &       0.859 &       0.679$\pm$0.014 &      0.731 &       0.635 \\ % 37
+        % &  \bs &  \bs  &      &  \bs &      4 &      0.856$\pm$0.009 &     0.857 &       0.856 &       0.689$\pm$0.011 &      0.707 &       0.673 \\ % 38
+        % &  \bs &       &  \bs &  \bs &      5 &      0.850$\pm$0.007 &     0.839 &       0.860 &       0.644$\pm$0.010 &      0.580 &       0.725 \\ % 39
+        % &  \bs &  \bs  &  \bs &  \bs &      5 &      0.869$\pm$0.003 &     0.878 &       0.861 &       0.700$\pm$0.013 &      0.702 &       0.698 \\ % 40
+        % \hline
+        % \multicolumn{1}{c}{} \\
+        % \multicolumn{6}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+        % \hline
+        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\umbert\end{minipage}}} 
+        &  \bs  &      &      &      5 &      0.855$\pm$0.003 &     0.868 &       0.843 &       0.696$\pm$0.010 & \bf  0.879 &       0.576 \\ % 27
+        &       &  \bs &      &      4 &      0.754$\pm$0.004 &     0.800 &       0.713 &       0.432$\pm$0.060 &      0.319 &       0.685 \\ % 28
+        &       &      &  \bs &      4 & \bf  0.914$\pm$0.004 & \bf 0.931 &  \bf  0.899 &       0.569$\pm$0.031 &      0.520 &       0.631 \\ % 29
+        &  \bs  &  \bs &      &      4 &      0.788$\pm$0.006 &     0.824 &       0.755 &       0.666$\pm$0.024 &      0.758 &       0.595 \\ % 30
+        &  \bs  &      &  \bs &      5 &      0.883$\pm$0.004 &     0.900 &       0.867 &  \bf  0.697$\pm$0.019 &      0.747 &       0.653 \\ % 31
+        &       &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.844 &       0.814 &       0.596$\pm$0.017 &      0.526 &  \bf  0.688 \\ % 32
+        &  \bs  &  \bs &  \bs &      5 &      0.822$\pm$0.003 &     0.836 &       0.808 &       0.680$\pm$0.016 &      0.692 &       0.671 \\ % 33
+        \hline
+        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \iumbert\end{minipage}}} 
+        &  \bs  &      &      &      5 &      0.867$\pm$0.006 &     0.887 &       0.848 &  \bf  0.705$\pm$0.009 & \bf  0.870 &       0.593 \\ % 27
+        &       &  \bs &      &      4 &      0.756$\pm$0.002 &     0.810 &       0.708 &       0.403$\pm$0.024 &      0.285 &       0.692 \\ % 28
+        &       &      &  \bs &      4 & \bf  0.918$\pm$0.001 & \bf 0.946 &  \bf  0.891 &       0.652$\pm$0.031 &      0.608 &       0.705 \\ % 29
+        &  \bs  &  \bs &      &      4 &      0.790$\pm$0.003 &     0.831 &       0.754 &       0.660$\pm$0.014 &      0.696 &       0.627 \\ % 30
+        &  \bs  &      &  \bs &      5 &      0.886$\pm$0.002 &     0.901 &       0.872 &       0.704$\pm$0.005 &      0.732 &       0.678 \\ % 31
+        &       &  \bs &  \bs &      2 &      0.831$\pm$0.003 &     0.866 &       0.799 &       0.648$\pm$0.011 &      0.544 &  \bf  0.802 \\ % 32
+        &  \bs  &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.853 &       0.804 &       0.699$\pm$0.029 &      0.718 &       0.682 \\ % 33
+        \hline
+        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\albert\end{minipage}}} 
+        &  \bs  &      &      &      4 &      0.850$\pm$0.003 &     0.899 &       0.807 &       0.683$\pm$0.006 & \bf  0.941 &       0.537 \\ % 27
+        &       &  \bs &      &      1 &      0.752$\pm$0.006 &     0.817 &       0.698 &       0.520$\pm$0.089 &      0.426 &  \bf  0.716 \\ % 28
+        &       &      &  \bs &      2 & \bf  0.907$\pm$0.004 & \bf 0.952 &  \bf  0.866 &       0.528$\pm$0.022 &      0.517 &       0.542 \\ % 29
+        &  \bs  &  \bs &      &      2 &      0.775$\pm$0.003 &     0.803 &       0.750 &       0.695$\pm$0.007 &      0.786 &       0.623 \\ % 30
+        &  \bs  &      &  \bs &      3 &      0.879$\pm$0.003 &     0.918 &       0.843 &  \bf  0.705$\pm$0.011 &      0.803 &       0.629 \\ % 31
+        &       &  \bs &  \bs &      3 &      0.820$\pm$0.001 &     0.888 &       0.762 &       0.652$\pm$0.018 &      0.645 &       0.660 \\ % 32
+        &  \bs  &  \bs &  \bs &      2 &      0.808$\pm$0.011 &     0.872 &       0.753 &       0.684$\pm$0.015 &      0.821 &       0.587 \\ % 33
+        \hline
+        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \ialbert\end{minipage}}} 
+        &  \bs  &      &      &      5 &      0.847$\pm$0.005 &     0.863 &       0.831 &  \bf  0.707$\pm$0.007 & \bf  0.791 &       0.639 \\ % 27
+        &       &  \bs &      &      1 &      0.748$\pm$0.002 &     0.785 &       0.715 &       0.506$\pm$0.035 &      0.370 &  \bf  0.805 \\ % 28
+        &       &      &  \bs &      5 & \bf  0.912$\pm$0.003 & \bf 0.930 &  \bf  0.895 &       0.617$\pm$0.018 &      0.562 &       0.685 \\ % 29
+        &  \bs  &  \bs &      &      2 &      0.771$\pm$0.004 &     0.791 &       0.752 &       0.673$\pm$0.016 &      0.721 &       0.632 \\ % 30
+        &  \bs  &      &  \bs &      5 &      0.873$\pm$0.003 &     0.888 &       0.858 &       0.668$\pm$0.014 &      0.663 &       0.674 \\ % 31
+        &       &  \bs &  \bs &      1 &      0.818$\pm$0.004 &     0.864 &       0.776 &       0.656$\pm$0.007 &      0.593 &       0.736 \\ % 32
+        &  \bs  &  \bs &  \bs &      4 &      0.800$\pm$0.009 &     0.828 &       0.773 &       0.688$\pm$0.017 &      0.747 &       0.639 \\ % 33
+        \hline
+    \end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+  \centering
+  % \footnotesize
+  \caption{Performance when fine-tuning on Italian-English dataset combinations. Epochs (e) are selected based on the convergence of the validation performance. Highest scores in bold.}
+  \label{tab:multilingual-results}
+
+  \begin{tabular}{l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
+    \multicolumn{1}{c|}{}  & \multicolumn{3}{c|}{\bf IT} & \multicolumn{1}{c|}{\bf EN}\bf & \bf (e) & \multicolumn{3}{c|}{\bf \begin{minipage}{4cm}\begin{center}Validation (IT-EN)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+     & \rotatebox{90}{\hsdfb} & \rotatebox{90}{\hsdtw} & \rotatebox{90}{\ami} & \rotatebox{90}{\dsENclassification} &
+     & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
+        \hline
+            \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.5cm}mBERT\end{minipage}}} 
+        &  \bs  &      &      &  \bs &    3 &      0.841$\pm$0.004 &     0.852 &       0.832 & \bf   0.688$\pm$0.006 & \bf  0.921 &       0.549 \\ % 34
+        &       &  \bs &      &  \bs &    3 &      0.846$\pm$0.002 & \bf 0.866 &       0.827 &       0.529$\pm$0.041 &      0.482 &       0.588 \\ % 35
+        &       &      &  \bs &  \bs &    5 &      0.844$\pm$0.007 &     0.849 &       0.838 &       0.634$\pm$0.023 &      0.587 & \bf   0.692 \\ % 36
+        &  \bs  &  \bs &      &  \bs &    4 &      0.844$\pm$0.006 &     0.844 &       0.844 &       0.616$\pm$0.028 &      0.675 &       0.568 \\ % 37
+        &  \bs  &      &  \bs &  \bs &    5 &      0.842$\pm$0.004 &     0.844 &       0.840 &       0.676$\pm$0.012 &      0.801 &       0.585 \\ % 38
+        &       &  \bs &  \bs &  \bs &    4 & \bf  0.847$\pm$0.008 &     0.841 & \bf   0.853 &       0.570$\pm$0.048 &      0.535 &       0.620 \\ % 39
+        &  \bs  &  \bs &  \bs &  \bs &    5 &      0.837$\pm$0.008 &     0.829 &       0.845 &       0.613$\pm$0.019 &      0.639 &       0.590 \\ % 40
+        \hline
+            \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.2cm}Incel mBERT\end{minipage}}} 
+        &  \bs  &      &      &  \bs &    5 &      0.859$\pm$0.010 &     0.853 & \bf   0.864 &       0.708$\pm$0.007 & \bf  0.889 &       0.588 \\ % 34
+        &       &  \bs &      &  \bs &    2 &      0.861$\pm$0.015 &     0.866 &       0.856 &       0.615$\pm$0.025 &      0.558 &       0.690 \\ % 35
+        &       &      &  \bs &  \bs &    4 &      0.853$\pm$0.009 &     0.863 &       0.844 & \bf   0.722$\pm$0.028 &      0.704 & \bf   0.746 \\ % 36
+        &  \bs  &  \bs &      &  \bs &    5 &      0.857$\pm$0.007 &     0.855 &       0.859 &       0.679$\pm$0.014 &      0.731 &       0.635 \\ % 37
+        &  \bs  &      &  \bs &  \bs &    4 &      0.856$\pm$0.009 &     0.857 &       0.856 &       0.689$\pm$0.011 &      0.707 &       0.673 \\ % 38
+        &       &  \bs &  \bs &  \bs &    5 &      0.850$\pm$0.007 &     0.839 &       0.860 &       0.644$\pm$0.010 &      0.580 &       0.725 \\ % 39
+        &  \bs  &  \bs &  \bs &  \bs &    5 & \bf  0.869$\pm$0.003 & \bf 0.878 &       0.861 &       0.700$\pm$0.013 &      0.702 &       0.698 \\ % 40
+        \hline
+        % \multicolumn{1}{c}{} \\
+        % \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+        % \hline
+        % \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\umbert\end{minipage}}} 
+        % &      &  \bs  &      &      &      5 &      0.855$\pm$0.003 &     0.868 &       0.843 &       0.696$\pm$0.010 &      0.879 &       0.576 \\ % 27
+        % &      &       &  \bs &      &      4 &      0.754$\pm$0.004 &     0.800 &       0.713 &       0.432$\pm$0.060 &      0.319 &       0.685 \\ % 28
+        % &      &       &      &  \bs &      4 &      0.914$\pm$0.004 &     0.931 &       0.899 &       0.569$\pm$0.031 &      0.520 &       0.631 \\ % 29
+        % &      &  \bs  &  \bs &      &      4 &      0.788$\pm$0.006 &     0.824 &       0.755 &       0.666$\pm$0.024 &      0.758 &       0.595 \\ % 30
+        % &      &  \bs  &      &  \bs &      5 &      0.883$\pm$0.004 &     0.900 &       0.867 &       0.697$\pm$0.019 &      0.747 &       0.653 \\ % 31
+        % &      &       &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.844 &       0.814 &       0.596$\pm$0.017 &      0.526 &       0.688 \\ % 32
+        % &      &  \bs  &  \bs &  \bs &      5 &      0.822$\pm$0.003 &     0.836 &       0.808 &       0.680$\pm$0.016 &      0.692 &       0.671 \\ % 33
+        % \hline
+        % \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \iumbert\end{minipage}}} 
+        % &      &  \bs  &      &      &      5 &      0.867$\pm$0.006 &     0.887 &       0.848 &       0.705$\pm$0.009 &      0.870 &       0.593 \\ % 27
+        % &      &       &  \bs &      &      4 &      0.756$\pm$0.002 &     0.810 &       0.708 &       0.403$\pm$0.024 &      0.285 &       0.692 \\ % 28
+        % &      &       &      &  \bs &      4 &      0.918$\pm$0.001 &     0.946 &       0.891 &       0.652$\pm$0.031 &      0.608 &       0.705 \\ % 29
+        % &      &  \bs  &  \bs &      &      4 &      0.790$\pm$0.003 &     0.831 &       0.754 &       0.660$\pm$0.014 &      0.696 &       0.627 \\ % 30
+        % &      &  \bs  &      &  \bs &      5 &      0.886$\pm$0.002 &     0.901 &       0.872 &       0.704$\pm$0.005 &      0.732 &       0.678 \\ % 31
+        % &      &       &  \bs &  \bs &      2 &      0.831$\pm$0.003 &     0.866 &       0.799 &       0.648$\pm$0.011 &      0.544 &       0.802 \\ % 32
+        % &      &  \bs  &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.853 &       0.804 &       0.699$\pm$0.029 &      0.718 &       0.682 \\ % 33
+        % \hline
+        % \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\albert\end{minipage}}} 
+        % &      &  \bs  &      &      &      4 &      0.850$\pm$0.003 &     0.899 &       0.807 &       0.683$\pm$0.006 &      0.941 &       0.537 \\ % 27
+        % &      &       &  \bs &      &      1 &      0.752$\pm$0.006 &     0.817 &       0.698 &       0.520$\pm$0.089 &      0.426 &       0.716 \\ % 28
+        % &      &       &      &  \bs &      2 &      0.907$\pm$0.004 &     0.952 &       0.866 &       0.528$\pm$0.022 &      0.517 &       0.542 \\ % 29
+        % &      &  \bs  &  \bs &      &      2 &      0.775$\pm$0.003 &     0.803 &       0.750 &       0.695$\pm$0.007 &      0.786 &       0.623 \\ % 30
+        % &      &  \bs  &      &  \bs &      3 &      0.879$\pm$0.003 &     0.918 &       0.843 &       0.705$\pm$0.011 &      0.803 &       0.629 \\ % 31
+        % &      &       &  \bs &  \bs &      3 &      0.820$\pm$0.001 &     0.888 &       0.762 &       0.652$\pm$0.018 &      0.645 &       0.660 \\ % 32
+        % &      &  \bs  &  \bs &  \bs &      2 &      0.808$\pm$0.011 &     0.872 &       0.753 &       0.684$\pm$0.015 &      0.821 &       0.587 \\ % 33
+        % \hline
+        % \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \ialbert\end{minipage}}} 
+        % &      &  \bs  &      &      &      5 &      0.847$\pm$0.005 &     0.863 &       0.831 &       0.707$\pm$0.007 &      0.791 &       0.639 \\ % 27
+        % &      &       &  \bs &      &      1 &      0.748$\pm$0.002 &     0.785 &       0.715 &       0.506$\pm$0.035 &      0.370 &       0.805 \\ % 28
+        % &      &       &      &  \bs &      5 &      0.912$\pm$0.003 &     0.930 &       0.895 &       0.617$\pm$0.018 &      0.562 &       0.685 \\ % 29
+        % &      &  \bs  &  \bs &      &      2 &      0.771$\pm$0.004 &     0.791 &       0.752 &       0.673$\pm$0.016 &      0.721 &       0.632 \\ % 30
+        % &      &  \bs  &      &  \bs &      5 &      0.873$\pm$0.003 &     0.888 &       0.858 &       0.668$\pm$0.014 &      0.663 &       0.674 \\ % 31
+        % &      &       &  \bs &  \bs &      1 &      0.818$\pm$0.004 &     0.864 &       0.776 &       0.656$\pm$0.007 &      0.593 &       0.736 \\ % 32
+        % &      &  \bs  &  \bs &  \bs &      4 &      0.800$\pm$0.009 &     0.828 &       0.773 &       0.688$\pm$0.017 &      0.747 &       0.639 \\ % 33
+        % \hline
+    \end{tabular}
 \end{table*}
 
 \section{Models}
 \label{sec:models}
 
-We apply multilingual models to the English-Italian combinations of training datasets and Italian-only models to the Italian-only combinations.
+We train the Italian-only models on the Italian-only combinations and the multilingual models on the English-Italian combinations of datasets.
 
-As regards the multilingual models, we use mBERT$_{base}$ and an MLM-enhanced version of it which we obtain by training it for one epoch on $500k$ posts sampled from \dsENcorpus and $500k$ posts sampled from \dsITcorpus, for a total of $1M$ bilingual sentences. We refer to this model as ``\imbert''.
+With relation to the Italian-only scenario, we use \umbert\, and \albert\, as our baseline models. We choose these models because they achieved the best performance in previous EVALITA shared tasks on hate speech \cite{basileEVALITA2020Overview} and misogyny \cite{fersiniAMIEVALITA2020Automatic2020} identification. We also create MLM-enhanced versions of these two models by training them on the entirety of the contents of \dsITcorpus, for a total of $627k$ sentences.\footnote{The number of sentences used for MLM-training differs from the total number of posts ($638k$) because we exclude empty posts.} We refer to these models as ``\iumbert''\, and ``\ialbert''.
 
-With relation to the Italian-only models, we use UmBERTo$_{base}$ and AlBERTo$_{base}$. In addition, we also create MLM-enhanced versions of these two models by training them on the entirety of the contents of \dsITcorpus, for a total of $627k$ sentences. We refer to these models as ``\umbert''\, and ``\albert'', respectively.
+As regards the Italian-English setting, we use \mbert\, as our baseline. We also use an MLM-enhanced version of it which we obtain by training it for one epoch on $500k$ posts sampled from \dsENcorpus\, and $500k$ posts sampled from \dsITcorpus, for a total of $1M$ bilingual sentences. We refer to this model as ``\imbert''.
 
-The MLM pre-training process is carried out in all cases by tokenizing the sentences using Hugging Face's AutoTokenizer\footnote{\url{https://huggingface.co/docs/transformers/model\_doc/auto\#transformers.AutoTokenizer}},
+The MLM pre-training process is carried out in all cases by tokenizing the sentences using Hugging Face's AutoTokenizer\footnote{\url{https://huggingface.co/docs/transformers/model_doc/auto}},
 % , which automatically selects the appropriate tokenizer for the model we wish 
 % to train. The sentences are 
 feeding them into the model using Hugging Face's data collator for language 
-modeling.\footnote{\url{https://huggingface.co/docs/transformers/main\_classes/ data\_collator}}
+modeling.\footnote{\url{https://huggingface.co/docs/transformers/main/main_classes/data_collator}}
 % , which automatically masks tokens with a 15\% chance for the 
 % MLM task. Finally, t
-Due to computational constraints, we train the models for a single (1) epoch, with a masking probability of 15\% and a batch size of 32
+Due to hardware constraints, we train the models only for one epoch, with a masking probability of 15\% and a batch size of 32
 % masking sentence tokens with a probability of 15\% and using a batch size of 32 samples 
 on a single Tesla P100 GPU with 16 GB of VRAM.
 
 \section{Experiments and Evaluation}
 \label{sec:exps}
 
-We train each model five times and select the number of epochs based on the performance on the validation set. We do this in order to make our results more reliable and diminishing the effect of the random initialization of the models. The resulting models are then evaluated on the \dsENclassification\, and \dsITclassification\, test sets.
-Table \ref{tab:hate-speech-all-models-all-ids} shows the performance in terms of precision, recall and F$_1$-measure for the three dataset combinations yielding the overall highest performance with the best-performing model. The full results can be found in Appendix~\ref{app:complete-results}, in Table~\ref{tab:hate-speech-all-models-all-ids-appendix}.
+We approach the task of identifying hate speech as a binary classification problem, where a post can either be hateful or not. We train each model five times on each dataset combination obtained by merging the datasets introduced in the previous section. We select the number of epochs based on the convergence of the performance on the validation set. We do this in order to make our results more reliable and diminishing the effect of the random initialization of the models. For each dataset combination, the training and validation sets are the unions of the individual training and validation sets of each merged dataset. The resulting models are then evaluated on the \dsITclassification\, test set.
 
-\itodo{waiting for results to continue writing}
+Table \ref{tab:italian-only-results} shows the performance in terms of precision, recall and F$_1$-measure for the Italian-only models and dataset combinations. Table~\ref{tab:multilingual-results} reports the results for the multilingual models and English-Italian combinations.
 
-As regards monolingual MLM training, 
+% The full results can be found in Appendix~\ref{app:complete-results}, in Table~\ref{tab:hate-speech-all-models-all-ids-appendix}.
 
-Carrying out MLM on mBERT on 1$M$ bilingual instances yields a mean F$_1$ score of 0.503 on the fourth epoch of training. Compared to the baseline mBERT model, which achieves a mean F$_1$ score of 0.333, this represents a significant performance boost of 51\%, showing the effectiveness of this approach.
+\paragraph*{Italian-only.} Overall, the best performing model on the Italian-only combinations is \ialbert, which achieves a test F$_1$ score of 0.707, when training solely on \hsdfb. Compared to training \mbert\, on the same dataset, which achieves a test F$_1$ score of 0.683 on \dsITclassification, this represents a performance boost of 2.4 F$_1$ points. To a lesser degree, the same can be observed with regard to \iumbert, which achieves a test F$_1$ score of 0.705 when trained on \hsdfb, representing a performance boost of 0.9 F$_1$ points compared to \umbert, which achieves a test F$_1$ score of 0.696 using the same dataset. In both cases, this shows that pre-training \albert\, and \umbert\, on Italian sentences extracted from \dsITcorpus\, is effective in improving their performance when evaluating on \dsITclassification.
+
+The worst test performance, for all models, is obtained when training solely on \hsdtw. In addition, the performance of \ialbert\, and \iumbert\, is worse than that of \umbert\, and \albert, showing an opposite trend to the one observed when training on \hsdfb. This is especially interesting considering the fact that the two datasets were annotated following the same annotation guidelines \cite{boscoOverviewEVALITA2018,basileEVALITA2020Overview}. The validation scores are also noticeably lower for \hsdtw\, combinations, compared to \hsdfb\, combinations. This shows that the models have a harder time learning from \hsdtw\, than from \hsdfb. This is coherent with the results obtained by participating teams in the two shared tasks, and with the fact that the messages contained in \hsdfb\, are ``longer and more correct than those in Twitter, allowing systems (and humans too) to find more and more clear indications of the presence of HS'' \cite{boscoOverviewEVALITA2018}. Thus, the considerably lower scores obtained on \dsITclassification\, when training on combinations involving \hsdtw\, can be explained by the fact that the models most likely have a harder time learning from the contents of \hsdtw. The fact that the messages contained in \hsdfb\, are longer would also be coherent with the fact that \ialbert\, and \iumbert\, perform better than \umbert\, and \albert\, when training on \hsdfb, since \dsITcorpus\, on average contains rather long posts (see Table~\ref{tab:english-italian-unsupervised-datasets-stats}), unlike Twitter datasets, since prior to 2023 tweets were limited to 280 characters.
+
+As regards combining different Italian datasets, the strategy yields the highest performance for \albert\, and \umbert\, when training on both \hsdfb\, and \ami. Compared to other combinations, the performance is particularly high for \albert\, when training on \hsdfb\, and \ami, almost equaling that of \ialbert\, when training only on \hsdfb. However, once the models are MLM-trained on \dsITcorpus, the performance boost is no longer observed, and the Incel versions of the models perform better when only using \hsdfb. This could be due to a high affinity between the contents of \dsITcorpus\, and \hsdfb, compared to \hsdtw\, and \ami, which would mean that pre-training on \dsITcorpus\, biases the model toward that language, decreasing performance when other datasets are involved.
+
+\paragraph*{Italian-English.} Compared to the best combination using \mbert, which achieves a test F$_1$ score of 0.688, the best combination using \imbert\, achieves a test F$_1$ score of 0.722 (+3.4 F$_1$ points), which is also the highest score across both language settings. Just like in the Italian-only setting, \mbert\, performs better when only training it on \hsdfb, in addition to \dsENclassification, which is used in all combinations in this English-Italian bilingual setting. Conversely, \imbert\, performs better when training on \ami. This is interesting, since the \ami\, dataset lowered the performance of all Italian-only models, compared to only training on \hsdfb. Since misogyny is the main way hate speech is expressed in \enforum\, (39.44\% of the instances in \dsENclassification are misogynous), and due to the fact that we are using sentences extracted from this forum to pre-train \imbert, the performance boost could be due to the fact that the model is better at detecting misogynous language compared to \mbert\, and the Italian-only models.
+
+As regards the worst combinations, the lowest performance is once again recorded when using \hsdtw\, for training. The combinations containing this dataset also lead to lower performance, compared to the other ones, both with relation to \mbert\, and \imbert. For example, the performance difference between training \imbert\, only on \ami and \hsdtw+\ami is 2.2 F$_1$ points in favor of the former.
+
+\paragraph*{IT-EN vs. IT.}
+% Based on the results obtained for the two settings, we can find out whether there is a correlation between validation and test performance using Pearson's correlation coefficient. We do this in order to verify how good of a predictor the performance obtained on the validation sets is with respect to the performance obtained on \dsITclassification. For English-Italian combinations, we find a correlation of 0.401 (p-value $>$ 0.05), while for Italian-only combinations we find a correlation of 0.438 (p-value $<$ 0.05).
+% % Taking both groups into account, we find a correlation of 0.426 (p-value $<$ 0.05).
+% This shows that in the case of Italian-only combinations, the validation performance is a better predictor of the test performance than in the case of English-Italian combinations. This arguably makes sense, as the English-Italian combinations are tested in a cross-domain and partially cross-lingual setting, while the Italian-only ones are tested in monolingual cross-domain scenarios, with a higher similarity between the contents of the validation and test sets.
+
+The results of our experiments show that the highest performance is not obtained by training on the Italian-only datasets, but rather on the English-Italian ones. For five combinations out of seven, \imbert's performance is higher than all other models.
+% The only dataset combinations for which the performance of \imbert\, does not beat that of all other models are \hsdfb+\ami\, and \hsdtw+\ami.
+% For both language settings, the best overall performance when predicting on \dsITclassification, across all employed models and dataset combinations, is achieved when training \imbert\, solely on \ami.
+
+Since mBERT was originally pre-trained on 104 languages and \albert\, and \umbert\, were pre-trained only on Italian, the fact that \imbert\, can outperform them by pre-training on just $1M$ bilingual instances is is surprising. Even more surprising is the fact that using bilingual instances is better than pre-training Italian-only models only on Italian sentences. Furthermore, the number of Italian sentences used to train \ialbert\, and \iumbert\, is 627k, which is greater than the number of Italian sentences used to train \imbert, which is 500k.
+
+From these results, we could infer that the model is learning more about how to spot hate speech in \dsITclassification\, by learning language-agnostic incel concepts, since \imbert\, is pre-trained on sentences extracted from two incel forums in two different languages. Although the two speech communities are obviously distinct, the red pill and black pill ideologies have spread internationally, and are shared by both communities. This could explain why \imbert\, performs better than the Italian-only models: the model might be learning about incel hate speech by paying more attention to the sociological concepts underlying the language, and putting less focus on purely linguistic features.
 
 
 \section{Conclusions}
 
 In this paper, we have presented an approach to improve the performance of hate speech detection models in a cross-lingual and cross-domain scenarios. We used existing datasets in Italian annotated for hate speech and combined them with unsupervised datasets compiled by us in English and Italian from incel forums.
 
-Choosing mBERT as our baseline model, we improved its performance by following the approach of~\newcite{caselliHateBERTRetrainingBERT2021} through MLM training, enhancing its capability of detecting hateful language in the target language. We did the same for Italian models, namely UmBERTo and AlBERTo, and compared the results with the baseline mBERT models.
+Choosing mBERT as our baseline model, we improved its performance by following the approach of~\newcite{caselliHateBERTRetrainingBERT2021} through MLM training, enhancing its capability of detecting hateful language in the target language. We did the same for Italian models, namely \umbert\, and \albert, and compared the results with the baseline mBERT models.
 
 Our experiments show that 
 
 Future work 
 
-\section*{Ethical Considerations}
-All the data for the compilation of the unsupervised datasets is publicly available, as forum users accept a legal disclaimer before posting. The posters are kept anonymous and maintain complete ownership of their posts. 
-% 
-The scope of the paper covers an inherently sensitive issue which could be subject to bias. Human supervision is necessary to assess the quality of the results, especially during the annotation process. Therefore, the annotated posts were evaluated as objectively as possible.
+% \section*{Ethical Considerations}
+% All the data for the compilation of the unsupervised datasets is publicly available, as forum users accept a legal disclaimer before posting. The posters are kept anonymous and maintain complete ownership of their posts. 
+% % 
+% The scope of the paper covers an inherently sensitive issue which could be subject to bias. Human supervision is necessary to assess the quality of the results, especially during the annotation process. Therefore, the annotated posts were evaluated as objectively as possible.
 
-The models tend to favor precision over recall which, upon deployment, 
-could lead to a fairly permissive platform, thus putting free speech 
-at a reasonable level.
+% The models tend to favor precision over recall which, upon deployment, 
+% could lead to a fairly permissive platform, thus putting free speech 
+% at a reasonable level.
 
-\section*{Limitations}
+% \section*{Limitations}
 
-Due to computational constraints, we were forced to only carry out MLM pre-training for one epoch over the contents of the incel forums. 
+% Due to computational constraints, we were forced to only carry out MLM pre-training for one epoch over the contents of the incel forums. 
 
-Additionally, more languages could be used: for example, Spanish and Portuguese are close to Italian, so using datasets annotated for hate speech in those languages and merging the to ours might help increase performance. Italian dataset annotated for hate speech could also be used to do the same.
+% Additionally, more languages could be used: for example, Spanish and Portuguese are close to Italian, so using datasets annotated for hate speech in those languages and merging the to ours might help increase performance. Italian dataset annotated for hate speech could also be used to do the same.
 
-% Additionally, the same approach could be repeated using a larger amount of test data to further smooth out any possible irregularities in the results.
+% % Additionally, the same approach could be repeated using a larger amount of test data to further smooth out any possible irregularities in the results.
 
-Finally, the same experiments could also be repeated using the individual misogyny and racism labels, instead of the combined hate speech label, to study the contribution of each label to the overall performance of the model.
+% Finally, the same experiments could also be repeated using the individual misogyny and racism labels, instead of the combined hate speech label, to study the contribution of each label to the overall performance of the model.
 
 % include your own bib file like this:
 \bibliographystyle{acl}
@@ -379,19 +580,19 @@ keyness(w) = \frac{fpm_f(w) + n}
                 {fpm_r(w)\, + \,n}
 \end{equation}
 %
-\paolo{where $fpm_f(w)$ represents the normalized frequency of a focus corpus word per million words,} $fpm_r(w)$ refers to the word in the reference corpus, and $n$ is a smoothing parameter (here, $n=1$).
+where $fpm_f(w)$ represents the normalized frequency of a focus corpus word per million words, $fpm_r(w)$ refers to the word in the reference corpus, and $n$ is a smoothing parameter (here, $n=1$).
 % where $f_{{pm_{focus}}}$ represents the normalized frequency of a word (per million words) in the focus corpus; $f_{{pm_{ref}}}$ represents the normalized frequency of a word (per million words) in the reference corpus; and $n$ represents a smoothing parameter (n = 1 by default).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-To study the English-speaking \textit{Incels.is} forum, we consider \paolo{all of its contents, for a total of}
+To study the English-speaking \textit{Incels.is} forum, we consider all of its contents, for a total of
 % a subset of
 104$M$ words (collected up to 18 October 2022).
 % , while for the 
-\paolo{We do the same for the}
+We do the same for the
 Italian \textit{Il forum dei brutti},
 % we consider the whole contents of the forum: %, which amount to 
-\paolo{for a total of}
+for a total of
 30$M$ words (up to 4 December 2022). For English, we calculate the keyness by using 
 enTenTen20
 % \footnote{\url{https://www.sketchengine.eu/ententen-english-corpus/}} 
@@ -399,7 +600,7 @@ as the reference corpus, while for Italian we use itTenTen20~\cite{tenten2013kil
 % \footnote{\url{https://www.sketchengine.eu/ittenten-italian-corpus/}}.
 
 As regards \enforum, in order to compile a list of characteristic incel lexicon, the keyness of lexical items was calculated across the entirety of the forum, up to October 2022. Preliminary candidates were selected by 
-collecting single- and multi-word items that ranked in the top $500$ for keyness, for a total of $1k$ analyzed items.  Among these, only terms considered to be typical of incel language were examined. As mentioned in Section~\ref{incels-section}, racism and misogyny are very characteristic elements of the language of incels. As such, a simple way to choose characteristic terms for this speech community is manually evaluating racist and misogynous terms (or terms that are frequently associated to racist and misogynous contexts) and selecting those which are not typically found in general language, i.e., having high keyness scores.
+collecting single- and multi-word items that ranked in the top $500$ for keyness, for a total of $1k$ analyzed items.  Among these, only terms considered to be typical of incel language were examined. R`acism and misogyny are very characteristic elements of the language of incels. As such, a simple way to choose characteristic terms for this speech community is manually evaluating racist and misogynous terms (or terms that are frequently associated to racist and misogynous contexts) and selecting those which are not typically found in general language, i.e., having high keyness scores.
 The evaluation of the individual terms was carried out by manually analyzing concordance lines in the corpus with the objective of verifying whether their use could be construed as being hateful. Although human evaluation is unavoidably subjective, we erred on the side of caution and only selected terms which could unmistakably be used in a hateful manner. Unfortunately, this terminology extraction strategy has the drawback of not directly taking into account terms that get resemanticized and assume a new, offensive meaning. Further work could be carried out to identify such terms in order to have a more comprehensive understanding of the issue.
 
 With relation to \itforum, we once again studied terms we deemed to be characteristic of the forum's incel language; however, in this case we focused on 10 terms used to describe other men in negative or positive ways. We chose this approach because the goal of this modern diachronic study is to show that language specific to incels changes over time, regardless of whether it can be considered hateful. Therefore, since in \dsITcorpus\, we could not find as much misogynous or racist jargon as in \dsENcorpus, we decided to consider the way men are represented, instead of women.
@@ -560,76 +761,121 @@ Based on the conducted qualitative and quantitative analyses, the same conclusio
 
 Consequently, it seems desirable, if not necessary, to periodically update corpora to have accurate terminological representations. In some cases, it would arguably make sense to even rebuild resources from scratch, were they too outdated. In our case, given the observed changes in keyness, we estimate that the hereby analyzed time frame could be taken as a reference for how long resources can be considered up-to-date. However, with the aim of obtaining an objective figure, further research could be conducted to quantify how often resources should be updated to keep up with the evolution of the language used in the spaces scrutinized through this study.
 
-The necessity to build such material is also supported by the fact that, as discussed in Chapter~\ref{related-work}, resources on the topic of incels are rare and limited, and their applicability is often compromised because the linguistic domain of the source data only partially aligns with the one under investigation \cite{pelzer-2021-toxic-language-incel-communities}. An additional cause for such incompatibility of resources can be found in the annotation scheme, which can be inapplicable to the supervised task being approached \cite{zhou-2022-automated-hs-detection}. However, the necessity to build new resources does not mean they will be obsolete soon after being employed, as the time frames we have analyzed in this chapter span various years of forum activity.
+The necessity to build such material is also supported by the fact that resources on the topic of incels are rare and limited, and their applicability is often compromised because the linguistic domain of the source data only partially aligns with the one under investigation \cite{pelzer-2021-toxic-language-incel-communities}. An additional cause for such incompatibility of resources can be found in the annotation scheme, which can be inapplicable to the supervised task being approached \cite{zhou-2022-automated-hs-detection}. However, the necessity to build new resources does not mean they will be obsolete soon after being employed, as the time frames we have analyzed in this chapter span various years of forum activity.
 
-\clearpage
+% \clearpage
 
-\section{Complete Results}
-\label{app:complete-results}
+% \section{Complete Results}
+% \label{app:complete-results}
 
-  \begin{strip}
-  \centering
-  % \footnotesize
-  \captionof{table}{Performance on the hate speech identification task of the adopted models when fine-tuning them on all combinations of the adopted datasets in English and Italian (top) and only Italian (bottom).}
-  \label{tab:hate-speech-all-models-all-ids-appendix}
+%   \begin{strip}
+%   \centering
+%   % \footnotesize
+%   \captionof{table}{Performance on the hate speech identification task of the adopted models when fine-tuning them on all combinations of the adopted datasets in English and Italian (top) and only Italian (bottom), for the epoch (e) of maximum validation F$_1$-measure.}
+%   \label{tab:hate-speech-all-models-all-ids-appendix}
 
-\begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|ccc|ccc}
-\multicolumn{1}{c|}{} & \multicolumn{1}{c|}{\bf EN} & \multicolumn{3}{c|}{\bf IT} & \multicolumn{3}{c|}{\bf \begin{minipage}{3cm}\begin{center}Val. (\dsENclassificationdev)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
- & \rotatebox{90}{Incels.is} & \rotatebox{90}{HSD-FB} & \rotatebox{90}{HSD-TW} & \rotatebox{90}{AMI-20}
- & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
-    \hline
-        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}mBERT\end{minipage}}} 
-    &  \bs &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
-    &  \bs &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
-    &  \bs &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
-    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-        \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}Incel mBERT\end{minipage}}} 
-    &  \bs &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
-    &  \bs &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
-    &  \bs &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
-    &  \bs &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &  \bs &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multicolumn{1}{c}{} \\
-    \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}UmBERTo\end{minipage}}} 
-    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
-    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
-    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}Incel\\UmBERTo\end{minipage}}} 
-    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
-    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
-    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}AlBERTo\end{minipage}}} 
-    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
-    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
-    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-    \multirow{4}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}Incel\\AlBERTo\end{minipage}}} 
-    &      &  \bs  &      &      &       0.843$\pm$0.005 &     0.862 &     0.826 &    0.333$\pm$0.114 &     0.224 &      0.742 \\
-    &      &       &  \bs &      &       0.835$\pm$0.010 &     0.837 &     0.835 &    0.694$\pm$0.011 &     0.859 &      0.583 \\
-    &      &       &      &  \bs &       0.854$\pm$0.011 &     0.875 &     0.835 &    0.657$\pm$0.035 &     0.721 &      0.612 \\
-    &      &  \bs  &  \bs &      &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &       &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    &      &  \bs  &  \bs &  \bs &       0.825$\pm$0.005 &     0.780 &     0.876 &    0.690$\pm$0.012 &     0.807 &      0.605 \\
-    \hline
-\end{tabular}
-\end{strip}
+% \begin{tabular}{l|c@{\hspace{1mm}}|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
+% \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{\bf EN} & \multicolumn{3}{c|}{\bf IT} & \bf (e) & \multicolumn{3}{c|}{\bf \begin{minipage}{3cm}\begin{center}Val. (\dsENclassificationdev)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+%  & \rotatebox{90}{Incels.is} & \rotatebox{90}{\hsdfb} & \rotatebox{90}{\hsdtw} & \rotatebox{90}{\ami} &
+%  & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
+%     \hline
+%         \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.5cm}mBERT\end{minipage}}} 
+%     &  \bs &  \bs  &      &      &      3 &      0.841$\pm$0.004 &     0.852 &       0.832 &       0.688$\pm$0.006 &      0.921 &       0.549 \\ % 34
+%     &  \bs &       &  \bs &      &      3 &      0.846$\pm$0.002 &     0.866 &       0.827 &       0.529$\pm$0.041 &      0.482 &       0.588 \\ % 35
+%     &  \bs &       &      &  \bs &      5 &      0.844$\pm$0.007 &     0.849 &       0.838 &       0.634$\pm$0.023 &      0.587 &       0.692 \\ % 36
+%     &  \bs &  \bs  &  \bs &      &      4 &      0.844$\pm$0.006 &     0.844 &       0.844 &       0.616$\pm$0.028 &      0.675 &       0.568 \\ % 37
+%     &  \bs &  \bs  &      &  \bs &      5 &      0.842$\pm$0.004 &     0.844 &       0.840 &       0.676$\pm$0.012 &      0.801 &       0.585 \\ % 38
+%     &  \bs &       &  \bs &  \bs &      4 &      0.847$\pm$0.008 &     0.841 &       0.853 &       0.570$\pm$0.048 &      0.535 &       0.620 \\ % 39
+%     &  \bs &  \bs  &  \bs &  \bs &      5 &      0.837$\pm$0.008 &     0.829 &       0.845 &       0.613$\pm$0.019 &      0.639 &       0.590 \\ % 40
+%     \hline
+%         \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.2cm}Incel mBERT\end{minipage}}} 
+%     &  \bs &  \bs  &      &      &      5 &      0.859$\pm$0.010 &     0.853 &       0.864 &       0.708$\pm$0.007 &      0.889 &       0.588 \\ % 34
+%     &  \bs &       &  \bs &      &      2 &      0.861$\pm$0.015 &     0.866 &       0.856 &       0.615$\pm$0.025 &      0.558 &       0.690 \\ % 35
+%     &  \bs &       &      &  \bs &      4 &      0.853$\pm$0.009 &     0.863 &       0.844 &       0.722$\pm$0.028 &      0.704 &       0.746 \\ % 36
+%     &  \bs &  \bs  &  \bs &      &      5 &      0.857$\pm$0.007 &     0.855 &       0.859 &       0.679$\pm$0.014 &      0.731 &       0.635 \\ % 37
+%     &  \bs &  \bs  &      &  \bs &      4 &      0.856$\pm$0.009 &     0.857 &       0.856 &       0.689$\pm$0.011 &      0.707 &       0.673 \\ % 38
+%     &  \bs &       &  \bs &  \bs &      5 &      0.850$\pm$0.007 &     0.839 &       0.860 &       0.644$\pm$0.010 &      0.580 &       0.725 \\ % 39
+%     &  \bs &  \bs  &  \bs &  \bs &      5 &      0.869$\pm$0.003 &     0.878 &       0.861 &       0.700$\pm$0.013 &      0.702 &       0.698 \\ % 40
+%     \hline
+%     % \multicolumn{1}{c}{} \\
+%     \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Val. (Italian)\end{center}\end{minipage}} & \multicolumn{3}{c}{\bf \begin{minipage}{3cm}\begin{center}Test (\dsITclassification)\end{center}\end{minipage}}\\
+%     \hline
+%     \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\umbert\end{minipage}}} 
+%     &      &  \bs  &      &      &      5 &      0.855$\pm$0.003 &     0.868 &       0.843 &       0.696$\pm$0.010 &      0.879 &       0.576 \\ % 27
+%     &      &       &  \bs &      &      4 &      0.754$\pm$0.004 &     0.800 &       0.713 &       0.432$\pm$0.060 &      0.319 &       0.685 \\ % 28
+%     &      &       &      &  \bs &      4 &      0.914$\pm$0.004 &     0.931 &       0.899 &       0.569$\pm$0.031 &      0.520 &       0.631 \\ % 29
+%     &      &  \bs  &  \bs &      &      4 &      0.788$\pm$0.006 &     0.824 &       0.755 &       0.666$\pm$0.024 &      0.758 &       0.595 \\ % 30
+%     &      &  \bs  &      &  \bs &      5 &      0.883$\pm$0.004 &     0.900 &       0.867 &       0.697$\pm$0.019 &      0.747 &       0.653 \\ % 31
+%     &      &       &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.844 &       0.814 &       0.596$\pm$0.017 &      0.526 &       0.688 \\ % 32
+%     &      &  \bs  &  \bs &  \bs &      5 &      0.822$\pm$0.003 &     0.836 &       0.808 &       0.680$\pm$0.016 &      0.692 &       0.671 \\ % 33
+%     \hline
+%     \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \iumbert\end{minipage}}} 
+%     &      &  \bs  &      &      &      5 &      0.867$\pm$0.006 &     0.887 &       0.848 &       0.705$\pm$0.009 &      0.870 &       0.593 \\ % 27
+%     &      &       &  \bs &      &      4 &      0.756$\pm$0.002 &     0.810 &       0.708 &       0.403$\pm$0.024 &      0.285 &       0.692 \\ % 28
+%     &      &       &      &  \bs &      4 &      0.918$\pm$0.001 &     0.946 &       0.891 &       0.652$\pm$0.031 &      0.608 &       0.705 \\ % 29
+%     &      &  \bs  &  \bs &      &      4 &      0.790$\pm$0.003 &     0.831 &       0.754 &       0.660$\pm$0.014 &      0.696 &       0.627 \\ % 30
+%     &      &  \bs  &      &  \bs &      5 &      0.886$\pm$0.002 &     0.901 &       0.872 &       0.704$\pm$0.005 &      0.732 &       0.678 \\ % 31
+%     &      &       &  \bs &  \bs &      2 &      0.831$\pm$0.003 &     0.866 &       0.799 &       0.648$\pm$0.011 &      0.544 &       0.802 \\ % 32
+%     &      &  \bs  &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.853 &       0.804 &       0.699$\pm$0.029 &      0.718 &       0.682 \\ % 33
+%     \hline
+%     \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\albert\end{minipage}}} 
+%     &      &  \bs  &      &      &      4 &      0.850$\pm$0.003 &     0.899 &       0.807 &       0.683$\pm$0.006 &      0.941 &       0.537 \\ % 27
+%     &      &       &  \bs &      &      1 &      0.752$\pm$0.006 &     0.817 &       0.698 &       0.520$\pm$0.089 &      0.426 &       0.716 \\ % 28
+%     &      &       &      &  \bs &      2 &      0.907$\pm$0.004 &     0.952 &       0.866 &       0.528$\pm$0.022 &      0.517 &       0.542 \\ % 29
+%     &      &  \bs  &  \bs &      &      2 &      0.775$\pm$0.003 &     0.803 &       0.750 &       0.695$\pm$0.007 &      0.786 &       0.623 \\ % 30
+%     &      &  \bs  &      &  \bs &      3 &      0.879$\pm$0.003 &     0.918 &       0.843 &       0.705$\pm$0.011 &      0.803 &       0.629 \\ % 31
+%     &      &       &  \bs &  \bs &      3 &      0.820$\pm$0.001 &     0.888 &       0.762 &       0.652$\pm$0.018 &      0.645 &       0.660 \\ % 32
+%     &      &  \bs  &  \bs &  \bs &      2 &      0.808$\pm$0.011 &     0.872 &       0.753 &       0.684$\pm$0.015 &      0.821 &       0.587 \\ % 33
+%     \hline
+%     \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \ialbert\end{minipage}}} 
+%     &      &  \bs  &      &      &      5 &      0.847$\pm$0.005 &     0.863 &       0.831 &       0.707$\pm$0.007 &      0.791 &       0.639 \\ % 27
+%     &      &       &  \bs &      &      1 &      0.748$\pm$0.002 &     0.785 &       0.715 &       0.506$\pm$0.035 &      0.370 &       0.805 \\ % 28
+%     &      &       &      &  \bs &      5 &      0.912$\pm$0.003 &     0.930 &       0.895 &       0.617$\pm$0.018 &      0.562 &       0.685 \\ % 29
+%     &      &  \bs  &  \bs &      &      2 &      0.771$\pm$0.004 &     0.791 &       0.752 &       0.673$\pm$0.016 &      0.721 &       0.632 \\ % 30
+%     &      &  \bs  &      &  \bs &      5 &      0.873$\pm$0.003 &     0.888 &       0.858 &       0.668$\pm$0.014 &      0.663 &       0.674 \\ % 31
+%     &      &       &  \bs &  \bs &      1 &      0.818$\pm$0.004 &     0.864 &       0.776 &       0.656$\pm$0.007 &      0.593 &       0.736 \\ % 32
+%     &      &  \bs  &  \bs &  \bs &      4 &      0.800$\pm$0.009 &     0.828 &       0.773 &       0.688$\pm$0.017 &      0.747 &       0.639 \\ % 33
+%     \hline
+% \end{tabular}
+% \end{strip}
+
+% \begin{tabular}{lrrrrrrrrr}
+%                Model &  (e)   &   Val F1          &  Val Rec &  Val Prec &    Test F1         &  Test Rec &  Test Prec \\ % ID
+%              \albert\, &      4 &   0.850$\pm$0.003 &    0.899 &     0.807 &    0.683$\pm$0.006 &     0.941 &      0.537 \\ % 27
+%              \albert\, &      1 &   0.752$\pm$0.006 &    0.817 &     0.698 &    0.520$\pm$0.089 &     0.426 &      0.716 \\ % 28
+%              \albert\, &      2 &   0.907$\pm$0.004 &    0.952 &     0.866 &    0.528$\pm$0.022 &     0.517 &      0.542 \\ % 29
+%              \albert\, &      2 &   0.775$\pm$0.003 &    0.803 &     0.750 &    0.695$\pm$0.007 &     0.786 &      0.623 \\ % 30
+%              \albert\, &      3 &   0.879$\pm$0.003 &    0.918 &     0.843 &    0.705$\pm$0.011 &     0.803 &      0.629 \\ % 31
+%              \albert\, &      3 &   0.821$\pm$0.001 &    0.886 &     0.764 &    0.646$\pm$0.019 &     0.630 &      0.665 \\ % 32
+%   Incel \albert\, 627k &      5 &   0.847$\pm$0.005 &    0.863 &     0.831 &    0.707$\pm$0.007 &     0.791 &      0.639 \\ % 27
+%   Incel \albert\, 627k &      1 &   0.748$\pm$0.002 &    0.785 &     0.715 &    0.506$\pm$0.035 &     0.370 &      0.805 \\ % 28
+%   Incel \albert\, 627k &      5 &   0.912$\pm$0.003 &    0.930 &     0.895 &    0.617$\pm$0.018 &     0.562 &      0.685 \\ % 29
+%   Incel \albert\, 627k &      2 &   0.771$\pm$0.004 &    0.791 &     0.752 &    0.673$\pm$0.016 &     0.721 &      0.632 \\ % 30
+%   Incel \albert\, 627k &      5 &   0.873$\pm$0.003 &    0.888 &     0.858 &    0.668$\pm$0.014 &     0.663 &      0.674 \\ % 31
+%   Incel Umberto 627k &      5 &   0.867$\pm$0.006 &    0.887 &     0.848 &    0.705$\pm$0.009 &     0.870 &      0.593 \\ % 27
+%   Incel Umberto 627k &      4 &   0.756$\pm$0.002 &    0.810 &     0.708 &    0.403$\pm$0.024 &     0.285 &      0.692 \\ % 28
+%   Incel Umberto 627k &      4 &   0.918$\pm$0.001 &    0.946 &     0.891 &    0.652$\pm$0.031 &     0.608 &      0.705 \\ % 29
+%   Incel Umberto 627k &      4 &   0.790$\pm$0.003 &    0.831 &     0.754 &    0.660$\pm$0.014 &     0.696 &      0.627 \\ % 30
+%   Incel Umberto 627k &      5 &   0.886$\pm$0.002 &    0.901 &     0.872 &    0.704$\pm$0.005 &     0.732 &      0.678 \\ % 31
+%       Incel mBERT 1M &      5 &   0.859$\pm$0.010 &    0.853 &     0.864 &    0.708$\pm$0.007 &     0.889 &      0.588 \\ % 34
+%       Incel mBERT 1M &      2 &   0.861$\pm$0.015 &    0.866 &     0.856 &    0.615$\pm$0.025 &     0.558 &      0.690 \\ % 35
+%       Incel mBERT 1M &      4 &   0.853$\pm$0.009 &    0.863 &     0.844 &    0.722$\pm$0.028 &     0.704 &      0.746 \\ % 36
+%       Incel mBERT 1M &      5 &   0.857$\pm$0.007 &    0.855 &     0.859 &    0.679$\pm$0.014 &     0.731 &      0.635 \\ % 37
+%       Incel mBERT 1M &      4 &   0.856$\pm$0.009 &    0.857 &     0.856 &    0.689$\pm$0.011 &     0.707 &      0.673 \\ % 38
+%       Incel mBERT 1M &      5 &   0.850$\pm$0.007 &    0.839 &     0.860 &    0.644$\pm$0.010 &     0.580 &      0.725 \\ % 39
+%       Incel mBERT 1M &      5 &   0.869$\pm$0.003 &    0.878 &     0.861 &    0.700$\pm$0.013 &     0.702 &      0.698 \\ % 40
+%              Umberto &      5 &   0.855$\pm$0.003 &    0.868 &     0.843 &    0.696$\pm$0.010 &     0.879 &      0.576 \\ % 27
+%              Umberto &      4 &   0.754$\pm$0.004 &    0.800 &     0.713 &    0.432$\pm$0.060 &     0.319 &      0.685 \\ % 28
+%              Umberto &      4 &   0.914$\pm$0.004 &    0.931 &     0.899 &    0.569$\pm$0.031 &     0.520 &      0.631 \\ % 29
+%              Umberto &      4 &   0.788$\pm$0.006 &    0.824 &     0.755 &    0.666$\pm$0.024 &     0.758 &      0.595 \\ % 30
+%              Umberto &      5 &   0.883$\pm$0.004 &    0.900 &     0.867 &    0.697$\pm$0.019 &     0.747 &      0.653 \\ % 31
+%           mBERT base &      3 &   0.841$\pm$0.004 &    0.852 &     0.832 &    0.688$\pm$0.006 &     0.921 &      0.549 \\ % 34
+%           mBERT base &      3 &   0.846$\pm$0.002 &    0.866 &     0.827 &    0.529$\pm$0.041 &     0.482 &      0.588 \\ % 35
+%           mBERT base &      5 &   0.844$\pm$0.007 &    0.849 &     0.838 &    0.634$\pm$0.023 &     0.587 &      0.692 \\ % 36
+%           mBERT base &      4 &   0.844$\pm$0.006 &    0.844 &     0.844 &    0.616$\pm$0.028 &     0.675 &      0.568 \\ % 37
+%           mBERT base &      5 &   0.842$\pm$0.004 &    0.844 &     0.840 &    0.676$\pm$0.012 &     0.801 &      0.585 \\ % 38
+%           mBERT base &      4 &   0.847$\pm$0.008 &    0.841 &     0.853 &    0.570$\pm$0.048 &     0.535 &      0.620 \\ % 39
+%           mBERT base &      5 &   0.837$\pm$0.008 &    0.829 &     0.845 &    0.613$\pm$0.019 &     0.639 &      0.590 \\ % 40
+%   \end{tabular}
 
 \end{document}
