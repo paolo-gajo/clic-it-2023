@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.18)  22 JUL 2023 18:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.18)  23 JUL 2023 15:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -533,27 +533,17 @@ File: omspcr.fd
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
 
-Underfull \hbox (badness 2293) in paragraph at lines 103--107
-\OT1/ptm/m/n/10.95 for ``in-vol-un-tary celi-bates''. We pre-
- []
-
-
-Underfull \hbox (badness 1205) in paragraph at lines 103--107
-\OT1/ptm/m/n/10.95 from two in-cel fo-rums, one in Ital-ian
- []
-
-
-Underfull \hbox (badness 1173) in paragraph at lines 123--129
+Underfull \hbox (badness 1173) in paragraph at lines 130--136
 \OT1/ptm/m/n/10.95 bate'') com-mu-nity within the Manosphere has
  []
 
 
-Underfull \hbox (badness 1168) in paragraph at lines 130--138
+Underfull \hbox (badness 1168) in paragraph at lines 137--145
 \OT1/ptm/m/n/10.95 less-resourced lan-guages, such as Ital-ian, one
  []
 
 
-Underfull \hbox (badness 1178) in paragraph at lines 130--138
+Underfull \hbox (badness 1178) in paragraph at lines 137--145
 \OT1/ptm/m/n/10.95 The prob-lem be-comes even more ex-ac-er-bated
  []
 
@@ -562,133 +552,141 @@ Underfull \hbox (badness 1178) in paragraph at lines 130--138
 
 
 ]
-Underfull \hbox (badness 1975) in paragraph at lines 163--164
+Underfull \hbox (badness 2165) in paragraph at lines 152--154
+\OT1/ptm/m/n/10.95 de-tec-tion of hate speech in Ital-ian in-cel fo-
+ []
+
+
+Underfull \hbox (badness 1975) in paragraph at lines 171--172
 []\OT1/ptm/m/n/10.95 English-language hate speech de-tec-tion has
  []
 
 
-Underfull \hbox (badness 1675) in paragraph at lines 172--175
+Underfull \hbox (badness 1675) in paragraph at lines 180--183
 \OT1/ptm/m/n/10.95 We lever-age ex-ist-ing Italian-language datasets
  []
 
 [2]
-Overfull \hbox (6.03775pt too wide) in paragraph at lines 187--196
+Overfull \hbox (6.03775pt too wide) in paragraph at lines 195--204
  [][] 
  []
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 198.
+               Default added (so using `tbp') on input line 206.
 
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 213.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 221.
 (c:/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 202--237
+Underfull \hbox (badness 10000) in paragraph at lines 210--245
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--237
+Underfull \hbox (badness 10000) in paragraph at lines 210--245
 
  []
 
 
-Underfull \hbox (badness 2970) in paragraph at lines 422--423
+Underfull \hbox (badness 2970) in paragraph at lines 430--431
 \OT1/ptm/m/n/10.95 use [] and [] as our base-
  []
 
 [3] [4]
-Underfull \hbox (badness 1038) in paragraph at lines 521--528
+Underfull \hbox (badness 1038) in paragraph at lines 531--538
 \OT1/ptm/m/n/10.95 that [] and [] per-
  []
+
+
+Underfull \vbox (badness 2707) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
-Underfull \hbox (badness 1552) in paragraph at lines 556--557
+Underfull \hbox (badness 1552) in paragraph at lines 566--567
 \OT1/ptm/m/n/10.95 104 lan-guages and [] and []
  []
 
 
-Underfull \hbox (badness 4024) in paragraph at lines 556--557
+Underfull \hbox (badness 4024) in paragraph at lines 566--567
 [] \OT1/ptm/m/n/10.95 can out-per-form them by pre-
  []
 
 
-Underfull \hbox (badness 2005) in paragraph at lines 556--557
+Underfull \hbox (badness 2005) in paragraph at lines 566--567
 \OT1/ptm/m/n/10.95 that, al-though we are test-ing on an en-tirely
  []
 
-(./clic2023.bbl [6]
+[6] (./clic2023.bbl
 Underfull \hbox (badness 1158) in paragraph at lines 31--38
 []\OT1/ptm/m/n/10 Cristina Bosco, Fe-lice Dell'Orletta, Fabio Po-letto,
  []
 
 
-Underfull \hbox (badness 2818) in paragraph at lines 47--52
+Underfull \hbox (badness 2818) in paragraph at lines 40--45
 []\OT1/ptm/m/n/10 Andrea Cimino, Lorenzo De Mat-tei, and Fe-lice
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 72--78
+Underfull \hbox (badness 2326) in paragraph at lines 65--71
 \OT1/ptm/m/n/10 yny Iden-ti-fi-ca-tion.  In Va-le-rio Basile, Danilo
  []
 
 
-Underfull \hbox (badness 1112) in paragraph at lines 112--117
+Underfull \hbox (badness 1112) in paragraph at lines 105--110
 []\OT1/ptm/m/n/10 Milo[]s Jakub[]^^P[]cek, Adam Kil-gar-riff, Vojt[]ech Kov[]a[]r,
  []
 
 
-Underfull \hbox (badness 3460) in paragraph at lines 135--140
+Underfull \hbox (badness 3460) in paragraph at lines 128--133
 []\OT1/ptm/m/n/10 Ariadna Matamoros-Fern[]andez and Jo-han Farkas.
  []
 
 
-Underfull \hbox (badness 2698) in paragraph at lines 143--150
+Underfull \hbox (badness 2698) in paragraph at lines 136--143
 []\OT1/ptm/m/n/10 Binny Mathew, Pun-ya-joy Saha, Seid Muhie Yi-
  []
 
 [7]
-Underfull \hbox (badness 2941) in paragraph at lines 212--217
+Underfull \hbox (badness 2941) in paragraph at lines 205--210
 []\OT1/ptm/m/n/10 Leandro Silva, Mainack Mon-dal, Den-zil Cor-rea,
  []
 
-)
-Underfull \vbox (badness 6047) has occurred while \output is active []
-
- [8]
+) [8]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 725.
+               Default added (so using `tbp') on input line 735.
 
 <images-tables/keyness_chart_incelsis.pdf, id=44, 723.28029pt x 378.79895pt>
 File: images-tables/keyness_chart_incelsis.pdf Graphic file (type pdf)
 <use images-tables/keyness_chart_incelsis.pdf>
-Package pdftex.def Info: images-tables/keyness_chart_incelsis.pdf  used on input line 728.
+Package pdftex.def Info: images-tables/keyness_chart_incelsis.pdf  used on input line 738.
 (pdftex.def)             Requested size: 455.24408pt x 238.43074pt.
 <images-tables/keyness_chart_fdb.pdf, id=45, 713.69762pt x 378.79895pt>
 File: images-tables/keyness_chart_fdb.pdf Graphic file (type pdf)
 <use images-tables/keyness_chart_fdb.pdf>
-Package pdftex.def Info: images-tables/keyness_chart_fdb.pdf  used on input line 732.
+Package pdftex.def Info: images-tables/keyness_chart_fdb.pdf  used on input line 742.
 (pdftex.def)             Requested size: 455.24408pt x 241.62129pt.
 
-Overfull \vbox (2.90596pt too high) detected at line 764
+Overfull \vbox (2.90596pt too high) detected at line 774
  []
 
-[9] [10 <./images-tables/keyness_chart_incelsis.pdf> <./images-tables/keyness_chart_fdb.pdf>] [11] (./clic2023.aux) ) 
+
+Underfull \vbox (badness 6047) has occurred while \output is active []
+
+ [9] [10 <./images-tables/keyness_chart_incelsis.pdf> <./images-tables/keyness_chart_fdb.pdf>] [11] (./clic2023.aux) ) 
 Here is how much of TeX's memory you used:
- 17422 strings out of 476024
- 344354 string characters out of 5794016
- 1908382 words of memory out of 5000000
- 37504 multiletter control sequences out of 15000+600000
+ 17420 strings out of 476024
+ 344311 string characters out of 5794016
+ 1909382 words of memory out of 5000000
+ 37502 multiletter control sequences out of 15000+600000
  547946 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,14n,131p,1233b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on clic2023.pdf (11 pages, 223943 bytes).
+Output written on clic2023.pdf (11 pages, 223369 bytes).
 PDF statistics:
  186 PDF objects out of 1000 (max. 8388607)
  82 compressed objects within 1 object stream

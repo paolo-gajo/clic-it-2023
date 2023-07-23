@@ -88,7 +88,7 @@
 % in the camera-ready version and ask you to change it back.
 
 
-  \title{Hate Speech Detection in Italian Incel Forums Using Bilingual Fine-Tuning Data}
+  \title{Hate Speech Detection in Italian Incel Forums \\ Using Bilingual Data for Pre-Training and Fine-Tuning}
 
 \author{\textbf{Paolo Gajo, Alberto Barrón Cedeño, Silvia Bernardini, Adriano Ferraresi} \\
   University of Bologna, Italy \\
@@ -100,19 +100,26 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-\textbf{English.}~In this paper we approach the problem of improving the performance of hate speech detection models in cross-lingual and cross-domain settings, in Internet forums frequented by ``incels'', short for ``involuntary celibates''. We pre-train Transformer models on corpora built from two incel forums, one in Italian and one in English, using masked language modeling. We fine-tune the models on English and Italian datasets annotated for hate speech.
+\textbf{English.}~In this paper we approach the problem of improving the performance of hate speech detection models in
+% cross-lingual and cross-domain settings, in
+an Italian forum frequented by incels.
+% , short for ``involuntary celibates''
+We pre-train monolingual (Italian) and multilingual Transformer models on corpora built from two incel forums, one in Italian and one in English, using masked language modeling. Then, we fine-tune the models on combinations of English and Italian datasets binary-annotated for hate speech.
 % , built from incel forums and mainstream social media sites.
 % with binary labels which indicate whether a post contains hate speech or not. The Italian training datasets are compiled from mainstream social media (Twitter and Facebook), while the English dataset is built by gathering posts from the English incel forum. The models' performance is evaluated on the Italian incel forum dataset.
-Testing the performance of the fine-tuned models on a hate speech dataset obtained from an Italian incel forum shows that the best results are achieved by using a combination of Italian and English data, rather than just Italian, emphasizing the importance of in-domain data, even when languages differ.
+Testing them on a hate speech dataset obtained from the Italian incel forum shows that the best results are achieved by training multilingual models on bilingual training data,
+rather than using monolingual models on Italian-only data, emphasizing the importance of in-domain data, even when training and target languages differ.
 
-% hate speech identification in cross-lingual and cross-domain settings. We do so by employing Transformer models, pre-trained on monolingual (Italian) and bilingual (Italian-English) corpora. We fine-tune these models on various combinations of English- and Italian-language datasets, all annotated for hate speech. The English-language dataset pertains to the so-called community of ``incels'', short for ``involuntary celibates'', while the ones in Italian are compiled from mainstream social media sites (Twitter and Facebook). We then evaluate the performance of the models on an Italian-language dataset built from the contents of an Italian incel forum. Our experiments with model domain adaptation via training on the masked language modeling task and fine-tuning on different combinations of datasets show that the best results are obtained not by training solely using Italian data, but with a combination of Italian and English data. This shows the importance of using in-domain data for training, even when training and test data are in different languages.
+% HS identification in cross-lingual and cross-domain settings. We do so by employing Transformer models, pre-trained on monolingual (Italian) and bilingual (Italian-English) corpora. We fine-tune these models on various combinations of English- and Italian-language datasets, all annotated for HS. The English-language dataset pertains to the so-called community of ``incels'', short for ``involuntary celibates'', while the ones in Italian are compiled from mainstream social media sites (Twitter and Facebook). We then evaluate the performance of the models on an Italian-language dataset built from the contents of an Italian incel forum. Our experiments with model domain adaptation via training on the masked language modeling task and fine-tuning on different combinations of datasets show that the best results are obtained not by training solely using Italian data, but with a combination of Italian and English data. This shows the importance of using in-domain data for training, even when training and test data are in different languages.
 
 \end{abstract}
 
 \begin{abstract-alt}
- \textrm{\bf{Italiano.}}~In questo studio affrontiamo il problema dell'identificazione dei discorsi d'odio in forum frequentati da ``incel'', abbreviazione inglese di ``celibi involontari''. Addestriamo quindi modelli Transformer su corpus costruiti a partire da due forum di incel, uno in italiano e uno in inglese, con il masked language modeling. Quindi, facciamo il fine-tuning dei modelli su dataset in italiano e inglese con annotazioni indicanti se un post esprime discorsi d'odio.
+\textrm{\bf{Italiano.}}~In questo studio affrontiamo il problema di migliorare le prestazioni di modelli per l'identificazione di discorsi di odio in un forum italiano di incel.
+%  , abbreviazione di ``celibi involontari''.
+Addestriamo modelli Transformer monolingue (italiano) e multilingue su corpora ottenuti da due forum di incel, uno in italiano e uno in inglese, con il masked language modeling. Quindi, facciamo il fine-tuning dei modelli su dataset in italiano e inglese con annotazioni binarie indicanti se un post esprime odio.
 %  , costruiti a partire da social media di vasto utilizzo e forum di incel.
- Valutando le prestazioni dei modelli su un dataset ottenuto da un forum italiano di incel, osserviamo che i risultati migliori si ottengono addestrandoli su una combinazione di dataset italiani e inglesi, piuttosto che solo italiani, sottolineando l'importanza di utilizzare dati appartenenti allo stesso contesto linguistico, anche quando le lingue differiscono.
+Valutandoli su un dataset ottenuto da un forum italiano di incel, osserviamo che i risultati migliori si ottengono addestrando modelli multilingue su combinazioni bilingue di dataset, sottolineando l'importanza di utilizzare dati appartenenti allo stesso contesto linguistico, anche con lingue differenti di addestramento e valutazione.
  
 %  . A questo scopo, impieghiamo modelli Transformer, pre-addestrati su corpora monolingui (italiano) e bilingui (italiano-inglese). Abbiamo effettuato il fine-tuning di questi modelli su varie combinazioni di dataset in lingua inglese e italiana, tutti annotati per i discorsi d'odio. Il dataset inglese riguarda la comunità dei c.d. ``incel'', abbreviazione inglese di ``celibi involontari'', mentre quelli italiani sono costruiti partendo da social media di vasto utilizzo (Twitter e Facebook). Valutiamo le prestazioni dei modelli su un dataset in lingua italiana costruito a partire dai contenuti di un forum italiano di incel. Gli esperimenti di adattamento dei modelli a questo contesto linguistico attraverso l'addestramento sulla task del masked language modeling e il fine-tuning su diverse combinazioni di dataset dimostrano che i risultati migliori si ottengono non solo con l'addestramento su dati in italiano, ma con una combinazione di dati in italiano e in inglese. Questo dimostra l'importanza di utilizzare dati provenienti dallo stesso contesto linguistico per l'addestramento, anche quando i dati di addestramento e di test sono in lingue diverse.
 \end{abstract-alt}
@@ -136,13 +143,14 @@ exacerbated when considering the detection of hate speech in niche contexts,
 such as in forums frequented by incels, which are characterized by the use of 
 specific misogynous and racist lexicon~\cite{gothard2020ExploringIncelLanguage}. In particular, it seems no work has yet been done on the detection of hate speech in Italian incel forums.
 
-In this paper, we present a simple approach to improving the performance of hate speech detection models in cross-lingual and cross-domain settings, focusing on detection efforts on Italian incel forums. Our contributions are the following:
+In this paper, we present a simple approach to improving the performance of hate speech detection models in Italian incel forums. Our contributions are the following:
 
 \vspace*{1mm}\noindent\textbf{\Ni Corpora.} We compile two novel unsupervised corpora on the domain of incel forums, one in Italian and one in English. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
 
 \vspace*{1mm}\noindent\textbf{\Nii Masked language modeling.} For the first time, we adapt monolingual Italian models and multilingual models to the linguistic domain of Italian and English incel forums by training them on the masked language modeling (MLM) task on the aforementioned unsupervised corpora. We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic23}}
 
-\vspace*{1mm}\noindent\textbf{\Niii Hate speech identification.} We approach the identification of hate speech in Italian incel forums using monolingual (Italian) and bilingual (English-Italian) training data. We train the obtained MLM-enhanced models on various combinations of English and Italian datasets, pertaining to the domains of incel forums and mainstream social media, testing. Then, we test their hate speech identification performance on the domain of Italian incel forums.
+\vspace*{1mm}\noindent\textbf{\Niii Hate speech detection.} We approach the detection of hate speech in Italian incel forums using monolingual (Italian) and bilingual (Italian-English) combinations of datasets binary-annotated for hate speech, compiled from incel forums and mainstream social media. We fine-tune the monolingual models on Italian-only combinations of datasets, while the multilingual models are fine-tuned on bilingual combinations. Then, we test their performance on a supervised hate speech dataset, obtained from the Italian incel forum.
+% the domain of Italian incel forums.
 
 % \vspace*{1mm}
 
@@ -151,14 +159,14 @@ In this paper, we present a simple approach to improving the performance of hate
 % We use two mBERT~\cite{devlinBERTPretrainingDeep2019a} models as the baselines for our study, training them on both the English and the Italian datasets. We compare \mbert\, to another mBERT model, trained on the masked language modeling (MLM) task on sentences extracted from two incel forums, one in English (\enforum) and one in Italian (\itforum\footnote{\url{https://ilforumdeibrutti.forumfree.it}}).
 % The two mBERT models are compared to other models trained specifically on Italian data: \umbert\, \cite{musixmatch-2020-umberto} and \albert\, \cite{PolignanoEtAlCLIC2019}. We also train these two models on the MLM task on the entirety of the contents of the aforementioned Italian incel forum. In doing so, we aim to improve the model's capability of detecting hateful language in the target language and domain, i.e., an Italian incel forum such as \itforum. 
 
-Our experiments show that the best results are obtained by training the mBERT model on bilingual data taken from both the English and Italian incel forums, using the MLM task, and then fine-tuning it on combinations of English and Italian datasets annotated for hate speech. This shows how in this niche scenario having in-domain incel annotated data may be more effective than using general target-language instances, despite part of the training data not being in the target language.
+Our experiments show that the best results are obtained by training the multilingual model on bilingual data taken from both the English and Italian incel forums, using the MLM task, and then fine-tuning it on combinations of English and Italian datasets annotated for hate speech. This shows how in this niche scenario having in-domain incel annotated data may be more effective than using general target-language instances, despite part of the training data not being in the target language.
 
 % \todoP{maybe drop par below}
 % The work hereby presented has the potential to contribute to the development of effective hate speech detection systems for different languages, with particular focus on Italian, with relation to niche contexts such as incel forums. This, in turn, can help address the harmful consequences of these online platforms and promote a more inclusive and respectful digital landscape.
 
 \section{Related Work}
 
-Prior work on Italian hate speech identification has been conducted chiefly within the context of the EVALITA shared tasks. The 2018 edition hosted a shared task on hate speech detection \cite{boscoOverviewEVALITA2018} based on two Italian-language datasets annotated for hate speech, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM \cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech, especially against migrants, based on a dataset of tweets and news headlines \cite{basileEVALITA2020Overview}. In this case, the best results were obtained by using AlBERTo \cite{PolignanoEtAlCLIC2019} and UmBERTo \cite{musixmatch-2020-umberto}, two Italian-language Transformer models. The 2020 edition also hosted a shared task on the automatic identification of misogyny in Italian tweets \cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models achieved the top performance \cite{mutiUniBOAMIMultiClass2020}.
+Prior work on Italian hate speech detection has been conducted chiefly within the context of the EVALITA shared tasks. The 2018 edition hosted a shared task on hate speech detection \cite{boscoOverviewEVALITA2018} based on two Italian-language datasets annotated for hate speech, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM \cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech, especially against migrants, based on a dataset of tweets and news headlines \cite{basileEVALITA2020Overview}. In this case, the best results were obtained by using AlBERTo \cite{PolignanoEtAlCLIC2019} and UmBERTo \cite{musixmatch-2020-umberto}, two Italian-language Transformer models. The 2020 edition also hosted a shared task on the automatic identification of misogyny in Italian tweets \cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models achieved the top performance \cite{mutiUniBOAMIMultiClass2020}.
 
 English-language hate speech detection has been conducted both with models such as logistic regression and linear SVMs \cite{davidson-2017-automated-hate} and, more recently, by using Transformers \cite{mathew2021hatexplain}.
 
@@ -446,6 +454,7 @@ on a single Tesla P100 GPU with 16 GB of VRAM.
      & \bf F$_1$& \bf Rec & \bf Prec & \bf F$_1$& \bf Rec & \bf Prec \\
         \hline
             \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.5cm}mBERT\end{minipage}}} 
+        &       &      &      &  \bs &    5 &      0.846$\pm$0.010 &     0.854 &       0.837 &       0.465$\pm$0.046 &      0.345 &       0.725 \\ % 17
         &  \bs  &      &      &  \bs &    3 &      0.841$\pm$0.004 &     0.852 &       0.832 & \bf   0.688$\pm$0.006 & \bf  0.921 &       0.549 \\ % 34
         &       &  \bs &      &  \bs &    3 &      0.846$\pm$0.002 & \bf 0.866 &       0.827 &       0.529$\pm$0.041 &      0.482 &       0.588 \\ % 35
         &       &      &  \bs &  \bs &    5 &      0.844$\pm$0.007 &     0.849 &       0.838 &       0.634$\pm$0.023 &      0.587 & \bf   0.692 \\ % 36
@@ -455,6 +464,7 @@ on a single Tesla P100 GPU with 16 GB of VRAM.
         &  \bs  &  \bs &  \bs &  \bs &    5 &      0.837$\pm$0.008 &     0.829 &       0.845 &       0.613$\pm$0.019 &      0.639 &       0.590 \\ % 40
         \hline
             \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.2cm}Incel mBERT\end{minipage}}} 
+        &       &      &      &  \bs &    3 &      0.855$\pm$0.003 &     0.877 &       0.834 &       0.516$\pm$0.071 &      0.386 &       0.807 \\ % 34
         &  \bs  &      &      &  \bs &    5 &      0.859$\pm$0.010 &     0.853 & \bf   0.864 &       0.708$\pm$0.007 & \bf  0.889 &       0.588 \\ % 34
         &       &  \bs &      &  \bs &    2 &      0.861$\pm$0.015 &     0.866 &       0.856 &       0.615$\pm$0.025 &      0.558 &       0.690 \\ % 35
         &       &      &  \bs &  \bs &    4 &      0.853$\pm$0.009 &     0.863 &       0.844 & \bf   0.722$\pm$0.028 &      0.704 & \bf   0.746 \\ % 36
