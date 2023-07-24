@@ -190,11 +190,15 @@ campaigns, along with two datasets compiled from two incel forums, one in Englis
 % All of the dataset are binary-annotated at a post level for hate speech.
 
 % \vspace*{1mm}\noindent\textbf{Italian datasets.}
-The first Italian dataset we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, from EVALITA 2018~\cite{boscoOverviewEVALITA2018} (henceforth ``\hsdfb''), by annotating Facebook posts for hate speech. The second one is from the 2020 HaSpeeDe shared task~\cite{basileEVALITA2020Overview} (``\hsdtw''), compiled by adding new data to the HaSpeeDe 2018 Twitter dataset. The third and last dataset we use in Italian is the one compiled for the Automatic Misogyny Identification (AMI) shared task~\cite{fersiniAMIEVALITA2020Automatic2020} (``\ami''), hosted at EVALITA 2020. This dataset is also compiled from tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{In incel spaces most of the hate speech is expressed in the form of misogynym, making this data useful.} All Italian datasets were split 70/30 between training and development sets. We do not use the test partitions of these datasets.
+\paragraph{Existing Corpora}
+The first Italian dataset we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, from EVALITA 2018~\cite{boscoOverviewEVALITA2018} (henceforth ``\hsdfb''), by annotating Facebook posts for hate speech. The second one is from the 2020 HaSpeeDe shared task~\cite{basileEVALITA2020Overview} (``\hsdtw''), compiled by adding new data to the HaSpeeDe 2018 Twitter dataset. The third and last corpus we use in Italian is the one compiled for the Automatic Misogyny Identification (AMI) shared task~\cite{fersiniAMIEVALITA2020Automatic2020} (``\ami''), hosted at EVALITA 2020. \ami\, also contains tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{In incel spaces most of the hate speech is expressed in the form of misogyny, making this data useful.}
+\todoA{why? Why not using the official partitions? That would allow you to eventually compare against them}
+All Italian datasets were split 70/30 between training and development sets. We do not use the test partitions of these datasets.
 
-\vspace*{1mm}\noindent\textbf{Novel incel datasets.} We compiled two novel unsupervised datasets, comprising posts scraped from two incel forums: \dsENcorpus\, (Incel Forum, Unsupervised, 2022, English) scraped from the \textit{Incels.is} forum\footnote{\url{https://incels.is}}, and \dsITcorpus\, (Incel Forum, Unsupervised, 2022, Italian) scraped from \textit{Il forum dei brutti}.\footnote{\url{https://ilforumdeibrutti.forumfree.it}}
+\todoA{The corpora are not novel. They are presented in the RANLP paper. Your contribution here is on the models/exps for Ialian}
+\paragraph{Novel incel corpora.} We compiled two novel unsupervised datasets, comprising posts scraped from two incel forums: \dsENcorpus\, (Incel Forum, Unsupervised, 2022, English) scraped from the \textit{Incels.is} forum\footnote{\url{https://incels.is}}, and \dsITcorpus\, (Incel Forum, Unsupervised, 2022, Italian) scraped from \textit{Il forum dei brutti}.\footnote{\url{https://ilforumdeibrutti.forumfree.it}}
 % The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content which a user is replying to.
-Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two datasets.\footnote{The datasets are available at: \url{https://zenodo.org/record/8147845}.} We build these new resources both due to the lack of freely available incel corpora and the fact that incel language changes rapidly, as outlined in Appendix~\ref{app:keyness}, making it worthwhile to compile updated resources.
+Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two corpora.\footnote{Both corpora are available at: \url{https://zenodo.org/record/8147845}.} We build these new resources both due to the lack of freely available incel corpora and the fact that incel language changes rapidly, as outlined in Appendix~\ref{app:keyness}, making it worthwhile to compile updated resources.
 
 \renewcommand{\arraystretch}{0.9}
 
@@ -433,7 +437,7 @@ The annotation statistics of all the datasets used in this study can be found in
 
 \section{Models}
 \label{sec:models}
-
+\todo[inline]{ABC: I am here (24/07)}
 % We train the Italian-only models on combinations of the Italian datasets and the multilingual models on English-Italian combinations.
 
 With relation to the Italian-only scenario, we use \umbert\, and \albert\, as our baseline models. We choose these models because they achieved the best performance in previous EVALITA shared tasks on hate speech~\cite{basileEVALITA2020Overview} and misogyny~\cite{fersiniAMIEVALITA2020Automatic2020} identification. We also create MLM-enhanced versions of these two models by training them on the entirety of the contents of \dsITcorpus, for a total of $627k$ posts.\footnote{The number of posts is lower than the total number of posts ($638k$) because we exclude empty posts.} We refer to these models as ``\iumbert''\, and ``\ialbert''.
@@ -613,6 +617,8 @@ In future work, we plan to experiment with different resources for MLM-pretraini
 
 \section{Analysis of Keyness in Incel Forums}
 \label{app:keyness}
+
+\todoA{you should focus on Italian, using English only for comparison}
 
 We can investigate the difference of relative frequency in word usage between general language and the language used in a specific speech community by building corpora representative of the two groups of speakers. That is, we can use a large \textit{reference corpus},
 % compiled by crawling the Internet indiscriminately for content in English, Italian, or any language,
