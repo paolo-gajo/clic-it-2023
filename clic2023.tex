@@ -143,21 +143,27 @@ exacerbated when considering the detection of hate speech in niche contexts,
 such as in forums frequented by incels,
 short for ``involuntary celibates'', a community known for its hateful language \cite{nagle-2017-kill-normies,jakiOnlineHatredWomen2019}
 and use of
-specific misogynous and racist lexicon~\cite{gothard2020exploring}. In particular, it seems no work has yet been done on the detection of hate speech in Italian incel forums.
+specific misogynous and racist lexicon~\cite{gothard2020exploring}.
+In particular, it seems no work has yet been done on the detection of hate speech in Italian incel forums.
 
-In this paper, we present a simple approach to improve the performance of hate speech detection models in Italian incel forums. Our contribution is two-fold:
+In this paper, we present a simple approach to improve the performance of hate speech detection models in Italian forums frequented by incels. Our contribution is two-fold:
 
 % \paragraph{\Ni Corpora} We compile two novel unsupervised corpora on the domain of incel forums, one in Italian and one in English. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
 
-\noindent\textbf{\Ni Masked language modeling} We adapt monolingual Italian models and multilingual models to the linguistic domain of Italian and English incel forums by training them on the masked language modeling (MLM) task. As training material, we use unsupervised corpora built from two incel forums, one in Italian and one in English. We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic23}}
+\noindent\textbf{\Ni Masked language modeling} We adapt monolingual Italian models and a multilingual model to the linguistic domain of Italian and English incel forums by training them on the masked language modeling (MLM) task.
+% As training material, we use unsupervised corpora built from two incel forums, one in Italian and one in English.
+We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic23}}
 
 \noindent\textbf{\Nii Hate speech detection}
 % \todoA{experiments are not contributions. You should stress the outcome more. I see you have a paragraph on it next, perhaps merge}
-We approach the detection of hate speech in Italian incel forums using monolingual (Italian) and bilingual (Italian--English) combinations of supervised corpora. The corpora were compiled from incel forums and mainstream social media platforms and are binary-annotated for hate speech. We fine-tune the monolingual models on Italian-only combinations of these corpora, while the multilingual models are fine-tuned on bilingual combinations. Testing their performance on a supervised hate speech corpus, obtained from the aforementioned Italian incel forum, shows that the best results are obtained by training the multilingual model on bilingual data taken from both the Italian and English incel forums, using the MLM task, and then fine-tuning it on combinations of Italian and English corpora, binary-annotated for hate speech.
+We fine-tune the base and domain-adapted models on the downstream task of detecting hate speech in Italian incel forums. 
+% We do this by fine-tuning them on combinations of Italian and English-language supervised corpora.
+% The corpora were compiled from incel forums and mainstream social media platforms and are binary-annotated for hate speech.
+Monolingual models are trained on Italian-only combinations of corpora binary-annotated for hate speech, while Italian-English combinations are used for the multilingual models.
 
-In the approached scenarios, pre-training and fine-tuning on in-domain incel annotated data may therefore be more effective than training on general target-language supervised corpora, despite part of the training data not being in the language of the downstream task. In addition, the results show that this strategy can be used to improve model performance when in-domain target-language data is scarce, by using in-domain data from other languages.
+Testing their performance on a supervised hate speech corpus, obtained by annotating posts from an Italian incel forum, shows that the best results are obtained by training the base multilingual model on bilingual data taken from both the Italian and English incel forums, using the MLM task, and then fine-tuning it on combinations of Italian and English corpora, binary-annotated for hate speech. In the approached scenarios, pre-training and fine-tuning on bilingual in-domain incel annotated data may therefore be more effective than training on general target-language supervised corpora, despite part of the training data not being in the language of the downstream task. In addition, the results show that this strategy can be used to improve model performance when in-domain target-language data is scarce, by using in-domain data from other languages.
 
-The rest of the paper is organized as follows: Section~\ref{sec:related-work} presents related work on hate speech detection in Italian and English, as well as multilingual approaches to the problem. Section~\ref{sec:corpora} describes the corpora used in this study. Section~\ref{sec:models} presents the models used in this study, while Section~\ref{sec:exps} describes the experiments conducted and discusses the results.
+% The rest of the paper is organized as follows: Section~\ref{sec:related-work} presents related work on hate speech detection in Italian and English, as well as multilingual approaches to the problem. Section~\ref{sec:corpora} describes the corpora used in this study. Section~\ref{sec:models} presents the models used in this study, while Section~\ref{sec:exps} describes the experiments conducted and discusses the results.
 % \vspace*{1mm}
 
 % To this end, we train Transformer models on a variety of datasets in English and Italian, all annotated for hate speech. The English training dataset is compiled from an English-language incel forum, \enforum\footnote{\url{https://incels.is}}, while the Italian ones are built from mainstream social media platforms such as Twitter and Facebook.
@@ -316,7 +322,7 @@ In order to improve the performance of the two models on the task of identifying
 
 % \todoP{should I say that we do this also bilingually based on the ranlp paper? otherwise it seems kind of strange that i just randomly decided to do bilingual MLM and on top of that we get the best results with the bilingual model}
 % \todoA{motivate it here. If you refer too much to RANLP, the reviewer will say that this is just another version of that paper (which, btw, is partially true)}
-As regards the bilingual setting, we use \mbert\, as our baseline. We also use an MLM-enhanced version of it, ``\imbert'', which we obtain by training it for one epoch on $500k$ posts sampled from \itforum\, and $500k$ posts sampled from \enforum, for a total of $1M$ posts in Italian and English. \paolo{The rationale behind this approach is that the Red Pill ``philosophy'' \cite{gingAlphasBetasIncels2019-manosphere} underlies inceldom internationally. Therefore, the two forums can be considered comparable from a sociolinguistic standpoint, since they share a common conceptual foundation, despite using different languages.}
+As regards the bilingual setting, we use \mbert\, as our baseline. We also use an MLM-enhanced version of it, ``\imbert'', which we obtain by training it for one epoch on $500k$ posts sampled from \itforum\, and $500k$ posts sampled from \enforum, for a total of $1M$ posts in Italian and English. The rationale behind this approach is that the Red Pill ``philosophy'' \cite{gingAlphasBetasIncels2019-manosphere} underlies inceldom internationally. Therefore, the two forums can be considered comparable from a sociolinguistic standpoint, since they share a common conceptual foundation, despite using different languages.
 % We refer to this model as .
 
 The MLM pre-training process is carried out in all cases by tokenizing post contents using each model's own tokenizer and masking tokens with a probability of 15\%. We use a batch size of 32 samples and train the models for one epoch on a single Tesla P100 GPU with 16 GB of VRAM.
