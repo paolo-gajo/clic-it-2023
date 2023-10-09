@@ -204,7 +204,7 @@ The first Italian corpus we use was compiled for the first edition of the Hate S
 The corpora were split 70/30 between training and development sets (we do not use the test partitions of these shared tasks).
 
 \paragraph{Incel corpora}
-We use two unsupervised corpora compiled by scraping two incel forums: \textit{\enforum}\footnote{\url{https://incels.is}} and \textit{\itforum}\footnote{\url{https://ilforumdeibrutti.forumfree.it}} \cite{gajo2023identification}.
+We use two unsupervised corpora compiled by scraping two incel forums: \textit{\enforum}\footnote{\url{https://incels.is} (Last access: 11 Aug 2023)} and \textit{\itforum}\footnote{\url{https://ilforumdeibrutti.forumfree.it}} \cite{gajo2023identification}.
 % The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content which a user is replying to.
 Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two corpora.\footnote{Both corpora are available at: \url{https://zenodo.org/record/8147845}.}
 These resources were created both due to the lack of freely available incel corpora and the fact that incel language changes rapidly,
@@ -482,145 +482,145 @@ In future work, we plan to experiment with different resources for MLM-pretraini
 \bibliographystyle{acl}
 \bibliography{bibliography.bib}
 
-% \appendix
+\appendix
 
-% \section{Analysis of Keyness in Incel Forums}
-% \label{app:keyness}
+\section{Analysis of Keyness in Incel Forums}
+\label{app:keyness}
 
 % % \todoA{you should focus on Italian, using English only for comparison}
 
-% We can investigate the difference of relative frequency in word usage between general language and the language used in a specific speech community by building corpora representative of the two groups of speakers. That is, we can use a large \textit{reference corpus},
-% % compiled by crawling the Internet indiscriminately for content in English, Italian, or any language,
-% representing general language usage, and compare its frequencies to a \textit{focus corpus}~\cite{kilgarriff2009simple}, built only from texts pertaining to a specific communicative context.
+We can investigate the difference of relative frequency in word usage between general language and the language used in a specific speech community by building corpora representative of the two groups of speakers. That is, we can use a large \textit{reference corpus},
+% compiled by crawling the Internet indiscriminately for content in English, Italian, or any language,
+representing general language usage, and compare its frequencies to a \textit{focus corpus}~\cite{kilgarriff2009simple}, built only from texts pertaining to a specific communicative context.
 
-% % \todoA{can you explain what is keyness?}
-% We show the evolution of incel language by studying the change in
-% \textit{keyness}~\cite{kilgarriff2009simple}
-% of specific sets of words, showing how the lexical features of incel
-% communities of speakers of Italian and English
-% % these two communities
-% change rapidly over time.
-% Keyness indicates which words in a focus corpus are highly frequent compared to a reference corpus.
-% The keyness of a word $w$ is defined as~\cite{lexical_computing_2015}:%
-% % The formula below shows Sketch Engine's implementation of this metric
+% \todoA{can you explain what is keyness?}
+We show the evolution of incel language by studying the change in
+\textit{keyness}~\cite{kilgarriff2009simple}
+of specific sets of words, showing how the lexical features of incel
+communities of speakers of Italian and English
+% these two communities
+change rapidly over time.
+Keyness indicates which words in a focus corpus are highly frequent compared to a reference corpus.
+The keyness of a word $w$ is defined as~\cite{lexical_computing_2015}:%
+% The formula below shows Sketch Engine's implementation of this metric
 
-% \begin{equation}
-% keyness(w) = \frac{fpm_f(w) + n}
-%                 {fpm_r(w)\, + \,n}
-% \end{equation}
-% %
-% where $fpm_f(w)$ represents the normalized frequency of a focus corpus word per million words, $fpm_r(w)$ refers to the word in the reference corpus, and $n$ is a smoothing parameter (here, $n=1$).
+\begin{equation}
+keyness(w) = \frac{fpm_f(w) + n}
+                {fpm_r(w)\, + \,n}
+\end{equation}
+%
+where $fpm_f(w)$ represents the normalized frequency of a focus corpus word per million words, $fpm_r(w)$ refers to the word in the reference corpus, and $n$ is a smoothing parameter (here, $n=1$).
 
-% To study the Italian forum, \textit{Il forum dei brutti}, we consider all of its contents, for a total of 30$M$ words (up to 4 December 2022).
-% We do the same for the English-speaking \textit{Incels.is} forum, for a total of 104$M$ words (collected up to 18 October 2022).
-% For Italian, we calculate the keyness by using itTenTen20
-% % \footnote{\url{https://www.sketchengine.eu/ententen-english-corpus/}}
-% as the reference corpus, while for English we use enTenTen20~\cite{tenten2013kilgarriff}.
-% % \footnote{\url{https://www.sketchengine.eu/ittenten-italian-corpus/}}.
+To study the Italian forum, \textit{Il forum dei brutti}, we consider all of its contents, for a total of 30$M$ words (up to 4 December 2022).
+We do the same for the English-speaking \textit{Incels.is} forum, for a total of 104$M$ words (collected up to 18 October 2022).
+For Italian, we calculate the keyness by using itTenTen20
+% \footnote{\url{https://www.sketchengine.eu/ententen-english-corpus/}}
+as the reference corpus, while for English we use enTenTen20~\cite{tenten2013kilgarriff}.
+% \footnote{\url{https://www.sketchengine.eu/ittenten-italian-corpus/}}.
 
-% For both forums, in order to compile a list of characteristic incel lexicon the keyness of lexical items was calculated across the entirety of the forums, up to the aforementioned cutoff dates. Preliminary candidates were selected by
-% collecting single- and multi-word items that ranked in the top $500$ for keyness, for a total of $1k$ analyzed items.  Among these, only terms considered to be typical of incel language were examined.
+For both forums, in order to compile a list of characteristic incel lexicon the keyness of lexical items was calculated across the entirety of the forums, up to the aforementioned cutoff dates. Preliminary candidates were selected by
+collecting single- and multi-word items that ranked in the top $500$ for keyness, for a total of $1k$ analyzed items.  Among these, only terms considered to be typical of incel language were examined.
 
-% As regards \itforum, we studied terms we deemed to be characteristic of the forum's incel language, focusing on 10 terms used to describe other men in negative or positive ways. We chose this approach because the goal of this modern diachronic study is to show that language specific to incels changes over time, regardless of whether it can be considered hateful. Therefore, since in \itforum\, we could not find a great amount of overtly hateful jargon, we decided to consider the way men are represented.
+As regards \itforum, we studied terms we deemed to be characteristic of the forum's incel language, focusing on 10 terms used to describe other men in negative or positive ways. We chose this approach because the goal of this modern diachronic study is to show that language specific to incels changes over time, regardless of whether it can be considered hateful. Therefore, since in \itforum\, we could not find a great amount of overtly hateful jargon, we decided to consider the way men are represented.
 
-% Conversely, racism and misogyny are very characteristic elements of the language used in \enforum. As such, a simple way to choose characteristic terms for this speech community is manually evaluating racist and misogynous terms (or terms that are frequently associated to racist and misogynous contexts) and selecting those which are not typically found in general language, i.e., having high keyness scores.
+Conversely, racism and misogyny are very characteristic elements of the language used in \enforum. As such, a simple way to choose characteristic terms for this speech community is manually evaluating racist and misogynous terms (or terms that are frequently associated to racist and misogynous contexts) and selecting those which are not typically found in general language, i.e., having high keyness scores.
 
-% The evaluation of the individual terms was carried out by manually analyzing concordance lines in the corpus with the objective of verifying whether their use could be construed as being hateful. Although human evaluation is unavoidably subjective, we erred on the side of caution and only selected terms which could unmistakably be used in a hateful manner. Unfortunately, this terminology extraction strategy has the drawback of not directly taking into account terms that get resemanticized and assume a new, offensive meaning. Further work could be carried out to identify such terms in order to have a more comprehensive understanding of the issue.
+The evaluation of the individual terms was carried out by manually analyzing concordance lines in the corpus with the objective of verifying whether their use could be construed as being hateful. Although human evaluation is unavoidably subjective, we erred on the side of caution and only selected terms which could unmistakably be used in a hateful manner. Unfortunately, this terminology extraction strategy has the drawback of not directly taking into account terms that get resemanticized and assume a new, offensive meaning. Further work could be carried out to identify such terms in order to have a more comprehensive understanding of the issue.
 
-% In order to conduct the study, the contents posted on the \itforum\, were divided chronologically by grouping posts by year of creation, from 2009 to 2022, for a total of 14 partitions. With a similar approach, \enforum\, was divided into 22 chronological partitions, from 2017 to 2022, one for each 100 pages, each page containing 100 threads.
+In order to conduct the study, the contents posted on the \itforum\, were divided chronologically by grouping posts by year of creation, from 2009 to 2022, for a total of 14 partitions. With a similar approach, \enforum\, was divided into 22 chronological partitions, from 2017 to 2022, one for each 100 pages, each page containing 100 threads.
 
-% The keyness of each selected term was measured for every partition, calculating the slope $m$ of its regression line as:
+The keyness of each selected term was measured for every partition, calculating the slope $m$ of its regression line as:
 
-% \begin{equation}
-%   \label{eq:slope}
-%   m = \frac{\sum_{i=1}^{n} (t_i - \bar{t})(k_i - \bar{k})}{\sum_{i=1}^{n} (t_i - \bar{t})^2}
-% \end{equation}
-% where $t_i$ is the $i$-th time partition, $k_i$ is the $i$-th keyness score, $n$ is the number of partitions, and $\bar{t}$ and $\bar{k}$ are the means of the two variables. By calculating the slope of the regression line, we are able to find how the keyness of a term changes over time. A positive slope indicates that the use of a term is becoming more frequent, while a negative slope indicates that a term is becoming less prevalent. For each term, the slope was first calculated across all partitions (14 for \itforum\, and 22 for \enforum); then, it was divided by the average keyness of the term over all the partitions, thus obtaining the normalized slope. This was done because certain terms may have very high keyness values, while other terms may not be as prevalent, and we wanted to be able to compare the slope of different terms regardless of the absolute value of their keyness.
+\begin{equation}
+  \label{eq:slope}
+  m = \frac{\sum_{i=1}^{n} (t_i - \bar{t})(k_i - \bar{k})}{\sum_{i=1}^{n} (t_i - \bar{t})^2}
+\end{equation}
+where $t_i$ is the $i$-th time partition, $k_i$ is the $i$-th keyness score, $n$ is the number of partitions, and $\bar{t}$ and $\bar{k}$ are the means of the two variables. By calculating the slope of the regression line, we are able to find how the keyness of a term changes over time. A positive slope indicates that the use of a term is becoming more frequent, while a negative slope indicates that a term is becoming less prevalent. For each term, the slope was first calculated across all partitions (14 for \itforum\, and 22 for \enforum); then, it was divided by the average keyness of the term over all the partitions, thus obtaining the normalized slope. This was done because certain terms may have very high keyness values, while other terms may not be as prevalent, and we wanted to be able to compare the slope of different terms regardless of the absolute value of their keyness.
 
-% For each partition, only the keyness of the 500 terms with the highest keyness was recorded. Zero values, produced whenever the item's keyness was not high enough to appear among the top 500 terms of the partition, were ignored both for the calculation of the slope and the average keyness. The number of zero values for for \itforum\, was 44.44\%, while for \enforum\, it was 7.16\% of the total.
+For each partition, only the keyness of the 500 terms with the highest keyness was recorded. Zero values, produced whenever the item's keyness was not high enough to appear among the top 500 terms of the partition, were ignored both for the calculation of the slope and the average keyness. The number of zero values for for \itforum\, was 44.44\%, while for \enforum\, it was 7.16\% of the total.
 
-% With relation to \itforum\, we picked the top and bottom 5 terms with the highest and lowest normalized slope, 10 in total, while for \enforum, we selected the top and bottom 10 terms, 20 in total. The lower number of terms for \itforum\, is due to the fact that we could not identify enough relevant terms for the study. For both forums, the mean normalized slope was finally calculated for each group of terms to have a pair of values which could be used to compare the two overall trends.
+With relation to \itforum\, we picked the top and bottom 5 terms with the highest and lowest normalized slope, 10 in total, while for \enforum, we selected the top and bottom 10 terms, 20 in total. The lower number of terms for \itforum\, is due to the fact that we could not identify enough relevant terms for the study. For both forums, the mean normalized slope was finally calculated for each group of terms to have a pair of values which could be used to compare the two overall trends.
 
-% Figure~\ref{fig:keyness-over-time} shows the over-time trend of the keyness of the terms extracted from \itforum\, and \enforum\, over the partitions of the two forums. The curves show clear opposite trends for the two groups, which we refer to as ``gainers'' and ``losers'' of keyness, based on whether their mean normalized slope is positive or negative, respectively. The plots help visualize a widening over-time difference in lexicon, which may cause models trained on dated texts to become increasingly worse at evaluating more recent data. The highlighted terms in the figure also show that certain terms seem to substitute each other over time, although not all of them can be paired in this manner. For example, ``adone'' is a close synonym of ``chad'', while ``foid'' is a contraction of ``femoid'', and for both pairs we can observe opposite trends with a specific point in time in which one overtakes the other.
+Figure~\ref{fig:keyness-over-time} shows the over-time trend of the keyness of the terms extracted from \itforum\, and \enforum\, over the partitions of the two forums. The curves show clear opposite trends for the two groups, which we refer to as ``gainers'' and ``losers'' of keyness, based on whether their mean normalized slope is positive or negative, respectively. The plots help visualize a widening over-time difference in lexicon, which may cause models trained on dated texts to become increasingly worse at evaluating more recent data. The highlighted terms in the figure also show that certain terms seem to substitute each other over time, although not all of them can be paired in this manner. For example, ``adone'' is a close synonym of ``chad'', while ``foid'' is a contraction of ``femoid'', and for both pairs we can observe opposite trends with a specific point in time in which one overtakes the other.
 
-% \begin{figure*}[]
-%   \centering
-%   \begin{subfigure}[b]{\textwidth}
-%     \includegraphics[width=\textwidth]{images-tables/keyness_chart_fdb.pdf}
-%     \caption{\itforum}
-%   \end{subfigure}
-%   \begin{subfigure}[b]{\textwidth}
-%     \includegraphics[width=\textwidth]{images-tables/keyness_chart_incelsis.pdf}
-%     \caption{\enforum}
-%   \end{subfigure}
-%   \caption[Keyness graph for \itforum\, and \enforum.]{Keyness over time for the characteristic incel terms extracted from (a) \itforum\, and (b) \enforum. Red lines represent the terms that gained keyness over time, while blue lines represent the terms that lost keyness over time.}
-%   \label{fig:keyness-over-time}
-% \end{figure*}
+\begin{figure*}[]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{images-tables/keyness_chart_fdb.pdf}
+    \caption{\itforum}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{images-tables/keyness_chart_incelsis.pdf}
+    \caption{\enforum}
+  \end{subfigure}
+  \caption[Keyness graph for \itforum\, and \enforum.]{Keyness over time for the characteristic incel terms extracted from (a) \itforum\, and (b) \enforum. Red lines represent the terms that gained keyness over time, while blue lines represent the terms that lost keyness over time.}
+  \label{fig:keyness-over-time}
+\end{figure*}
+
+\begin{table}[t]
+  \caption{Keyness normalized slopes for \enforum\, and \itforum.}
+  \footnotesize
+    \centering
+    \begin{tabular}{c|lc|lc}
+      \hline
+      \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\bf Forum}} & \multicolumn{2}{c|}{\bf Gainers} & \multicolumn{2}{c}{\bf Losers} \\
+      \cline{2-5}
+       & \bf Term &\bf  Slope &\bf  Term &\bf  Slope \\
+      \hline
+      \multirow{6}{*}[14pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2cm}\textit{Il forum}\\ \textit{dei brutti}\end{minipage}}}
+      &zerbini & 0.104 & reietto & -0.142 \\
+      &normie & 0.121 & strafigo & -0.122 \\
+      &bv & 0.125 & figaccione & -0.122 \\
+      &chad & 0.126 & attraente & -0.113 \\
+      &subumano & 0.158 & adone & -0.103 \\
+      \cline{2-5}
+      &\bf Mean &\bf 0.127 &\bf Mean &\bf -0.120 \\
+      \hline
+      \multirow{11}{*}[0pt]{\rotatebox[origin=c]{90}{\enforum}} & shitskin    & 0.093           & racepill    & -0.019           \\
+      & deathnic    & 0.081           & stacie      & -0.022           \\
+      &cumskin     & 0.079           & jb          & -0.027           \\
+      &noodlewhore & 0.077           & chadlite    & -0.029           \\
+      &slav        & 0.068           & whitecels   & -0.032           \\
+      &foid        & 0.058           & cunt        & -0.036           \\
+      &curryland   & 0.051           & slut        & -0.046           \\
+      &aryan       & 0.048           & deathnik    & -0.047           \\
+      &ricecel     & 0.047           & roastie     & -0.051           \\
+      &whore       & 0.025           & femoid      & -0.124           \\
+      \cline{2-5}
+      &\bf Mean       &\bf 0.063  &\bf Mean       &\bf -0.043      \\
+      \hline
+    \end{tabular}
+  \label{tab:keyness}
+\end{table}
+
+Table~\ref{tab:keyness} reports the normalized slopes of the terms obtained from the two forums. In both cases, the mean normalized slopes of the two data series, compared side by side, quantitatively display a clear trend according to which certain terms gain popularity over time, while others become less popular. With regard to \itforum\, the difference is 0.247, while for \enforum\, the difference between the mean normalized slopes is smaller, 0.106, which points at a slower lexical evolution. As regards \enforum, the trends observed for terms such as ``foid'', ``femoid'', and ``roastie'' reflect the time-series data discussed in \newcite{gothard2020exploring}, which show certain terms increasing and decreasing in use over the total messages posted in incel subreddits. For both forums, the shift in lexicon needs to be taken into account in order to have a clear picture of the language adopted by each speech community.
+
+As regards \itforum, we can observe that the way users refer to men changes in a rather clear way. On one hand, positive words that are commonly used in general language, such as ``strafigo'' and ``figaccione'' (both meaning ``extremely handsome''), are substituted by specialized terms that are more specific to the forum's speech community, e.g., ``chad''.\footnote{\url{https://incels.wiki/w/Chad}} On the other hand, we can see the same phenomenon for negative words, where ``reietto'' (``outcast'') loses popularity, leaving space to terms with more specialized uses, such as ``bv'', meaning ``brutto vero'' (lit. ``truly ugly'') and ``subumano'', meaning ``subhuman''. The first is an acronym, which makes its meaning opaque to outsiders, while the second is a term with a much stronger and denigrating connotation.
+
+With relation to \enforum, as already anticipated through Figure~\ref{fig:keyness-over-time}, although terms like ``foid'' and ``femoid'' have the same meaning (both are used to dehumanize women by associating them to insentient androids\footnote{\url{https://incels.wiki/w/Femoid}}), the shorter form has become more popular, while the use of the full form has decreased. This is probably due to the fact that, given the high frequency with which the term is used in the forum, users tend to use the abbreviated version to save time and effort. This might seem like a minor detail, but the sheer amount of misogyny that is expressed in the forum through this term alone makes it important to point out a shift in its use.
+
+% This trend is also confirmed statistically. For both forums, we first take the normalized average slopes for each term and then we test if the difference between gainers and losers of keyness is statistically significant. For the \enforum\, forum, since the data series of the losers is not normally distributed, we use the Mann-Whitney U test \cite{mann1947test}. For \itforum, since both data series are normally distributed, we use a two-sample t-test \cite{snedecor1989statistical}. In both cases, the p-values are well below 0.001, as shown in Table~\ref{tab:statistical-tests-diachronic-study}, showing the results are statistically significant. This means that the change in the usage of the terms is not random, but rather due to a concrete variation in the way specific lexicon is used by the two speech communities.
 
 % \begin{table}[t]
-%   \caption{Keyness normalized slopes for \enforum\, and \itforum.}
-%   \footnotesize
-%     \centering
-%     \begin{tabular}{c|lc|lc}
-%       \hline
-%       \multirow{2}{*}[0pt]{\rotatebox[origin=c]{0}{\bf Forum}} & \multicolumn{2}{c|}{\bf Gainers} & \multicolumn{2}{c}{\bf Losers} \\
-%       \cline{2-5}
-%        & \bf Term &\bf  Slope &\bf  Term &\bf  Slope \\
-%       \hline
-%       \multirow{6}{*}[14pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2cm}\textit{Il forum}\\ \textit{dei brutti}\end{minipage}}}
-%       &zerbini & 0.104 & reietto & -0.142 \\
-%       &normie & 0.121 & strafigo & -0.122 \\
-%       &bv & 0.125 & figaccione & -0.122 \\
-%       &chad & 0.126 & attraente & -0.113 \\
-%       &subumano & 0.158 & adone & -0.103 \\
-%       \cline{2-5}
-%       &\bf Mean &\bf 0.127 &\bf Mean &\bf -0.120 \\
-%       \hline
-%       \multirow{11}{*}[0pt]{\rotatebox[origin=c]{90}{\enforum}} & shitskin    & 0.093           & racepill    & -0.019           \\
-%       & deathnic    & 0.081           & stacie      & -0.022           \\
-%       &cumskin     & 0.079           & jb          & -0.027           \\
-%       &noodlewhore & 0.077           & chadlite    & -0.029           \\
-%       &slav        & 0.068           & whitecels   & -0.032           \\
-%       &foid        & 0.058           & cunt        & -0.036           \\
-%       &curryland   & 0.051           & slut        & -0.046           \\
-%       &aryan       & 0.048           & deathnik    & -0.047           \\
-%       &ricecel     & 0.047           & roastie     & -0.051           \\
-%       &whore       & 0.025           & femoid      & -0.124           \\
-%       \cline{2-5}
-%       &\bf Mean       &\bf 0.063  &\bf Mean       &\bf -0.043      \\
-%       \hline
-%     \end{tabular}
-%   \label{tab:keyness}
-% \end{table}
+%   \centering
+%   \caption[Keyness statistical tests.]{Results of the Mann-Whitney U test and the t-test for the normalized slopes of the keyness of the terms gaining and losing popularity over time, for \enforum\, and \itforum, respectively.}
+%   \label{tab:statistical-tests-diachronic-study}
+%   \begin{tabular}{l|c|c|c}
+%     \hline
+%   \bf Forum                    &\bf  Test       &\bf  Stat Value  &\bf  \textit{p}-Value        \\
+%   \hline
+%   \enforum\,           & Mann-Whitney U & 100             & 0.0002             \\
+%   \itforum\, & t-test         & -22.7566        & 1.4736 x $10^{-8}$ \\
+%   \hline
+%   \end{tabular}
+%   \end{table}
 
-% Table~\ref{tab:keyness} reports the normalized slopes of the terms obtained from the two forums. In both cases, the mean normalized slopes of the two data series, compared side by side, quantitatively display a clear trend according to which certain terms gain popularity over time, while others become less popular. With regard to \itforum\, the difference is 0.247, while for \enforum\, the difference between the mean normalized slopes is smaller, 0.106, which points at a slower lexical evolution. As regards \enforum, the trends observed for terms such as ``foid'', ``femoid'', and ``roastie'' reflect the time-series data discussed in \newcite{gothard2020exploring}, which show certain terms increasing and decreasing in use over the total messages posted in incel subreddits. For both forums, the shift in lexicon needs to be taken into account in order to have a clear picture of the language adopted by each speech community.
+Based on the conducted qualitative and quantitative analyses, the same conclusions can be drawn for both forums: the presented terms are arguably characteristic of the incel language used within the two platforms and the change in their usage over time is non-negligible. This implies that language models could become progressively worse at predicting over these domains, were their training resources not be periodically updated. Models rely on training material to learn language, and if the material is outdated, their understanding of the discourse currently produced by a specific speech community could become suboptimal.
 
-% As regards \itforum, we can observe that the way users refer to men changes in a rather clear way. On one hand, positive words that are commonly used in general language, such as ``strafigo'' and ``figaccione'' (both meaning ``extremely handsome''), are substituted by specialized terms that are more specific to the forum's speech community, e.g., ``chad''.\footnote{\url{https://incels.wiki/w/Chad}} On the other hand, we can see the same phenomenon for negative words, where ``reietto'' (``outcast'') loses popularity, leaving space to terms with more specialized uses, such as ``bv'', meaning ``brutto vero'' (lit. ``truly ugly'') and ``subumano'', meaning ``subhuman''. The first is an acronym, which makes its meaning opaque to outsiders, while the second is a term with a much stronger and denigrating connotation.
+Although the hate speech expressed in \itforum\, is not as explicit as in \enforum, having updated resources is still valuable, since they can be used to domain-adapt models to improve their contextual embeddings, for example with Transformer models. Of course, when hate speech is expressed through racist and misogynous neologisms, such as in \enforum, having updated lexical resources becomes of paramount importance.
 
-% With relation to \enforum, as already anticipated through Figure~\ref{fig:keyness-over-time}, although terms like ``foid'' and ``femoid'' have the same meaning (both are used to dehumanize women by associating them to insentient androids\footnote{\url{https://incels.wiki/w/Femoid}}), the shorter form has become more popular, while the use of the full form has decreased. This is probably due to the fact that, given the high frequency with which the term is used in the forum, users tend to use the abbreviated version to save time and effort. This might seem like a minor detail, but the sheer amount of misogyny that is expressed in the forum through this term alone makes it important to point out a shift in its use.
+In both scenarios, it is thus arguably desirable, if not necessary, to periodically update corpora to have accurate terminological representations. In some cases, it would arguably make sense to even rebuild resources from scratch, were they too outdated. In our case, given the observed changes in keyness, we estimate that the hereby analyzed time frame could be taken as a reference for how long resources can be considered up-to-date. However, with the aim of obtaining an objective figure, further research could be conducted to quantify how often resources should be updated to keep up with the evolution of the language used in the spaces scrutinized through this study.
 
-% % This trend is also confirmed statistically. For both forums, we first take the normalized average slopes for each term and then we test if the difference between gainers and losers of keyness is statistically significant. For the \enforum\, forum, since the data series of the losers is not normally distributed, we use the Mann-Whitney U test \cite{mann1947test}. For \itforum, since both data series are normally distributed, we use a two-sample t-test \cite{snedecor1989statistical}. In both cases, the p-values are well below 0.001, as shown in Table~\ref{tab:statistical-tests-diachronic-study}, showing the results are statistically significant. This means that the change in the usage of the terms is not random, but rather due to a concrete variation in the way specific lexicon is used by the two speech communities.
-
-% % \begin{table}[t]
-% %   \centering
-% %   \caption[Keyness statistical tests.]{Results of the Mann-Whitney U test and the t-test for the normalized slopes of the keyness of the terms gaining and losing popularity over time, for \enforum\, and \itforum, respectively.}
-% %   \label{tab:statistical-tests-diachronic-study}
-% %   \begin{tabular}{l|c|c|c}
-% %     \hline
-% %   \bf Forum                    &\bf  Test       &\bf  Stat Value  &\bf  \textit{p}-Value        \\
-% %   \hline
-% %   \enforum\,           & Mann-Whitney U & 100             & 0.0002             \\
-% %   \itforum\, & t-test         & -22.7566        & 1.4736 x $10^{-8}$ \\
-% %   \hline
-% %   \end{tabular}
-% %   \end{table}
-
-% Based on the conducted qualitative and quantitative analyses, the same conclusions can be drawn for both forums: the presented terms are arguably characteristic of the incel language used within the two platforms and the change in their usage over time is non-negligible. This implies that language models could become progressively worse at predicting over these domains, were their training resources not be periodically updated. Models rely on training material to learn language, and if the material is outdated, their understanding of the discourse currently produced by a specific speech community could become suboptimal.
-
-% Although the hate speech expressed in \itforum\, is not as explicit as in \enforum, having updated resources is still valuable, since they can be used to domain-adapt models to improve their contextual embeddings, for example with Transformer models. Of course, when hate speech is expressed through racist and misogynous neologisms, such as in \enforum, having updated lexical resources becomes of paramount importance.
-
-% In both scenarios, it is thus arguably desirable, if not necessary, to periodically update corpora to have accurate terminological representations. In some cases, it would arguably make sense to even rebuild resources from scratch, were they too outdated. In our case, given the observed changes in keyness, we estimate that the hereby analyzed time frame could be taken as a reference for how long resources can be considered up-to-date. However, with the aim of obtaining an objective figure, further research could be conducted to quantify how often resources should be updated to keep up with the evolution of the language used in the spaces scrutinized through this study.
-
-% The necessity to build such material is also supported by the fact that resources on the topic of incels are rare and limited, and their applicability is often compromised because the linguistic domain of the source data only partially aligns with the one under investigation~\cite{pelzer-2021-toxic-language-incel-communities}. An additional cause for such incompatibility of resources can be found in the annotation scheme, which can be inapplicable to the supervised task being approached~\cite{zhou-2022-automated-hs-detection}. However, the necessity to build new resources does not mean they will be obsolete soon after being employed, as the time frames we have analyzed in this chapter span various years of forum activity.
+The necessity to build such material is also supported by the fact that resources on the topic of incels are rare and limited, and their applicability is often compromised because the linguistic domain of the source data only partially aligns with the one under investigation~\cite{pelzer-2021-toxic-language-incel-communities}. An additional cause for such incompatibility of resources can be found in the annotation scheme, which can be inapplicable to the supervised task being approached~\cite{zhou-2022-automated-hs-detection}. However, the necessity to build new resources does not mean they will be obsolete soon after being employed, as the time frames we have analyzed in this chapter span various years of forum activity.
 
 \end{document}
