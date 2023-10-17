@@ -135,7 +135,7 @@ Sperimentando su un corpus annotato per i discorsi di odio ottenuto da un forum 
 % Given the gravity of the phenomenon, especially in these environments, the development of effective hate speech detection systems is critical to addressing the harmful consequences of these online platforms and promoting a more inclusive and respectful digital landscape.
 
 While there is no scarcity of English-language models and training resources for
-the detection of hate speech, especially with the recent rise in popularity of
+the detection of hate speech \paolo{(HS)}, especially with the recent rise in popularity of
 this research topic~\cite{alkomahLiteratureReviewTextual2022},
 much work can still be done when approaching this problem in other languages.
 For less-resourced languages, such as Italian, one of the main difficulties of combating this phenomenon is the lack of annotated data~\cite{van2023mitigating}. The problem becomes even more
@@ -154,14 +154,14 @@ In this paper, we present a simple approach to improve the performance of hate s
 As training material, we use unsupervised corpora built from two incel forums, one in Italian and one in English.
 We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic23}}
 
-\noindent\textbf{\Nii Hate speech detection}
+\noindent\textbf{\Nii \paolo{HS} detection}
 % \todoA{experiments are not contributions. You should stress the outcome more. I see you have a paragraph on it next, perhaps merge}
-We fine-tune the base and domain-adapted models on the downstream task of detecting hate speech in Italian incel forums.
+We fine-tune the \paolo{default} and domain-adapted models on the downstream task of detecting hate speech in Italian incel forums.
 % We do this by fine-tuning them on combinations of Italian and English-language supervised corpora.
 % The corpora were compiled from incel forums and mainstream social media platforms and are binary-annotated for hate speech.
 Monolingual models are trained on Italian-only combinations of corpora binary-annotated for hate speech, while Italian-English combinations are used for the multilingual models.
 
-Testing their performance on a supervised hate speech corpus, obtained by annotating posts from the Italian incel forum, shows that the best results are obtained by first training the base multilingual model on bilingual data taken from both the Italian and English incel forums, using the MLM task, and then fine-tuning it on combinations of Italian and English corpora, binary-annotated for hate speech. In the approached scenarios, pre-training and fine-tuning on bilingual in-domain incel annotated data may therefore be more effective than training on general target-language supervised corpora, despite part of the training data not being in the language of the downstream task. In addition, the results show that this strategy can be used to improve model performance when in-domain target-language data is scarce, by using in-domain data from other languages.
+Testing \paolo{the performance of the models} on a supervised hate speech corpus, obtained by annotating posts from the Italian incel forum, shows that the best results are obtained by first training the base multilingual model on bilingual data taken from both the Italian and English incel forums, using the MLM task, and then fine-tuning it on combinations of Italian and English corpora, binary-annotated for hate speech. In the approached scenarios, pre-training and fine-tuning on bilingual in-domain incel annotated data may therefore be more effective than training on general target-language supervised corpora, despite part of the training data not being in the language of the downstream task. In addition, the results show that this strategy can be used to improve model performance when in-domain target-language data is scarce, by using in-domain data from other languages.
 
 The rest of the paper is organized as follows: Section~\ref{sec:related-work} presents related work on hate speech detection in Italian and English, as well as multilingual approaches to the problem. Section~\ref{sec:corpora} describes the corpora used in this study. Section~\ref{sec:models} presents the employed models. Section~\ref{sec:exps} describes the experiments conducted and discusses the results.
 % \vspace*{1mm}
@@ -179,10 +179,10 @@ The rest of the paper is organized as follows: Section~\ref{sec:related-work} pr
 \section{Related Work}
 \label{sec:related-work}
 
-Prior work on Italian hate speech detection has been conducted chiefly within the context of EVALITA\@. The 2018 edition hosted a shared task on hate speech detection~\cite{boscoOverviewEVALITA2018} based on two supervised corpora, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine-learning and deep-learning algorithms, with the top team relying on an SVM and a BiLSTM~\cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech, especially against migrants, focusing on tweets and news headlines~\cite{basileEVALITA2020Overview}. In this case, the best results were obtained by using AlBERTo~\cite{PolignanoEtAlCLIC2019} and UmBERTo~\cite{musixmatch-2020-umberto}, two BERT models pre-trained on Italian data. The 2020 edition also hosted a shared task on the automatic identification of misogyny in Italian tweets~\cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models obtained the top performance~\cite{mutiUniBOAMIMultiClass2020}.
+Prior work on Italian hate speech detection has been conducted chiefly within the context of EVALITA\@. The 2018 edition hosted a shared task on hate speech detection~\cite{boscoOverviewEVALITA2018} based on two supervised corpora, one from Twitter and one from Facebook. The participating teams experimented with a variety of machine learning and deep learning algorithms, with the top team relying on an SVM and a BiLSTM~\cite{cimino2018multi}. The 2020 edition hosted a shared task on the detection of hate speech, especially against migrants, focusing on tweets and news headlines~\cite{basileEVALITA2020Overview}. In this case, the best results were obtained by using AlBERTo~\cite{PolignanoEtAlCLIC2019} and UmBERTo~\cite{musixmatch-2020-umberto}, two BERT models pre-trained on Italian data. The 2020 edition also hosted a shared task on the automatic identification of misogyny in Italian tweets~\cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models obtained the top performance~\cite{mutiUniBOAMIMultiClass2020}. \paolo{In the 2023 edition of EVALITA, \newcite{bonaventura2023odang} use triple verbalisation, prompting and majority vote to improve the performance of an AlBERTo model on the tasks of homotransphobia and hate speech detection.}
 
-English-language hate speech detection has been conducted in a variety of ways. \newcite{davidson-2017-automated-hate} build a corpus of tweets annotated with multi-class labels (``hate speech'', ``offensive'', ``neither'') and train logistic regression and linear SVM models on it.
-\newcite{mathew2021hatexplain} build a corpus called HateXplain from Twitter and Gab posts, annotated with a multi-class label based on whether the post is ``offensive'', expresses ``hate'', or is ``normal'', which they use to fine-tune a BERT hate speech classifier.
+English-language hate speech detection has been conducted in a variety of ways. \paolo{Among the most noteworthy past works,} \newcite{davidson-2017-automated-hate} build a corpus of tweets annotated with multi-class labels (``hate speech'', ``offensive'', ``neither'') and train logistic regression and linear SVM models on it.
+\newcite{mathew2021hatexplain} build a corpus called HateXplain from Twitter and Gab posts, annotated with multi-class labels based on whether the post is ``offensive'', expresses ``hate'', or is ``normal'', which they use to fine-tune a BERT hate speech classifier.
 \newcite{caselli-etal-2021-hatebert} retrain BERT$_{base}$ on the MLM task using an unsupervised corpus built from hateful and offensive Reddit messages, obtaining a model called HateBERT, capable of outperforming BERT$_{base}$ on hate speech identification on various benchmark datasets.
 
 In multilingual settings, \newcite{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of corpora annotated for hate speech to improve the performance of classifiers in zero-shot, few-shot and well-resourced settings. \newcite{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow such approaches in attempting to improve the performance of our models\paolo{, with a specific focus on monolingual vs. bilingual pre-training, compared to \newcite{gajo2023identification}.}
@@ -199,8 +199,8 @@ campaigns, along with two supervised corpora compiled from two incel forums, one
 
 % \vspace*{1mm}\noindent\textbf{Italian datasets.}
 \paragraph{EVALITA corpora}
-The first Italian corpus we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, from EVALITA 2018~\cite{boscoOverviewEVALITA2018} (henceforth \hsdfb), by annotating Facebook posts for hate speech. The second one is from the 2020 HaSpeeDe shared task~\cite{basileEVALITA2020Overview} (\hsdtw), compiled by adding new data to the HaSpeeDe 2018 Twitter corpus. The third corpus is the one compiled for the Automatic Misogyny Identification (AMI) shared task~\cite{fersiniAMIEVALITA2020Automatic2020} (\ami), hosted at EVALITA 2020. \ami\, also contains tweets and is annotated with misogyny labels, which we use in place of hate speech labels.\footnote{In incel spaces most of the hate speech is expressed in the form of misogyny, making this data useful.}
-The corpora were split 70/30 between training and development sets (we do not use the test partitions of these shared tasks).
+The first Italian corpus we use was compiled for the first edition of the Hate Speech Detection (HaSpeeDe) shared task, from EVALITA 2018~\cite{boscoOverviewEVALITA2018} (henceforth \hsdfb), by annotating Facebook posts for hate speech. The second one is from the 2020 HaSpeeDe shared task~\cite{Sanguinetti2020haspeedeeoverview} (\hsdtw), compiled by adding new data to the HaSpeeDe 2018 Twitter corpus. The third corpus is the one compiled for the Automatic Misogyny Identification (AMI) shared task~\cite{fersiniAMIEVALITA2020Automatic2020} (\ami), hosted at EVALITA 2020. \paolo{Another dataset comprising tweets is }\ami, annotated with misogyny labels. \paolo{In this case, the misogyny labels were used as hate speech labels to train our classifiers}.\footnote{In incel spaces most of the hate speech is expressed in the form of misogyny, making this data useful.}
+\paolo{Where existing partitions were not available, we split the corpora} 70/30 between training and development sets (we do not use the test partitions of these shared tasks).
 
 \paragraph{Incel corpora}
 We use two unsupervised corpora compiled by scraping two incel forums: \textit{\enforum}\footnote{\url{https://incels.is} (Last access: 11 Aug 2023)} and \textit{\itforum}\footnote{\url{https://ilforumdeibrutti.forumfree.it}} \cite{gajo2023identification}.
@@ -214,7 +214,7 @@ making it worthwhile to compile updated resources.
 
 \begin{table}[t]
   \centering
-  \caption{Statistics of the \enforum\, and \itforum\, (\textit{FdB}) unsupervised corpora. Mean length computed at token level.}
+  \caption{Statistics of the \enforum\, and \itforum\, (\textit{FdB}) unsupervised corpora. Mean length computed at token level \paolo{(w/ BertTokenizer\footnote{\url{https://huggingface.co/docs/transformers/model_doc/bert\#transformers.BertTokenizer}})}.}
   \begin{tabular}{l|ccc}
       \hline
       \textbf{Corpus} & \textbf{Posts} & \textbf{Threads} & \textbf{Length} \\
@@ -249,7 +249,7 @@ In order to improve the performance of the two models on the task of identifying
 
 
 \begin{table}[t]
-  \caption{Class distribution for the different supervised hate speech corpora.}
+  \caption{Existing corpora class distribution.}
   \label{tab:english-italian-supervised-datasets-partition-stats}
   \centering
   % \footnotesize
@@ -261,11 +261,32 @@ In order to improve the performance of the two models on the task of identifying
   \ami\,              & \cite{fersiniAMIEVALITA2020Automatic2020} &  2,337 &  2,663  \\
   \hsdfb              & \cite{boscoOverviewEVALITA2018} &  1,382 &    1,617  \\
   \hsdtw              & \cite{basileEVALITA2020Overview} &  \,\,\,\,971   &  2,028   \\
-  \dsENclassification & \cite{gajo2023identification} &  2,090 &    3,113   \\
-  \dsITclassification & \cite{gajo2023identification} &  \,\,\,\,200  &  \,\,\,\,300 \\
+  % \dsENclassification & \cite{gajo2023identification} &  2,090 &    3,113   \\
+  % \dsITclassification & \cite{gajo2023identification} &  \,\,\,\,200  &  \,\,\,\,300 \\
 
   \hline
   \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \caption{Incel corpora class distribution \cite{gajo2023identification}. Mis$=$misogynous, Rac$=$racist.}
+  \label{tab:english-italian-supervised-datasets-partition-stats}
+  \centering
+  % \footnotesize
+  \begin{tabular}{l|rrrr}
+    \hline
+  %   \bf \multirow{2}{*}{Dataset}  &\multicolumn{2}{c|}{\bf Binary} & 
+  % \multicolumn{4}{c}{\bf Multi-Label} \\
+    % \cline{2-7}
+    \bf Corpus                & \bf Mis& \bf Rac & \bf Both & \bf  Neither \\
+    \hline
+    \dsENclassificationtrain\,	&  806 & 630 & 46 & 
+  2,160 \\
+    \dsENclassificationdev 	&  173 & 130 & 13 & 464 \\
+    \dsENclassificationtest 	&  160 & 125 & 7 & 489 \\
+    \dsITclassification$_{\mbox{te}}$  & 187 & 8 & 5 & 300 \\
+    \hline
+    \end{tabular}
 \end{table}
 
 \begin{table*}[t]
