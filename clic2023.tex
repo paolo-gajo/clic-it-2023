@@ -79,7 +79,6 @@
 \newcommand{\enforum}{\textit{Incels.is}}
 \newcommand{\itforum}{\textit{Il forum dei brutti}}
 
-
 %\setlength\titlebox{5cm}
 
 % You can expand the titlebox if you need extra space
@@ -143,7 +142,7 @@ exacerbated when considering the detection of hate speech in niche contexts,
 such as in forums frequented by incels,
 short for ``involuntary celibates'', a community known for its hateful language \cite{nagle-2017-kill-normies,jakiOnlineHatredWomen2019}
 and use of
-specific misogynous and racist lexicon\abc{~\cite{farrellExploringMisogynyManosphere2019,gothard2020exploring}.}
+specific misogynous and racist lexicon \abc{\cite{farrellExploringMisogynyManosphere2019,gothard2020exploring}.}
 In particular, it seems no work has yet been done on the detection of hate speech in Italian incel forums.
 
 In this paper, we present a simple approach to improve the performance of hate speech detection models in Italian forums frequented by incels. Our contribution is two-fold:
@@ -152,7 +151,7 @@ In this paper, we present a simple approach to improve the performance of hate s
 
 \noindent\textbf{\Ni Masked language modeling} We adapt monolingual Italian models and a multilingual model to the linguistic domain of Italian and English incel forums by training them on the masked language modeling (MLM) task.
 As training material, we use unsupervised corpora built from two incel forums, one in Italian and one in English.
-We release these novel models, which can be used for further research on the topic.\footnote{\url{https://github.com/paolo-gajo/clic23}}
+We release these novel models, which can be used for further research on the topic.\footnote{\paolo{All Hugging Face model pages can be found at: }\url{https://github.com/paolo-gajo/clic23}}
 
 \noindent\textbf{\Nii \paolo{HS} detection}
 % \todoA{experiments are not contributions. You should stress the outcome more. I see you have a paragraph on it next, perhaps merge}
@@ -227,17 +226,17 @@ making it worthwhile to compile updated resources.
 \end{table}
 
 % \todoA{we don't care about English or IAA. You are not introducing these corpora here... See how T2 looks like: all corpora are first-class citizens. I dropped most of this paragraph}
-A subset of the two corpora was annotated for both misogyny and racism.
+A subset of the two corpora was annotated for both misogyny and racism. \paolo{Refer to \newcite{gajo2023identification} for details on the annotation process.}
 % For English, a subset of 50 posts was randomly selected and labeled by three annotators, all with a C2 CEFR level of English, well-versed in linguistics, gender studies, NLP, and data annotation.
 % The Cohen's Kappa inter-annotator agreement (IAA)~\cite{bobicev2017inter} was of 0.77, which is considered high.
 % As such, the remaining instances were annotated by a single annotator. For the Italian dataset, two native speakers of Italian, also experts in the relevant fields, annotated  50 posts as well, reaching an IAA of 0.69. As the IAA was deemed acceptable, the rest of the instances were once again annotated by one annotator.
-We refer to these two supervised corpora as \dsENclassification\, (Incel Forum, Supervised, English) and \dsITclassification\, (Incel Forum, Supervised, Italian). \dsENclassification~is split between training, development and testing partitions with a 70/15/15 split. In this study, \dsITclassification~is only used as a test set, meaning it is unpartitioned and all of its 500 instances are used for testing.
+We refer to these two supervised corpora as \dsENclassification\, (Incel Forum, Supervised, English) and \dsITclassification\, (Incel Forum, Supervised, Italian). \dsENclassification~is split between training, development and testing partitions with a 70/15/15 split. In this study, \dsITclassification~is only used as a test set, meaning it is unpartitioned and all of its 500 instances are used for testing. \paolo{The choice of using \dsITclassification\, solely as a test set is motivated by the unavailability of additional annotated Italian incel data for training. Said scarcity prompted us to leverage the available data in order to conduct cross-lingual experiments for the incel domain, for which Italian is a low-resource language.}
 The corpora are annotated for racism and misogyny because they are the most relevant forms of hate speech in the two forums~\cite{silva2016analyzing,ging2018special}. However, it has to be noted that racism is much more prevalent in \enforum\, than in \itforum. Posts are annotated as hateful if they are either labeled as misogynous or racist.
-The intersection between \dsITclassification\, and the Italian data used for MLM training is void; the same is true for \dsENclassification\, and the English MLM training data.
+The intersection between \paolo{the datasets listed in Table~\ref{tab:english-italian-unsupervised-datasets-stats} and those listed in Table~\ref{tab:incel-distribution} is void. That is, none of the data contained in \dsITclassification\, was obtained from the Italian data used for MLM pre-training. The same is true for \dsENclassification\, and the English MLM pre-training data.}
 % \medskip
 
-Table~\ref{tab:english-italian-supervised-datasets-partition-stats} shows the class distribution of all five supervised corpora \abc{whereas Table~\ref{tab:incel-distribution} shows the distribution for our incel corpora.}
-\todo{say something about the multi-class distribution}
+Table~\ref{tab:english-italian-supervised-datasets-partition-stats} shows the class distribution of all five supervised corpora, whereas Table~\ref{tab:incel-distribution} shows the distribution for our incel corpora. \paolo{As can be inferred from the statistics, while misogynous instances comprise around ~39\% of the instances in both \dsENclassification\, and \dsITclassification\, the same cannot be said for the racist ones, which are much more prevalent in \dsENclassification\, (13\% vs. 0.03\%). This shows a rather clear difference in terms of the hate speech being produced by the Italian incel community, vs. the English one.}
+% \todo{say something about the multi-class distribution}
 % statistics of the The annotation statistics of all the datasets used in this study can be found in .
 
 \section{Models}
@@ -261,7 +260,7 @@ In order to improve the performance of the two models on the task of identifying
   \hline
   \ami\,              & \cite{fersiniAMIEVALITA2020Automatic2020} &  2,337 &  2,663  \\
   \hsdfb              & \cite{boscoOverviewEVALITA2018} &  1,382 &    1,617  \\
-  \hsdtw              & \cite{basileEVALITA2020Overview} &  \,\,\,\,971   &  2,028   \\
+  \hsdtw              & \cite{boscoOverviewEVALITA2018} &  \,\,\,\,971   &  2,028   \\
   % \dsENclassification & \cite{gajo2023identification} &  2,090 &    3,113   \\
   % \dsITclassification & \cite{gajo2023identification} &  \,\,\,\,200  &  \,\,\,\,300 \\
 
@@ -293,9 +292,7 @@ In order to improve the performance of the two models on the task of identifying
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance when fine-tuning the monolingual models on Italian-only corpora combinations. Epochs (e) selected based on validation performance. Highest scores in bold.
-  % The highlights indicate whether the Incel versions of the models perform better (green) or worse (red) than the base versions.
-  }
+  \caption{Performance when fine-tuning the monolingual models on Italian-only corpora combinations. Epochs (e) selected based on validation performance. \paolo{Best scores in bold, second-best underlined. ``\bs''~indicates whether the corpus was used for training.}}
   \label{tab:italian-only-results}
 
   \begin{tabular}{l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
@@ -305,16 +302,16 @@ In order to improve the performance of the two models on the task of identifying
         \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\umbert\end{minipage}}}
         &  \bs  &      &      &      5 &      0.855$\pm$0.003 &     0.868 &       0.843 &       0.696$\pm$0.010 & \bf  0.879 &       0.576 \\ % 27
         &       &  \bs &      &      4 &      0.754$\pm$0.004 &     0.800 &       0.713 &       0.432$\pm$0.060 &      0.319 &       0.685 \\ % 28
-        &       &      &  \bs &      4 & \bf  0.914$\pm$0.004 & \bf 0.931 &  \bf  0.899 &       0.569$\pm$0.031 &      0.520 &       0.631 \\ % 29
+        &       &      &  \bs &      4 &  \ul{0.914$\pm$0.004}& \ul{0.931}&  \bf  0.899 &       0.569$\pm$0.031 &      0.520 &       0.631 \\ % 29
         &  \bs  &  \bs &      &      4 &      0.788$\pm$0.006 &     0.824 &       0.755 &       0.666$\pm$0.024 &      0.758 &       0.595 \\ % 30
-        &  \bs  &      &  \bs &      5 &      0.883$\pm$0.004 &     0.900 &       0.867 &  \bf  0.697$\pm$0.019 &      0.747 &       0.653 \\ % 31
-        &       &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.844 &       0.814 &       0.596$\pm$0.017 &      0.526 &  \bf  0.688 \\ % 32
+        &  \bs  &      &  \bs &      5 &      0.883$\pm$0.004 &     0.900 &       0.867 &   \ul{0.697$\pm$0.019}&      0.747 &       0.653 \\ % 31
+        &       &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.844 &       0.814 &       0.596$\pm$0.017 &      0.526 &   \ul{0.688}\\ % 32
         &  \bs  &  \bs &  \bs &      5 &      0.822$\pm$0.003 &     0.836 &       0.808 &       0.680$\pm$0.016 &      0.692 &       0.671 \\ % 33
         \hline
         \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \iumbert\end{minipage}}}
-        &  \bs  &      &      &      5 &      0.867$\pm$0.006 &     0.887 &       0.848 &  \bf  0.705$\pm$0.009 & \bf  0.870 &       0.593 \\ % 27
+        &  \bs  &      &      &      5 &      0.867$\pm$0.006 &     0.887 &       0.848 &  \bf  0.705$\pm$0.009 &  \ul{0.870}&       0.593 \\ % 27
         &       &  \bs &      &      4 &      0.756$\pm$0.002 &     0.810 &       0.708 &       0.403$\pm$0.024 &      0.285 &       0.692 \\ % 28
-        &       &      &  \bs &      4 & \bf  0.918$\pm$0.001 & \bf 0.946 &  \bf  0.891 &       0.652$\pm$0.031 &      0.608 &       0.705 \\ % 29
+        &       &      &  \bs &      4 & \bf  0.918$\pm$0.001 & \bf 0.946 &   \ul{0.891}&       0.652$\pm$0.031 &      0.608 &       0.705 \\ % 29
         &  \bs  &  \bs &      &      4 &      0.790$\pm$0.003 &     0.831 &       0.754 &       0.660$\pm$0.014 &      0.696 &       0.627 \\ % 30
         &  \bs  &      &  \bs &      5 &      0.886$\pm$0.002 &     0.901 &       0.872 &       0.704$\pm$0.005 &      0.732 &       0.678 \\ % 31
         &       &  \bs &  \bs &      2 &      0.831$\pm$0.003 &     0.866 &       0.799 &       0.648$\pm$0.011 &      0.544 &  \bf  0.802 \\ % 32
@@ -323,17 +320,17 @@ In order to improve the performance of the two models on the task of identifying
         \hline
         \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\albert\end{minipage}}}
         &  \bs  &      &      &      4 &      0.850$\pm$0.003 &     0.899 &       0.807 &       0.683$\pm$0.006 & \bf  0.941 &       0.537 \\ % 27
-        &       &  \bs &      &      1 &      0.752$\pm$0.006 &     0.817 &       0.698 &       0.520$\pm$0.089 &      0.426 &  \bf  0.716 \\ % 28
-        &       &      &  \bs &      2 & \bf  0.907$\pm$0.004 & \bf 0.952 &  \bf  0.866 &       0.528$\pm$0.022 &      0.517 &       0.542 \\ % 29
+        &       &  \bs &      &      1 &      0.752$\pm$0.006 &     0.817 &       0.698 &       0.520$\pm$0.089 &      0.426 &   \ul{0.716}\\ % 28
+        &       &      &  \bs &      2 & \ul{0.907$\pm$0.004} & \bf 0.952 &  \ul{0.866} &       0.528$\pm$0.022 &      0.517 &       0.542 \\ % 29
         &  \bs  &  \bs &      &      2 &      0.775$\pm$0.003 &     0.803 &       0.750 &       0.695$\pm$0.007 &      0.786 &       0.623 \\ % 30
-        &  \bs  &      &  \bs &      3 &      0.879$\pm$0.003 &     0.918 &       0.843 &  \bf  0.705$\pm$0.011 &      0.803 &       0.629 \\ % 31
+        &  \bs  &      &  \bs &      3 &      0.879$\pm$0.003 &     0.918 &       0.843 &  \ul{0.705$\pm$0.011} &      0.803 &       0.629 \\ % 31
         &       &  \bs &  \bs &      3 &      0.820$\pm$0.001 &     0.888 &       0.762 &       0.652$\pm$0.018 &      0.645 &       0.660 \\ % 32
         &  \bs  &  \bs &  \bs &      2 &      0.808$\pm$0.011 &     0.872 &       0.753 &       0.684$\pm$0.015 &      0.821 &       0.587 \\ % 33
         \hline
         \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \ialbert\end{minipage}}}
-        &  \bs  &      &      &      5 &      0.847$\pm$0.005 &     0.863 &       0.831 &  \bf  0.707$\pm$0.007 & \bf  0.791 &       0.639 \\ % 27
+        &  \bs  &      &      &      5 &      0.847$\pm$0.005 &     0.863 &       0.831 &  \bf  0.707$\pm$0.007 & \ul{0.791} &       0.639 \\ % 27
         &       &  \bs &      &      1 &      0.748$\pm$0.002 &     0.785 &       0.715 &       0.506$\pm$0.035 &      0.370 &  \bf  0.805 \\ % 28
-        &       &      &  \bs &      5 & \bf  0.912$\pm$0.003 & \bf 0.930 &  \bf  0.895 &       0.617$\pm$0.018 &      0.562 &       0.685 \\ % 29
+        &       &      &  \bs &      5 & \bf  0.912$\pm$0.003 & \ul{0.930}&  \bf  0.895 &       0.617$\pm$0.018 &      0.562 &       0.685 \\ % 29
         &  \bs  &  \bs &      &      2 &      0.771$\pm$0.004 &     0.791 &       0.752 &       0.673$\pm$0.016 &      0.721 &       0.632 \\ % 30
         &  \bs  &      &  \bs &      5 &      0.873$\pm$0.003 &     0.888 &       0.858 &       0.668$\pm$0.014 &      0.663 &       0.674 \\ % 31
         &       &  \bs &  \bs &      1 &      0.818$\pm$0.004 &     0.864 &       0.776 &       0.656$\pm$0.007 &      0.593 &       0.736 \\ % 32
@@ -364,7 +361,7 @@ The MLM pre-training process is carried out in all cases by tokenizing post cont
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance when fine-tuning the multilingual models on monolingual and bilingual combinations of English and Italian supervised corpora. Epochs (e) selected based on validation performance. Highest scores in bold.}
+  \caption{Performance when fine-tuning the multilingual models on monolingual and bilingual combinations of English and Italian supervised corpora. Epochs (e) selected based on validation performance. \paolo{Best scores in bold, second-best underlined. ``\bs''~indicates whether the corpus was used for training.}}
   \label{tab:multilingual-results}
 
   \begin{tabular}{l|l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
@@ -417,7 +414,7 @@ The MLM pre-training process is carried out in all cases by tokenizing post cont
 \section{Experiments and Evaluation}
 \label{sec:exps}
 
-We approach the task of identifying hate speech as a binary classification problem, where a post can either be hateful or not. We train each model five times on all possible combinations of the previously introduced corpora in order to make our results more reliable and diminish the effect of the random initialization of the models. In the monolingual Italian setting we never use \dsENclassification, while it is always included when training the multilingual models in the bilingual setting. We select the number of epochs based on the convergence of the performance on the validation set. For each corpus combination, the training and validation sets are the union of the individual training and validation sets of each merged corpus. The models are then evaluated on the \dsITclassification\, test set.
+We approach the task of identifying hate speech as a binary classification problem, where a post can either be hateful or not. We train each model five times on all possible combinations of the previously introduced corpora in order to make our results more reliable and diminish the effect of the random initialization of the models. In the monolingual Italian setting we never use \dsENclassification, while it is always included when training the multilingual models in the bilingual setting. We select the number of epochs based on the convergence of the performance on the validation set\paolo{, in terms of F1-measure on the positive class}. For each corpus combination, the training and validation sets are the union of the individual training and validation sets of each merged corpus. The models are then evaluated on the \dsITclassification\, test set.
 
 \paragraph{Monolingual setting}
 % \todoA{I might have missed it, but perhaps you don't mention that there is no  IFS-IT training set? For a while, I was expecting to see IFS-IT training partitions in this table}
