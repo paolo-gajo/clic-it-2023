@@ -151,8 +151,7 @@ In this paper, we present a simple approach to improve the performance of hate s
 
 % \paragraph{\Ni Corpora} We compile two novel unsupervised corpora on the domain of incel forums, one in Italian and one in English. We annotate a subset of each for hate speech, misogyny, and racism, obtaining two supervised corpora. The unsupervised corpora can be used for domain-adaptation, while the supervised ones can be used for training hate speech detection models.
 
-\noindent\textbf{\Ni Masked language modeling.} We adapt monolingual Italian models and a multilingual model to the linguistic domain of Italian and English incel forums by training them on the masked language modeling (MLM) task.
-As training material, we use unsupervised corpora built from two incel forums, one in Italian and one in English.
+\noindent\textbf{\Ni Masked language modeling.} We adapt monolingual Italian models to the linguistic domain of Italian incel forums by training them on the masked language modeling (MLM) task. As training material, we use an unlabelled corpus compiled from an Italian incel forum. We also adopt an existing multilingual model, already domain-adapted to the incel domain in both English and Italian.
 We release these novel models, which can be used for further research on the topic.\footnote{Links to the models, released on HuggingFace: \url{https://github.com/paolo-gajo/clic23}.}
 
 \noindent\textbf{\Nii Hate speech detection.}
@@ -162,7 +161,7 @@ We fine-tune the vanilla and domain-adapted models on the downstream task of det
 % The corpora were compiled from incel forums and mainstream social media platforms and are binary-annotated for hate speech.
 Monolingual models are trained on Italian-only combinations of corpora binary-annotated for hate speech, while Italian--English combinations are used for the multilingual models.
 
-Testing the performance of the models on a labelled hate speech corpus, obtained by annotating posts from the Italian incel forum, shows that the best results are obtained by first training the base multilingual model on bilingual data taken from both the Italian and English incel forums, using the MLM task, and then fine-tuning it on combinations of Italian and English corpora, annotated for hate speech. In the approached scenarios, pre-training and fine-tuning on bilingual in-domain incel annotated data may therefore be more effective than training on general target-language supervised corpora, despite part of the training data not being in the language of the downstream task. In addition, the results show that this strategy can be used to improve model performance when in-domain target-language data is scarce, by using in-domain data from other languages.
+Testing the performance of the models on a labelled hate speech corpus, obtained by annotating posts from the Italian incel forum, shows that the best results are obtained by first training the base multilingual model on bilingual data taken from both the Italian and English incel forums, using the MLM task, and then fine-tuning it on combinations of Italian and English corpora, annotated for hate speech. In the approached scenarios, pre-training and fine-tuning on bilingual in-domain incel annotated data may therefore be more effective than training on general target-language labelled corpora, despite part of the training data not being in the language of the downstream task. In addition, the results show that this strategy can be used to improve model performance when in-domain target-language data is scarce, by using in-domain data from other languages.
 
 The rest of the paper is organized as follows: Section~\ref{sec:related-work} presents related work on hate speech detection in Italian and English, as well as multilingual approaches to the problem. Section~\ref{sec:corpora} describes the corpora used in this study. Section~\ref{sec:models} presents the employed models. Section~\ref{sec:exps} describes the experiments conducted and discusses the results. Section~\ref{sec:conclusions} closes the contribution with conclusions and future work.
 % \vspace*{1mm}
@@ -185,11 +184,11 @@ the best team's approach for the hate speech detection sub-task \cite{Lavergne20
 
 % \todo{I miss AMI 2018}
 As regards misogyny in particular, EVALITA 2018 hosted for the first time a shared task on automatic misogyny identification (AMI), where the top performing teams used a combination of TF-IDF and SVD for the Italian scenario, and TF-IDF with logistic regression for the English one~\cite{Fersini2018OverviewOT}.
-EVALITA 2020 hosted the second edition of the AMI shared task, focusing on Italian tweets~\cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models obtained the top performance~\cite{mutiUniBOAMIMultiClass2020}. In the 2023 edition of EVALITA, \newcite{bonaventura2023odang} use triple verbalisation, prompting and majority vote to improve the performance of an AlBERTo model on the tasks of homotransphobia and hate speech detection.
+EVALITA 2020 hosted the second edition of the AMI shared task, focusing on Italian tweets~\cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models obtained the top performance~\cite{mutiUniBOAMIMultiClass2020}. In the 2023 edition of EVALITA, \newcite{bonaventura2023odang} used triple verbalisation, prompting and majority vote to improve the performance of an AlBERTo model on the tasks of homotransphobia and hate speech detection.
 
 English-language hate speech detection has been conducted in a variety of ways. Among others, \newcite{davidson-2017-automated-hate} build a corpus of tweets annotated with multi-class labels (``hate speech'', ``offensive'', ``neither'') and train logistic regression and linear SVM models on it.
 \newcite{mathew2021hatexplain} build a corpus called HateXplain from Twitter and Gab posts, annotated with multi-class labels based on whether the post is ``offensive'', expresses ``hate'', or is ``normal'', which they use to fine-tune a BERT hate speech classifier.
-\newcite{caselli-etal-2021-hatebert} retrain BERT$_{base}$ on the MLM task using an unsupervised corpus built from hateful and offensive Reddit messages, obtaining a model called HateBERT, capable of outperforming BERT$_{base}$ on hate speech identification on various benchmark datasets.
+\newcite{caselli-etal-2021-hatebert} retrain BERT$_{base}$ on the MLM task using an unlabelled corpus built from hateful and offensive Reddit messages, obtaining a model called HateBERT, capable of outperforming BERT$_{base}$ on hate speech identification on various benchmark datasets.
 
 In multilingual settings, \newcite{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of corpora annotated for hate speech to improve the performance of classifiers in zero-shot, few-shot and well-resourced settings. \newcite{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow such approaches in attempting to improve the performance of our models, with a specific focus on monolingual vs.\ bilingual pre-training, compared to \newcite{gajo2023identification}.
 
@@ -212,7 +211,7 @@ The first Italian corpus we use was compiled for the first edition of the Hate S
 Where the corpora were not partitioned, %available partitions were not available
 we split them %the corpora
 % \todo{1) not sure why you don't use test sets; 2) get sure you don't use dev as test (hence you should call it test)}
-70/30 between training and development sets. We do not use the test partitions, \paolo{as we are interested in maintaining consistency with the use of the original splits of these corpora.}
+70/30 between training and development sets. We do not use the test partitions, as we are interested in maintaining consistency with the use of the original splits of these corpora.
 
 \begin{table}[t]
   \caption{Existing corpora class distribution.}
@@ -234,7 +233,9 @@ we split them %the corpora
 \end{table}
 
 \paragraph{Incel corpora}
-We use two \abc{unlabelled} \todoP{didn't we discuss 'labeled' should be used for predictions assigned by a model?} corpora compiled by scraping two incel forums~\cite{gajo2023identification}: \textit{\enforum}\footnote{\url{https://incels.is} (Last access: 11 Aug 2023)} and \textit{\itforum}.\footnote{\url{https://ilforumdeibrutti.forumfree.it}}
+We use two unlabelled
+% \todoP{didn't we discuss 'labeled' should be used for predictions assigned by a model?}
+corpora compiled by scraping two incel forums~\cite{gajo2023identification}: \textit{\enforum}\footnote{\url{https://incels.is} (Last access: 11 Aug 2023)} and \textit{\itforum}.\footnote{\url{https://ilforumdeibrutti.forumfree.it}}
 % The posts were scraped making sure to retain all metadata associated with them, with the main content being saved separately from the quoted content which a user is replying to.
 % \todo{this is not the RANLP paper. You should drop Table 1 and just mention in the (models?) section, where you describe the MLM, that you used those corpora, giving some stats in the paragraph, with a reference to your paper. If somebody wants them, they go to your RANLP paper to get them. You don't need to justify why they were created here.}
 % Table~\ref{tab:english-italian-unsupervised-datasets-stats} reports the statistics of the two corpora.\footnote{Both corpora are available at: \url{https://zenodo.org/record/8147845}. Tokenization carried out with BertTokenizer (\url{https://huggingface.co/docs/transformers/model_doc/bert#transformers.BertTokenizer}).}
@@ -259,8 +260,7 @@ We use two \abc{unlabelled} \todoP{didn't we discuss 'labeled' should be used fo
 A subset of the two corpora was annotated for both misogyny and racism.\footnote{Refer to \newcite{gajo2023identification} for details on the annotation process.} % For English, a subset of 50 posts was randomly selected and labeled by three annotators, all with a C2 CEFR level of English, well-versed in linguistics, gender studies, NLP, and data annotation.
 % The Cohen's Kappa inter-annotator agreement (IAA)~\cite{bobicev2017inter} was of 0.77, which is considered high.
 % As such, the remaining instances were annotated by a single annotator. For the Italian dataset, two native speakers of Italian, also experts in the relevant fields, annotated  50 posts as well, reaching an IAA of 0.69. As the IAA was deemed acceptable, the rest of the instances were once again annotated by one annotator.
-The annotated partitions are referred to
-as \dsENclassification\, (Incel Forum, Supervised, English) and \dsITclassification\, (Incel Forum, Supervised, Italian).
+The annotated partitions are referred to as \dsENclassification\, and \dsITclassification\, (``Incel Forum, Supervised, English'' and ``Italian'').
 
 We keep the training, development and testing partitions as in the released corpora. \dsITclassification\, is used in its entirety solely as a test set, due to
 % in which only testing data exists for Italian.
@@ -302,14 +302,14 @@ the unavailability of additional annotated Italian incel data for training. Said
 Table~\ref{tab:existing-corpora-distributions} shows the class distribution of all three EVALITA corpora, whereas
 % \todo{it's not ours. Its the one of the RANLP paper. Tables 2 and 3 must be merged. Table 1 must be dropped}
 % \todoP{reviewer 1 asked for more info about the incel corpora, which in table 3 now has mis/rac/both/neither info. table 2 does not have that, so they cannot really be merged in my opinion, or at least i don't see how}
-Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel corpora\paolo{, where posts are considered hateful if they are either labeled as misogynous or racist.} As can be inferred from the statistics, while misogynous instances comprise around 39\% of the instances in both \dsENclassification\, and \dsITclassification\, the same cannot be said for the racist ones, which are much more prevalent in \dsENclassification\, (13\% vs.\ 0.03\%). This shows a rather clear difference in terms of the hate speech being produced by the Italian incel community, vs. the English one.
+Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel corpora, where posts are considered hateful if they are either labeled as misogynous or racist. As can be inferred from the statistics, while misogynous instances comprise around 39\% of the instances in both \dsENclassification\, and \dsITclassification, the same cannot be said for the racist ones, which are much more prevalent in \dsENclassification\, (13\% vs.\ 0.03\%). This shows a rather clear difference in terms of the hate speech being produced by the Italian incel community, vs. the English one.
 % \todo{say something about the multi-class distribution}
 % statistics of the The annotation statistics of all the datasets used in this study can be found in .
 
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance when fine-tuning the monolingual models on Italian-only corpora. Epochs (e) selected based on \paolo{val. F$_1$}. Best scores in bold, second-best underlined; \bs\, = corpus used for training.}
+  \caption{Performance when fine-tuning the monolingual models on Italian-only corpora. Epochs (e) selected based on val. F$_1$. Best scores in bold, second-best underlined; \bs\, = corpus used for training.}
   \label{tab:italian-only-results}
 
   \begin{tabular}{l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
@@ -359,7 +359,7 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance when fine-tuning the multilingual models on \paolo{mono-} and bilingual \paolo{corpora} combinations. Epochs (e) selected based on \paolo{val. F$_1$}. Best scores in bold; \bs\, = corpus used for training.}
+  \caption{Performance when fine-tuning the multilingual models on mono- and bilingual corpora combinations. Epochs (e) selected based on val. F$_1$. Best scores in bold; \bs\, = corpus used for training.}
   \label{tab:multilingual-results}
 
   \begin{tabular}{l|l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
@@ -417,8 +417,8 @@ With relation to the Italian-only scenario, we use \umbert\, and \albert\, for o
 % \todoA{you should give more details about this, for the case of Italian}
 In order to improve the performance of the two models on the task of identifying hate speech in Italian incel forums, we train them on the MLM task on posts extracted from \itforum. We follow this approach because it has been shown to work in English both for general hateful content \cite{caselli-etal-2021-hatebert} and incel forums \cite{gajo2023identification}.
 % \todo{here: you move the relevant info about the dumps here. Drop the footnote. You are using the corpus of the RANLP paper}
-For training data, we use the entirety of the contents of the forum, for a total of $627k$ posts. The intersection between the \paolo{unlabelled}
-incel corpora and the annotated corpora listed in Table~\ref{tab:incel-corpora-distributions} is void. That is, none of the data contained in \dsITclassification{} was obtained from the Italian data scraped from \itforum\, and used for MLM pre-training. The same is true for \dsENclassification{} and the English MLM pre-training data taken from \enforum.
+For training data, we use the entirety of the contents of the forum, for a total of $627k$ posts. The intersection between the unlabelled
+incel corpora and the annotated corpora listed in Table~\ref{tab:incel-corpora-distributions} is void. That is, none of the data contained in \dsITclassification\, was obtained from the Italian data scraped from \itforum\, and used for MLM pre-training. The same is true for \dsENclassification\, and the English MLM pre-training data taken from \enforum.
 % \footnote{The number of posts is lower than the total number of posts ($638k$) because we exclude empty posts.}
 Doing this, we obtain two new models which we refer to as ``\iumbert'' and ``\ialbert''.
 
@@ -427,9 +427,8 @@ The MLM pre-training process is carried out in all cases by tokenizing post cont
 
 % \todoP{should I say that we do this also bilingually based on the ranlp paper? otherwise it seems kind of strange that i just randomly decided to do bilingual MLM and on top of that we get the best results with the bilingual model}
 % \todoA{motivate it here. If you refer too much to RANLP, the reviewer will say that this is just another version of that paper (which, btw, is partially true)}
-As regards the bilingual setting, we use \mbert{} as our baseline. We also use an MLM-enhanced version of it, ``\imbert'',
-\footnote{\url{https://huggingface.co/pgajo/incel-mbert}}
-obtained by further pre-training \mbert{} on $500k$ posts sampled from \itforum\, and $500k$ posts sampled from \enforum, for a total of $1M$ posts in Italian and English \cite{gajo2023identification}.
+As regards the bilingual setting, we use \mbert\, as our baseline. We also use an MLM-enhanced version of it, ``\imbert'',\footnote{\url{https://huggingface.co/pgajo/incel-mbert}}
+obtained by further pre-training \mbert\, on $500k$ posts sampled from \itforum\, and $500k$ posts sampled from \enforum, for a total of $1M$ posts in Italian and English \cite{gajo2023identification}.
 % \todoP{i dropped the paragraph below because it is explained by the sentence above ``We follow this approach because it has been shown to work in English both for general hateful content \cite{caselli-etal-2021-hatebert} and incel forums \cite{gajo2023identification}.'', in line 268 of this .tex file}
 % The rationale behind this approach is that the ``Red Pill philosophy'' \cite{gingAlphasBetasIncels2019-manosphere} underlies inceldom internationally. Therefore, the two forums can be considered comparable from a sociolinguistic standpoint, since they share a common conceptual foundation, despite using different languages.
 % We refer to this model as .
@@ -485,9 +484,9 @@ However, once the models are MLM-trained on \itforum, the performance decreases 
 \paragraph{Bilingual setting}
 % \paragraph*{Italian-English}
 Table~\ref{tab:multilingual-results} reports the results for the bilingual setting.
-Compared to the best combination using \mbert, which achieves a test F$_1$ of 0.688, the best combination using \imbert{} achieves a test F$_1$ of 0.722 (+3.4 F$_1$ points), which is also the highest score across both language settings. Just like in the monolingual setting, \mbert{} performs better when only training it on \hsdfb{} (in addition to \dsENclassification). Conversely, \imbert{} performs better when training on \ami{} and \dsENclassification. This is interesting, since the incorporation of the \ami{} corpus lowered the performance of all Italian-only models, compared to only training on \hsdfb. Since misogyny is the main way hate speech is expressed in \enforum{} (39.44\% of the instances in \dsENclassification{} are misogynous) and
+Compared to the best combination using \mbert, which achieves a test F$_1$ of 0.688, the best combination using \imbert\, achieves a test F$_1$ of 0.722 (+3.4 F$_1$ points), which is also the highest score across both language settings. Just like in the monolingual setting, \mbert\, performs better when only training it on \hsdfb\, (in addition to \dsENclassification). Conversely, \imbert\, performs better when training on \ami\, and \dsENclassification. This is interesting, since the incorporation of the \ami\, corpus lowered the performance of all Italian-only models, compared to only training on \hsdfb. Since misogyny is the main way hate speech is expressed in \enforum\, (39.44\% of the instances in \dsENclassification\, are misogynous) and
 % due to the fact that
-\imbert{} was pre-trained using posts extracted from this forum, the performance boost could be due to the fact that the model is better at learning about misogynous language compared to \mbert{} and the Italian-only models.
+\imbert\, was pre-trained using posts extracted from this forum, the performance boost could be due to the fact that the model is better at learning about misogynous language compared to \mbert\, and the Italian-only models.
 
 On average, the lowest performance is achieved when training separately on \dsENclassification\, and on the Italian corpora (monolingual rows in Table~\ref{tab:multilingual-results}). When using bilingual data, the worst results are obtained when training on \hsdtw\, and combinations containing it, coherently with the results in the monolingual settings shown in \mbox{Table~\ref{tab:italian-only-results}}.
 
@@ -562,14 +561,15 @@ When looking at the difference between the performance on misogyny vs.\ racism, 
 perfect precision and recall. %and F$_1$.
 The explanation for the racist instances being much easier to detect is two-fold:
 \Ni the number of instances which are only racist is much smaller (8 vs. 187) and
-\Nii  compared to the misogyny expressed by \itforum\, users, the racism is much more explicit and easier to detect.
-This can be seen in the examples in Table~\ref{tab:examples}, which display explicit language in the first four instances, which contain racism. Here, the model can easily detect hate, even though users might even attempt to auto-censor themselves by substituting letters with numbers, as in example \#1 (most likely in order to bypass automatic forum filters). \paolo{Conversely, the misogyny in the last two samples is much more implicit, so much so that the model failed to detect misogyny in sample \#5, for example.}
+\Nii  compared to the misogyny expressed by \itforum\, users, the racism is much more explicit and simpler to identify.
+This can be seen in the examples in Table~\ref{tab:examples}, which display explicit language in the first four instances, which contain racism. Here, the model can easily detect hate, even though users might even attempt to auto-censor themselves by substituting letters with numbers, as in example \#1 (most likely in order to bypass automatic forum filters). Conversely, the misogyny in the last two samples is much more implicit, so much so that the model failed to detect misogyny in sample \#5, for example.
 
 
 \begin{table}
   \centering
-  \caption{Examples of racist \paolo{and misogynous} posts from \dsITclassification\paolo{, with gold annotation and \imbert\, prediction labels.}}
+  \caption{Examples of racist and misogynous posts from \dsITclassification, with gold annotation and \imbert\, prediction labels.}
   \label{tab:examples}
+  % \footnotesize
   \begin{tabular}{p{5.2cm}@{\hspace{1.5mm}}|c@{\hspace{1.5mm}}|c@{\hspace{1.5mm}}}
   \hline
   \bf Post & \bf Gold & \bf Pred.\\
@@ -606,7 +606,7 @@ Our experiments show that domain-adapting transformer models to the contents of 
 We have also shown that for the base Italian models (\albert\, and \umbert) fine-tuning on combinations of different Italian corpora can lead to a boost in performance. However, this performance boost is nullified after MLM pre-training, which appears to be a more effective strategy for improving the performance of the models. When looking at racism vs.\ misogyny identification in posts extracted from \itforum, the former appears to be much easier to detect. This seems due to the fact that racist language is much more explicit than misogynous language in the scrutinized forum, but further research is needed to ascertain such a supposition.
 % , despite the greater computational cost.
 
-In future work, we plan to experiment with different resources for MLM-pretraining, using corpora in different languages, since it seems multilingual models such as \mbert\, are capable of learning about hate speech in a language-agnostic way from multiple languages. In addition, with more computational resources, larger corpora and more training epochs could be used to further improve the performance of the models. Lastly, further experiments can be carried out as regards the performance of the scrutinized models on the individual ``Misogyny'' and ``Racism'' labels.
+In future work, we plan to experiment with different resources for MLM pre-training, using corpora in different languages, since it seems multilingual models such as \mbert\, are capable of learning about hate speech in a language-agnostic way from multiple languages. In addition, with more computational resources, larger corpora and more training epochs could be used to further improve the performance of the models. Lastly, further experiments can be carried out as regards the performance of the scrutinized models on the individual sub-tasks of misogyny and racism identification, respectively.
 
 % \todo[inline]{I don't remember: we wanted to have an appendix here as wel? The one of the RANLP paper is not enough? Is it that different?}
 % \todoP{i don't think it's necessary but since i changed the focus from english to italian maybe it's worth keeping?}
