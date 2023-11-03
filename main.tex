@@ -1,22 +1,26 @@
-% File clic2021.tex
-% May 2021
+%% The first command in your LaTeX source must be the \documentclass command.
+%%
+%% Options:
+%% twocolumn : Two column layout.
+%% hf: enable header and footer.
+\documentclass[
+twocolumn,
+% hf,
+]{ceurart}
 
-%% Based on the style files for CLiC-IT-2019, which were, in turn,
-%% Based on the style files for CLiC-IT-2014, which were, in turn,
-%% Based on the style files for ACL-2014, which were, in turn,
-%% Based on the style files for ACL-2013, which were, in turn,
-%% Based on the style files for ACL-2012, which were, in turn,
-%% based on the style files for ACL-2011, which were, in turn,
-%% based on the style files for ACL-2010, which were, in turn,
-%% based on the style files for ACL-IJCNLP-2009, which were, in turn,
-%% based on the style files for EACL-2009 and IJCNLP-2008...
-%% Based on the style files for EACL 2006 by
-%% e.agirre@ehu.es or Sergi.Balari@uab.es
-%% and that of ACL 08 by Joakim Nivre and Noah Smith
+%%
+%% One can fix some overfulls
+\sloppy
 
-\documentclass[11pt]{article}
+%%
+%% Minted listings support 
+%% Need pygment <http://pygments.org/> <http://pypi.python.org/pypi/Pygments>
+\usepackage{minted}
+%% auto break lines
+\setminted{breaklines=true}
+
 \usepackage[a4paper]{geometry}
-\usepackage{clic2023} % imports CLiC-it 2023 layout style
+% \usepackage{clic2023} % imports CLiC-it 2023 layout style
 \usepackage{times} % font
 \usepackage{xurl} % splits URL in multiple lines
 \usepackage[italian,english]{babel}
@@ -31,7 +35,7 @@
 \usepackage{cuted}
 \usepackage{soul}
 \usepackage{xcolor}
-\usepackage{ulem}
+% \usepackage{ulem}
 
 \definecolor{lightgreen}{RGB}{0, 180, 0}
 \definecolor{lightred}{RGB}{214, 0, 0}
@@ -42,9 +46,9 @@
 
 \newcommand{\bs}[0]{$\blacksquare$}
 
-\newcommand{\Ni}{({\em i})~}
-\newcommand{\Nii}{({\em ii})~}
-\newcommand{\Niii}{({\em iii})~}
+\newcommand{\Ni}{(\textit{i})~}
+\newcommand{\Nii}{(\textit{ii})~}
+\newcommand{\Niii}{(\textit{iii})~}
 
 \newcommand{\abc}[1]{{\color{blue} #1}}
 \newcommand{\paolo}[1]{{\color{red} #1}}
@@ -81,28 +85,60 @@
 \newcommand{\enforum}{\textit{Incels.is}}
 \newcommand{\itforum}{\textit{Il forum dei brutti}}
 
-%\setlength\titlebox{5cm}
-
-% You can expand the titlebox if you need extra space
-% to show all the authors. Please do not make the titlebox
-% smaller than 5cm (the original size); we will check this
-% in the camera-ready version and ask you to change it back.
-
-
-  \title{Hate Speech Detection in an Italian Incel Forum \\ Using Bilingual Data for Pre-Training and Fine-Tuning}
-
-\author{\textbf{Paolo Gajo, Silvia Bernardini, Adriano Ferraresi and Alberto Barr\'on-Cede\~no} \\
-  DIT, Universit\`a di Bologna, Forl\`i, Italy \\
-  {\tt paolo.gajo@studio.unibo.it}\\
-  {\tt \{silvia.bernardini, adriano.ferraresi, a.barron\}@unibo.it}}
-
-\date{}
-
+%%
+%% end of the preamble, start of the body of the document source.
 \begin{document}
-\maketitle
-\begin{abstract}
-  % \todo{I changed the first instance. You are not doing it on the forum, but on a corpus you download from that forum. Please change the Italian verison accordingly}
-\textbf{English.}~In this study, we aim to enhance hate speech detection in Italian incel posts.
+
+%%
+%% Rights management information.
+%% CC-BY is default license.
+\copyrightyear{2021}
+\copyrightclause{Copyright for this paper by its authors.
+  Use permitted under Creative Commons License Attribution 4.0
+  International (CC BY 4.0).}
+
+%%
+%% This command is for the conference information
+\conference{CLiC-it 2023: 9th Italian Conference on Computational Linguistics, Nov 30 — Dec 02, 2023, Venice, Italy}
+
+%%
+%% The "title" command
+\title{Hate Speech Detection in an Italian Incel Forum Using Bilingual Data for Pre-Training and Fine-Tuning}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+\author[1]{Paolo Gajo}[%
+% orcid=none,
+email=paolo.gajo2@unibo.it,
+url=https://www.unibo.it/sitoweb/paolo.gajo2,
+]
+
+\author[1]{Silvia Bernardini}[%
+orcid=0000-0003-0750-4861,
+email=silvia.bernardini@unibo.it,
+url=https://www.unibo.it/sitoweb/silvia.bernardini,
+]
+
+\author[1]{Adriano Ferraresi}[%
+orcid=0000-0002-6957-0605,
+email=adriano.ferraresi@unibo.it,
+url=https://www.unibo.it/sitoweb/adriano.ferraresi,
+]
+
+\author[1]{Alberto Barr\'on-Cede\~no}[%
+orcid=0000-0003-4719-3420,
+email=a.barron@unibo.it,
+url=https://www.unibo.it/sitoweb/a.barron,
+]
+
+\address[1]{Department of Interpreting and Translation, Universit\`a di Bologna, Corso della Repubblica, 136, 47121, Forl\`i, FC, Italy}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract} 
+\textbf{\textbf{English.}} In this study, we aim to enhance hate speech detection in Italian incel posts.
 % , short for ``involuntary celibates''
 We pre-train monolingual (Italian) and multilingual Transformer models on corpora built from two incel forums, one in Italian and one in English, using masked language modeling. Then, we fine-tune the models on combinations of English and Italian corpora, annotated for hate speech.
 % , built from incel forums and mainstream social media sites.
@@ -110,22 +146,30 @@ We pre-train monolingual (Italian) and multilingual Transformer models on corpor
 Experiments on a hate speech corpus derived from the Italian incel forum show that the best results are achieved by training multilingual models on bilingual data,
 rather than training monolingual models on Italian-only data. This emphasizes the importance of using training and testing data from a similar linguistic domain, even when the languages differ.
 
-% HS identification in cross-lingual and cross-domain settings. We do so by employing Transformer models, pre-trained on monolingual (Italian) and bilingual (Italian-English) corpora. We fine-tune these models on various combinations of English- and Italian-language datasets, all annotated for HS. The English-language dataset pertains to the so-called community of ``incels'', short for ``involuntary celibates'', while the ones in Italian are compiled from mainstream social media sites (Twitter and Facebook). We then evaluate the performance of the models on an Italian-language dataset built from the contents of an Italian incel forum. Our experiments with model domain adaptation via training on the masked language modeling task and fine-tuning on different combinations of datasets show that the best results are obtained not by training solely using Italian data, but with a combination of Italian and English data. This shows the importance of using in-domain data for training, even when training and test data are in different languages.
-
-\end{abstract}
-
-\begin{abstract-alt}
-  % \todoA{change Italian according to en modifs}
-\textrm{\bf{Italiano.}}~In questo studio, ci proponiamo di migliorare il rilevamento dei discorsi d'odio in post tratti da un forum italiano di incel.
+\textbf{Italiano.} \textit{In questo studio, ci proponiamo di migliorare il rilevamento dei discorsi d'odio in post tratti da un forum italiano di incel.
 %  , abbreviazione di ``celibi involontari''.
 Addestriamo modelli Transformer mono (italiano) e multilingue su corpora ottenuti da due forum di incel, uno in italiano e uno in inglese, con il masked language modeling. Facciamo quindi il fine-tuning dei modelli su corpora in italiano e inglese con annotazioni indicanti se un post esprime odio.
 %  , costruiti a partire da social media di vasto utilizzo e forum di incel.
-Sperimentando su un corpus annotato per i discorsi di odio ottenuto da un forum italiano di incel mostriamo che i risultati migliori si ottengono addestrando modelli multilingue su combinazioni bilingue di corpora e non con modelli italiani e dati monolingue. Ciò sottolinea l'importanza di utilizzare dati di addestramento appartenenti a un contesto linguistico simile a quello dei dati di valutazione, anche con lingue differenti.
-%  di addestramento e valutazione
+Sperimentando su un corpus annotato per i discorsi di odio ottenuto da un forum italiano di incel mostriamo che i risultati migliori si ottengono addestrando modelli multilingue su combinazioni bilingue di corpora e non con modelli italiani e dati monolingue. Ciò sottolinea l'importanza di utilizzare dati di addestramento appartenenti a un contesto linguistico simile a quello dei dati di valutazione, anche con lingue differenti.}
+\end{abstract}
 
-%  . A questo scopo, impieghiamo modelli Transformer, pre-addestrati su corpora monolingui (italiano) e bilingui (italiano-inglese). Abbiamo effettuato il fine-tuning di questi modelli su varie combinazioni di dataset in lingua inglese e italiana, tutti annotati per i discorsi d'odio. Il dataset inglese riguarda la comunità dei c.d. ``incel'', abbreviazione inglese di ``celibi involontari'', mentre quelli italiani sono costruiti partendo da social media di vasto utilizzo (Twitter e Facebook). Valutiamo le prestazioni dei modelli su un dataset in lingua italiana costruito a partire dai contenuti di un forum italiano di incel. Gli esperimenti di adattamento dei modelli a questo contesto linguistico attraverso l'addestramento sulla task del masked language modeling e il fine-tuning su diverse combinazioni di dataset dimostrano che i risultati migliori si ottengono non solo con l'addestramento su dati in italiano, ma con una combinazione di dati in italiano e in inglese. Questo dimostra l'importanza di utilizzare dati provenienti dallo stesso contesto linguistico per l'addestramento, anche quando i dati di addestramento e di test sono in lingue diverse.
-\end{abstract-alt}
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\begin{keywords}
+incels \sep
+hate speech \sep
+masked language modeling \sep
+transformers \sep
+bert \sep
+multilingual mlm \sep
+multilingual masked language modeling
+\end{keywords}
 
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
 
 \section{Introduction}
 
@@ -184,15 +228,15 @@ the best team's approach for the hate speech detection sub-task \cite{Lavergne20
 
 % \todo{I miss AMI 2018}
 As regards misogyny in particular, EVALITA 2018 hosted for the first time a shared task on automatic misogyny identification (AMI), where the top performing teams used a combination of TF-IDF and SVD for the Italian scenario, and TF-IDF with logistic regression for the English one~\cite{Fersini2018OverviewOT}.
-EVALITA 2020 hosted the second edition of the AMI shared task, focusing on Italian tweets~\cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models obtained the top performance~\cite{mutiUniBOAMIMultiClass2020}. In the 2023 edition of EVALITA, \newcite{bonaventura2023odang} used triple verbalisation, prompting and majority vote to improve the performance of an AlBERTo model on the tasks of homotransphobia and hate speech detection.
+EVALITA 2020 hosted the second edition of the AMI shared task, focusing on Italian tweets~\cite{fersiniAMIEVALITA2020Automatic2020}, where an ensemble of BERT models obtained the top performance~\cite{mutiUniBOAMIMultiClass2020}. In the 2023 edition of EVALITA, \citet{bonaventura2023odang} used triple verbalisation, prompting and majority vote to improve the performance of an AlBERTo model on the tasks of homotransphobia and hate speech detection.
 
-English-language hate speech detection has been conducted in a variety of ways. Among others, \newcite{davidson-2017-automated-hate} build a corpus of tweets annotated with multi-class labels (``hate speech'', ``offensive'', ``neither'') and train logistic regression and linear SVM models on it.
-\newcite{mathew2021hatexplain} build a corpus called HateXplain from Twitter and Gab posts, annotated with multi-class labels based on whether the post is ``offensive'', expresses ``hate'', or is ``normal'', which they use to fine-tune a BERT hate speech classifier.
-\newcite{caselli-etal-2021-hatebert} retrain BERT$_{base}$ on the MLM task using an unlabelled corpus built from hateful and offensive Reddit messages, obtaining a model called HateBERT, capable of outperforming BERT$_{base}$ on hate speech identification on various benchmark datasets.
+English-language hate speech detection has been conducted in a variety of ways. Among others, \citet{davidson-2017-automated-hate} build a corpus of tweets annotated with multi-class labels (``hate speech'', ``offensive'', ``neither'') and train logistic regression and linear SVM models on it.
+\citet{mathew2021hatexplain} build a corpus called HateXplain from Twitter and Gab posts, annotated with multi-class labels based on whether the post is ``offensive'', expresses ``hate'', or is ``normal'', which they use to fine-tune a BERT hate speech classifier.
+\citet{caselli-etal-2021-hatebert} retrain BERT$_{base}$ on the MLM task using an unlabelled corpus built from hateful and offensive Reddit messages, obtaining a model called HateBERT, capable of outperforming BERT$_{base}$ on hate speech identification on various benchmark datasets.
 
-In multilingual settings, \newcite{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of corpora annotated for hate speech to improve the performance of classifiers in zero-shot, few-shot and well-resourced settings. \newcite{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow such approaches in attempting to improve the performance of our models, with a specific focus on monolingual vs.\ bilingual pre-training, compared to \newcite{gajo2023identification}.
+In multilingual settings, \citet{peliconInvestigatingCrosslingualTraining2021} use a multilingual combination of corpora annotated for hate speech to improve the performance of classifiers in zero-shot, few-shot and well-resourced settings. \citet{gokhaleSpreadLoveNot2022} use MLM training to improve the hate speech detection performance of BERT in Hindi and Marathi, separately. We follow such approaches in attempting to improve the performance of our models, with a specific focus on monolingual vs.\ bilingual pre-training, compared to \citet{gajo2023identification}.
 
-% \newcite{aluruDeepLearningModels2020} show that LASER embeddings with logistic regression perform better than BERT in low-resource settings. In the zero-shot setting they approach, Italian (together with Portuguese) achieves especially good results. In the context of monolingual Italian hate speech detection, and specifically misogyny detection, \newcite{mutiUniBOAMIMultiClass2020} use \albert\, \cite{PolignanoEtAlCLIC2019} to approach the EVALITA 2020 misogyny detection shared task \cite{basileEVALITA2020Overview}, achieving top performance among all participants. The runners-up also experiment with BERT-based architectures, but approach the task using an ensemble technique \cite{leesJigsawAMIHaSpeeDe22020}.
+% \citet{aluruDeepLearningModels2020} show that LASER embeddings with logistic regression perform better than BERT in low-resource settings. In the zero-shot setting they approach, Italian (together with Portuguese) achieves especially good results. In the context of monolingual Italian hate speech detection, and specifically misogyny detection, \citet{mutiUniBOAMIMultiClass2020} use \albert\, \cite{PolignanoEtAlCLIC2019} to approach the EVALITA 2020 misogyny detection shared task \cite{basileEVALITA2020Overview}, achieving top performance among all participants. The runners-up also experiment with BERT-based architectures, but approach the task using an ensemble technique \cite{leesJigsawAMIHaSpeeDe22020}.
 
 \section{Corpora}
 \label{sec:corpora}
@@ -212,6 +256,8 @@ Where the corpora were not partitioned, %available partitions were not available
 we split them %the corpora
 % \todo{1) not sure why you don't use test sets; 2) get sure you don't use dev as test (hence you should call it test)}
 70/30 between training and development sets. We do not use the test partitions, as we are interested in maintaining consistency with the use of the original splits of these corpora.
+
+\renewcommand{\arraystretch}{0.9}
 
 \begin{table}[t]
   \caption{Existing corpora class distribution.}
@@ -242,7 +288,9 @@ corpora compiled by scraping two incel forums~\cite{gajo2023identification}: \te
 % These resources were created both due to the lack of freely available incel corpora and the fact that incel language changes rapidly,
 % %  as outlined in Appendix~\ref{app:keyness},
 % making it worthwhile to compile updated resources.
-\renewcommand{\arraystretch}{0.9}
+
+
+
 % \begin{table}[t]
 %   \centering
 %   \caption{Statistics of the \enforum\, and \itforum\, (\textit{FdB}) unsupervised corpora. Mean length computed at token level.}
@@ -257,7 +305,7 @@ corpora compiled by scraping two incel forums~\cite{gajo2023identification}: \te
 %   \label{tab:english-italian-unsupervised-datasets-stats}
 % \end{table}
 % \todoA{we don't care about English or IAA. You are not introducing these corpora here... See how T2 looks like: all corpora are first-class citizens. I dropped most of this paragraph}
-A subset of the two corpora was annotated for both misogyny and racism.\footnote{Refer to \newcite{gajo2023identification} for details on the annotation process.} % For English, a subset of 50 posts was randomly selected and labeled by three annotators, all with a C2 CEFR level of English, well-versed in linguistics, gender studies, NLP, and data annotation.
+A subset of the two corpora was annotated for both misogyny and racism.\footnote{Refer to \citet{gajo2023identification} for details on the annotation process.} % For English, a subset of 50 posts was randomly selected and labeled by three annotators, all with a C2 CEFR level of English, well-versed in linguistics, gender studies, NLP, and data annotation.
 % The Cohen's Kappa inter-annotator agreement (IAA)~\cite{bobicev2017inter} was of 0.77, which is considered high.
 % As such, the remaining instances were annotated by a single annotator. For the Italian dataset, two native speakers of Italian, also experts in the relevant fields, annotated  50 posts as well, reaching an IAA of 0.69. As the IAA was deemed acceptable, the rest of the instances were once again annotated by one annotator.
 The annotated partitions are referred to as \dsENclassification\, and \dsITclassification\, (``Incel Forum, Supervised, English'' and ``Italian'').
@@ -309,14 +357,14 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance when fine-tuning the monolingual models on Italian-only corpora. Epochs (e) selected based on val. F$_1$. Best scores in bold, second-best underlined; \bs\, = corpus used for training.}
+  \caption{Performance when fine-tuning the monolingual models on Italian-only corpora. Epochs (e) selected based on validation F$_1$. Best scores in bold, second-best underlined; \bs\, = corpus used for training.}
   \label{tab:italian-only-results}
 
   \begin{tabular}{l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
       & \rotatebox{90}{\hsdfb} & \rotatebox{90}{\hsdtw} & \rotatebox{90}{\ami} & \bf (e)
       & \bf F$_{1~val}$ & \bf R$_{val}$ & \bf P$_{val}$ & \bf F$_{1~test}$& \bf R$_{test}$ & \bf P$_{test}$ \\
         \hline
-        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\umbert\end{minipage}}}
+        \multirow{7}{*}[5pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\umbert\end{minipage}}}
         &  \bs  &      &      &      5 &      0.855$\pm$0.003 &     0.868 &       0.843 &       0.696$\pm$0.010 & \bf  0.879 &       0.576 \\ % 27
         &       &  \bs &      &      4 &      0.754$\pm$0.004 &     0.800 &       0.713 &       0.432$\pm$0.060 &      0.319 &       0.685 \\ % 28
         &       &      &  \bs &      4 &  \uline{0.914$\pm$0.004}& \uline{0.931}&  \bf  0.899 &       0.569$\pm$0.031 &      0.520 &       0.631 \\ % 29
@@ -325,7 +373,7 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
         &       &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.844 &       0.814 &       0.596$\pm$0.017 &      0.526 &   \uline{0.688}\\ % 32
         &  \bs  &  \bs &  \bs &      5 &      0.822$\pm$0.003 &     0.836 &       0.808 &       0.680$\pm$0.016 &      0.692 &       0.671 \\ % 33
         \hline
-        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \iumbert\end{minipage}}}
+        \multirow{7}{*}[10pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \iumbert\end{minipage}}}
         &  \bs  &      &      &      5 &      0.867$\pm$0.006 &     0.887 &       0.848 &  \bf  0.705$\pm$0.009 &  \uline{0.870}&       0.593 \\ % 27
         &       &  \bs &      &      4 &      0.756$\pm$0.002 &     0.810 &       0.708 &       0.403$\pm$0.024 &      0.285 &       0.692 \\ % 28
         &       &      &  \bs &      4 & \bf  0.918$\pm$0.001 & \bf 0.946 &   \uline{0.891}&       0.652$\pm$0.031 &      0.608 &       0.705 \\ % 29
@@ -335,7 +383,7 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
         &  \bs  &  \bs &  \bs &      5 &      0.828$\pm$0.003 &     0.853 &       0.804 &       0.699$\pm$0.029 &      0.718 &       0.682 \\ % 33
         \hline
         \hline
-        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\albert\end{minipage}}}
+        \multirow{7}{*}[8pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.7cm}\albert\end{minipage}}}
         &  \bs  &      &      &      4 &      0.850$\pm$0.003 &     0.899 &       0.807 &       0.683$\pm$0.006 & \bf  0.941 &       0.537 \\ % 27
         &       &  \bs &      &      1 &      0.752$\pm$0.006 &     0.817 &       0.698 &       0.520$\pm$0.089 &      0.426 &   \uline{0.716}\\ % 28
         &       &      &  \bs &      2 & \uline{0.907$\pm$0.004} & \bf 0.952 &  \uline{0.866} &       0.528$\pm$0.022 &      0.517 &       0.542 \\ % 29
@@ -344,7 +392,7 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
         &       &  \bs &  \bs &      3 &      0.820$\pm$0.001 &     0.888 &       0.762 &       0.652$\pm$0.018 &      0.645 &       0.660 \\ % 32
         &  \bs  &  \bs &  \bs &      2 &      0.808$\pm$0.011 &     0.872 &       0.753 &       0.684$\pm$0.015 &      0.821 &       0.587 \\ % 33
         \hline
-        \multirow{7}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \ialbert\end{minipage}}}
+        \multirow{7}{*}[13pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.6cm} \ialbert\end{minipage}}}
         &  \bs  &      &      &      5 &      0.847$\pm$0.005 &     0.863 &       0.831 &  \bf  0.707$\pm$0.007 & \uline{0.791} &       0.639 \\ % 27
         &       &  \bs &      &      1 &      0.748$\pm$0.002 &     0.785 &       0.715 &       0.506$\pm$0.035 &      0.370 &  \bf  0.805 \\ % 28
         &       &      &  \bs &      5 & \bf  0.912$\pm$0.003 & \uline{0.930}&  \bf  0.895 &       0.617$\pm$0.018 &      0.562 &       0.685 \\ % 29
@@ -359,7 +407,7 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
 \begin{table*}[t]
   \centering
   % \footnotesize
-  \caption{Performance when fine-tuning the multilingual models on mono- and bilingual corpora combinations. Epochs (e) selected based on val. F$_1$. Best scores in bold; \bs\, = corpus used for training.}
+  \caption{Performance when fine-tuning the multilingual models on mono- and bilingual corpora combinations. Epochs (e) selected based on validation F$_1$. Best scores in bold; \bs\, = corpus used for training.}
   \label{tab:multilingual-results}
 
   \begin{tabular}{l|l|c@{\hspace{1mm}}c@{\hspace{1mm}}c@{\hspace{1mm}}|c@{\hspace{1mm}}|c@{\hspace{1mm}}|ccc|ccc}
@@ -369,7 +417,7 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
     \multicolumn{1}{c}{} && \rotatebox{90}{\hsdfb} & \rotatebox{90}{\hsdtw} & \rotatebox{90}{\ami} & \rotatebox{90}{\dsENclassification} & \bf (e)
     & \bf F$_{1~val}$ & \bf R$_{val}$ & \bf P$_{val}$ & \bf F$_{1~test}$& \bf R$_{test}$ & \bf P$_{test}$ \\
         \hline
-            \multirow{15}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.5cm}mBERT\end{minipage}}}
+            \multirow{15}{*}[10pt]{\rotatebox[origin=c]{90}{\begin{minipage}{1.5cm}mBERT\end{minipage}}}
         &\multirow{8}{*}[0pt]{\rotatebox[origin=c]{90}{Monolingual}}&  \bs  &      &      &      &    4 &      0.807$\pm$0.008 &     0.846 &       0.775 &       0.651$\pm$0.013 &      0.891 &       0.516 \\ % 27
         &&       &  \bs &      &      &    4 &      0.717$\pm$0.012 &     0.745 &       0.693 &       0.493$\pm$0.037 &      0.455 &       0.540 \\ % 28
         &&       &      &  \bs &      &    5 & \bf  0.885$\pm$0.003 & \bf 0.890 & \bf   0.881 &       0.425$\pm$0.034 &      0.384 &       0.479 \\ % 29
@@ -388,7 +436,7 @@ Table~\ref{tab:incel-corpora-distributions} shows the distribution for the incel
         &&  \bs  &  \bs &  \bs &  \bs &    5 &      0.837$\pm$0.008 &     0.829 &       0.845 &       0.613$\pm$0.019 &      0.639 &       0.590 \\ % 40
         \hline
         \hline
-            \multirow{15}{*}[0pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.2cm}Incel mBERT\end{minipage}}}
+            \multirow{15}{*}[10pt]{\rotatebox[origin=c]{90}{\begin{minipage}{2.2cm}Incel mBERT\end{minipage}}}
         &\multirow{8}{*}[0pt]{\rotatebox[origin=c]{90}{Monolingual}}&  \bs  &      &      &      &    1 &      0.817$\pm$0.009 &     0.865 &       0.777 &       0.668$\pm$0.016 &      0.841 &       0.557 \\ % 27
         &&       &  \bs &      &      &    5 &      0.727$\pm$0.006 &     0.757 &       0.701 &       0.461$\pm$0.032 &      0.379 &       0.589 \\ % 28
         &&       &      &  \bs &      &    4 & \bf  0.895$\pm$0.007 & \bf 0.912 & \bf   0.879 &       0.574$\pm$0.047 &      0.511 &       0.666 \\ % 29
@@ -471,7 +519,7 @@ correct than those in Twitter, allowing systems (and humans too) to find more an
 % Thus, the considerably lower scores obtained on \dsITclassification\, when training on combinations involving \hsdtw\, can be explained by the fact that the models most likely have a harder time learning from the contents of \hsdtw.
 The fact that messages in \hsdfb\, are longer is also coherent with the Italian incel models performing better than the vanilla models when training on \hsdfb, since \itforum\, on average contains rather long posts
 % \todo{you don't need that table. Just mention some numbers here}
-($\sim$53 avg. tokens),\footnote{Obtained with BertTokenizer: \url{https://huggingface.co/docs/transformers/model_doc/bert#transformers.BertTokenizer}} unlike Twitter corpora, which were limited to 280 characters per tweet prior to 2023.
+($\sim$53 avg. tokens),\footnote{Obtained with BertTokenizer: \url{https://huggingface.co/docs/transformers/model_doc/bert\#transformers.BertTokenizer}} unlike Twitter corpora, which were limited to 280 characters per tweet prior to 2023.
 Finally, another element which might explain the lower performance when training on \hsdtw\, is that it contains hate speech against migrants, which might not be as relevant when it comes to \itforum, since racism is not all that prevalent in this forum, compared to misogyny.
 
 As regards combining different Italian corpora, the strategy yields the highest performance for \albert\, and \umbert\, when training on both \hsdfb\, and \ami.
@@ -490,7 +538,7 @@ Compared to the best combination using \mbert, which achieves a test F$_1$ of 0.
 
 On average, the lowest performance is achieved when training separately on \dsENclassification\, and on the Italian corpora (monolingual rows in Table~\ref{tab:multilingual-results}). When using bilingual data, the worst results are obtained when training on \hsdtw\, and combinations containing it, coherently with the results in the monolingual settings shown in \mbox{Table~\ref{tab:italian-only-results}}.
 
-For almost all combinations of Italian corpora, performance increases once \dsENclassification\, is added to the training data, i.e.\, bilingual combinations lead to better performance.
+For almost all combinations of Italian corpora, performance increases once \dsENclassification\, is added to the training data, i.e.\, bilingual data leads to better performance.
 % Finally, as expected, the lowest overall results are obtained when fine-tuning only on \dsENclassification.
 % , which also decreases performance when added to other training combinations.
 
@@ -538,7 +586,7 @@ Although the two considered incel communities are distinct, the hateful Red Pill
   % \end{tabular}
   \begin{tabular}{lcccr}
     \hline
-    \bf Class & \bf Prec & \bf Rec & \bf F$_1$ & \bf Inst. \\
+    \bf Class & \bf Precision & \bf Recall & \bf F$_1$ & \bf Inst. \\
     \hline
     None & 0.806 & 0.857 & 0.830 & 300 \\
     Misogyny & 0.746 & 0.674 & 0.708 & 187 \\
@@ -630,7 +678,7 @@ In future work, we plan to experiment with different resources for MLM pre-train
 % Finally, the same experiments could also be repeated using the individual misogyny and racism labels, instead of the combined hate speech label, to study the contribution of each label to the overall performance of the model.
 
 % include your own bib file like this:
-\bibliographystyle{acl}
+% \bibliographystyle{acl}
 \bibliography{bibliography.bib}
 
 % \appendix
@@ -744,7 +792,7 @@ In future work, we plan to experiment with different resources for MLM pre-train
 %   \label{tab:keyness}
 % \end{table}
 
-% Table~\ref{tab:keyness} reports the normalized slopes of the terms obtained from the two forums. In both cases, the mean normalized slopes of the two data series, compared side by side, quantitatively display a clear trend according to which certain terms gain popularity over time, while others become less popular. With regard to \itforum\, the difference is 0.247, while for \enforum\, the difference between the mean normalized slopes is smaller, 0.106, which points at a slower lexical evolution. As regards \enforum, the trends observed for terms such as ``foid'', ``femoid'', and ``roastie'' reflect the time-series data discussed in \newcite{gothard2020exploring}, which show certain terms increasing and decreasing in use over the total messages posted in incel subreddits. For both forums, the shift in lexicon needs to be taken into account in order to have a clear picture of the language adopted by each speech community.
+% Table~\ref{tab:keyness} reports the normalized slopes of the terms obtained from the two forums. In both cases, the mean normalized slopes of the two data series, compared side by side, quantitatively display a clear trend according to which certain terms gain popularity over time, while others become less popular. With regard to \itforum\, the difference is 0.247, while for \enforum\, the difference between the mean normalized slopes is smaller, 0.106, which points at a slower lexical evolution. As regards \enforum, the trends observed for terms such as ``foid'', ``femoid'', and ``roastie'' reflect the time-series data discussed in \citet{gothard2020exploring}, which show certain terms increasing and decreasing in use over the total messages posted in incel subreddits. For both forums, the shift in lexicon needs to be taken into account in order to have a clear picture of the language adopted by each speech community.
 
 % As regards \itforum, we can observe that the way users refer to men changes in a rather clear way. On one hand, positive words that are commonly used in general language, such as ``strafigo'' and ``figaccione'' (both meaning ``extremely handsome''), are substituted by specialized terms that are more specific to the forum's speech community, e.g., ``chad''.\footnote{\url{https://incels.wiki/w/Chad}} On the other hand, we can see the same phenomenon for negative words, where ``reietto'' (``outcast'') loses popularity, leaving space to terms with more specialized uses, such as ``bv'', meaning ``brutto vero'' (lit. ``truly ugly'') and ``subumano'', meaning ``subhuman''. The first is an acronym, which makes its meaning opaque to outsiders, while the second is a term with a much stronger and denigrating connotation.
 
@@ -775,3 +823,7 @@ In future work, we plan to experiment with different resources for MLM pre-train
 % The necessity to build such material is also supported by the fact that resources on the topic of incels are rare and limited, and their applicability is often compromised because the linguistic domain of the source data only partially aligns with the one under investigation~\cite{pelzer-2021-toxic-language-incel-communities}. An additional cause for such incompatibility of resources can be found in the annotation scheme, which can be inapplicable to the supervised task being approached~\cite{zhou-2022-automated-hs-detection}. However, the necessity to build new resources does not mean they will be obsolete soon after being employed, as the time frames we have analyzed in this chapter span various years of forum activity.
 
 \end{document}
+
+
+%%
+%% End of file

@@ -1,0 +1,13 @@
+{\textbf{English.}} In this study, we aim to enhance hate speech detection in Italian incel posts.
+% , short for ``involuntary celibates''
+We pre-train monolingual (Italian) and multilingual Transformer models on corpora built from two incel forums, one in Italian and one in English, using masked language modeling. Then, we fine-tune the models on combinations of English and Italian corpora, annotated for hate speech.
+% , built from incel forums and mainstream social media sites.
+% with binary labels which indicate whether a post contains hate speech or not. The Italian training datasets are compiled from mainstream social media (Twitter and Facebook), while the English dataset is built by gathering posts from the English incel forum. The models' performance is evaluated on the Italian incel forum dataset.
+Experiments on a hate speech corpus derived from the Italian incel forum show that the best results are achieved by training multilingual models on bilingual data,
+rather than training monolingual models on Italian-only data. This emphasizes the importance of using training and testing data from a similar linguistic domain, even when the languages differ.
+
+\textbf{Italiano.} \textit{In questo studio, ci proponiamo di migliorare il rilevamento dei discorsi d'odio in post tratti da un forum italiano di incel.
+%  , abbreviazione di ``celibi involontari''.
+Addestriamo modelli Transformer mono (italiano) e multilingue su corpora ottenuti da due forum di incel, uno in italiano e uno in inglese, con il masked language modeling. Facciamo quindi il fine-tuning dei modelli su corpora in italiano e inglese con annotazioni indicanti se un post esprime odio.
+%  , costruiti a partire da social media di vasto utilizzo e forum di incel.
+Sperimentando su un corpus annotato per i discorsi di odio ottenuto da un forum italiano di incel mostriamo che i risultati migliori si ottengono addestrando modelli multilingue su combinazioni bilingue di corpora e non con modelli italiani e dati monolingue. Ciò sottolinea l'importanza di utilizzare dati di addestramento appartenenti a un contesto linguistico simile a quello dei dati di valutazione, anche con lingue differenti.}
