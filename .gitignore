@@ -13,6 +13,8 @@
 *.cb
 *.cb2
 .*.lb
+*.abs
+*.xmpdata
 
 ## Intermediate documents:
 *.dvi
